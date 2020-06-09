@@ -3,7 +3,7 @@
 ### How the idea for Lifelines came about
 Appeals for blood donors often go unnoticed unless an owner with an eligible pet notices it on their social media timelines, which might not happen due to unhelpful algorithms.
 
-On the other hand, vet clinics might also be limited to appealing for donations only through their own client base.
+Additionally, vet clinics are also limited to appealing for donations only through their own client base.
 
 
 ### What does Lifeline hope to do?
