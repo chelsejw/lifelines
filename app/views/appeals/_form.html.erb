@@ -1,0 +1,47 @@
+<%= form_with(model: appeal, local: true) do |form| %>
+  <% if appeal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(appeal.errors.count, "error") %> prohibited this appeal from being saved:</h2>
+
+      <ul>
+        <% appeal.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clinic_id %>
+    <%= form.text_field :clinic_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :species_id %>
+    <%= form.text_field :species_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pet_name %>
+    <%= form.text_field :pet_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @appeal.user_id %>
+</p>
+
+<p>
+  <strong>Clinic:</strong>
+  <%= @appeal.clinic_id %>
+</p>
+
+<p>
+  <strong>Species:</strong>
+  <%= @appeal.species_id %>
+</p>
+
+<p>
+  <strong>Pet name:</strong>
+  <%= @appeal.pet_name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @appeal.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @appeal.status %>
+</p>
+
+<%= link_to 'Edit', edit_appeal_path(@appeal) %> |
+<%= link_to 'Back', appeals_path %>
