@@ -89,8 +89,6 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.9.0)
-    fast_jsonapi (1.5)
-      activesupport (>= 4.2)
     ffaker (2.15.0)
     ffi (1.13.0)
     globalid (0.4.2)

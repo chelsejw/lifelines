@@ -7,7 +7,7 @@ const App = ()=> {
 
     const [appeals, setAppeals] = useState(null)
 
-    axios.get(`/products/search/${searchInput}`)
+    axios.get(`/appeals`)
     .then((response) => {
 
       const data = response.data
@@ -16,7 +16,7 @@ const App = ()=> {
     }).catch((error)=>{
       console.log(error);
     })
-    
+
     return (
         <div>
             <Nav/>
