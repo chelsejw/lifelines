@@ -12,46 +12,58 @@ require 'ffaker'
 #     Species.create(name: s)
 # end
 
+25.times{print"-"}
+puts
 
-# 25.times{print"-"}
-# puts
+
+# Fake Users [username: firstname, email: firstname@email.com, password: 123456]
+20.times do
+    name = "#{FFaker::Name.first_name.downcase}#{rand(1..100)}"
+    User.create! :email => "#{name}@email.com", :password => "123456", :password_confirmation => "123456"
+
+    puts "Created user called #{name} with email #{name}@email.com"
+end
+
+25.times{print"-"}
+puts
+
+# Fake user profiles for each user
+User.all.each do |user|
+    puts "Created profile for #{user.email}"
+    name = user.email.slice(0..user.email.length-11)
+    Profile.create(user_id: user.id, username: name, display_name: name, img_url: "https://loremflickr.com/400/400/#{name}?lock=#{user.id}", bio: FFaker::Lorem.paragraph, address: FFaker::Address.street_address, account_type: "user", verified: false)
+end
 
 
-# # Fake Users [username: firstname, email: firstname@email.com, password: 123456]
-# 20.times do
-#     name = FFaker::Name.first_name.downcase
-#     User.create! :email => "#{name}@email.com", :password => "123456", :password_confirmation => "123456"
+clinics = [
+    {:name => "AAVC- Animal and Avian Veterinary Clinic", :address=> "716 Yishun Street 71 #01-254, Singapore 760716", :email => "aavcsingapore@gmail.com", :phone => "68539397"},
+    {:name => "Allpets & Aqualife Clinic", :address=> "24 Jalan Kelulut, Seletar Hills Estate, Singapore 809041", :email => "info@allpetsaqualife.com", :phone => "64813700"},
+    {:name => "Amber Veterinary Practice Pte Ltd", :address=> "50 Burnfoot Terrace, Frankel Estate", :email => "enquiry@ambervet.com", :phone => "62455543"},
+    {:name => "Mount Pleasant Veterinary Centre (Mandai)", :address=> "5 Mandai Road, Singapore 779391", :email => "mpmandai@mountpleasant.com.sg", :phone => "64515242"},
+    {:name => "Passion Veterinary Clinic Pte Ltd", :address=> "Blk 111 Woodlands Street 13 #01-86", :email => "passionvet@gmail.com", :phone => "66358725"},
+]
 
-#     puts "Created user called #{name} with email #{name}@email.com"
-# end
-
-# 25.times{print"-"}
-# puts
-
-# # Fake user profiles for each user
-# User.all.each do |user|
-#     puts "Created profile for #{user.email}"
-#     name = user.email.slice(0..user.email.length-11)
-#     Profile.create(user_id: user.id, username: name, display_name: name, img_url: "https://loremflickr.com/400/400/#{name}?lock=#{user.id}", bio: FFaker::Lorem.paragraph, address: FFaker::Address.street_address, user_type: "user", verified: false)
-# end
-
-# 45.times do 
-#     name = FFaker::Address.neighborhood
-#     @clinic = Clinic.create(name: "#{name} Veterinary Clinic", email: "enquiry@#{name.delete(' ')}.com", address: FFaker::Address.street_address, phone: FFaker::PhoneNumberSG.fixed_line_number)
-#     puts "Created clinic called for #{@clinic.name}"
-# end
-
-# Clinic.all.each do |clinic|
-#     @user = User.create! :email => "#{clinic.email}", :password => "123456", :password_confirmation => "123456"
-#     name = clinic.name.slice(0..clinic.name.length-19)
+clinics.each do |c| 
+    @clinic = Clinic.create!(name: c[:name], address: c[:address], email: c[:email], phone: c[:phone])
     
-#     @profile = Profile.create(user_id: @user.id, username: name, display_name: name, img_url: "https://loremflickr.com/400/400/#{name}?lock=#{@user.id}", bio: FFaker::Lorem.paragraph, address: FFaker::Address.street_address, user_type: "clinic", verified: false)
+    puts "Created #{c[:name]}"
 
-#     puts "Created #{name} clinic profile"
-# end
+    @user = User.create! :email => c[:email], :password => "123456", :password_confirmation => "123456"
 
-# 50.times do
-#     @appeal = Appeal.create(user_id: rand(User.first.id..User.last.id), clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: (1..2), pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
-#     puts @appeal
-#     puts "Created appeal for #{@appeal.user.profile.username}"
-# end
+    puts "Created #{@user} for #{c[:name]}"
+
+    @profile = Profile.create!(user_id: @user.id, username: c[:name].delete(" "), display_name: c[:name].delete(" "), img_url: "https://loremflickr.com/400/400/#{c[:name].delete(" ")}?lock=#{c[:phone]}", bio: FFaker::Lorem.paragraph, address: c[:address], account_type: "clinic", verified: true)
+
+    puts "Created #{@profile} for #{c[:name]}"
+
+end
+
+50.times do
+    @appeal = Appeal.create!(user_id: rand(User.first.id..User.last.id), clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: 22, pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
+    puts "Created appeal for #{@appeal.user.profile.username}"
+end
+50.times do
+    @appeal = Appeal.create!(user_id: rand(User.first.id..User.last.id), clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: 22, pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
+    puts "Created appeal for #{@appeal.user.profile.username}"
+end
+
