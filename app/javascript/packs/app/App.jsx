@@ -16,10 +16,7 @@ const App = ()=> {
     }).catch((error)=>{
       console.log(error);
     })
-
-    const appeals = 
-
-
+    
     return (
         <div>
             <Nav/>
