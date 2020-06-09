@@ -1,34 +1,35 @@
-import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import Nav from './components/Nav'
-import axios from 'axios';
+import AppealResults from './components/AppealResults'
 
-const App = ()=> {
 
-    const [appeals, setAppeals] = useState(null)
-
-    axios.get(`/appeals`)
-    .then((response) => {
-
-      const data = response.data
-      setResults(data)
-
-    }).catch((error)=>{
-      console.log(error);
-    })
-
+class App extends React.Component {
+  render(){
     return (
         <div>
             <Nav/>
-            <h1>This is my app.</h1>
+            <div className="container-fluid">
+              <div className="row">
+
+                <div className="col">
+                  <h3>Look for Appeals</h3>
+                  <ul>
+                    <AppealResults/>
+                  </ul>
+                </div>
+
+                <div className="col">
+
+                  Hello put your appeals here
+
+                </div>
+              
+
+              </div>
+            </div>
         </div>
     )
+  }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    ReactDOM.render(
-      <App/>,
-      document.body.appendChild(document.createElement('div')),
-    )
-  })
-  
+export default App;
