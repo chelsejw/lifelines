@@ -54,3 +54,4 @@ gem 'devise'
 
 gem "ffaker", "~> 2.15"
 gem 'fast_jsonapi'
+gem 'active_model_serializers'

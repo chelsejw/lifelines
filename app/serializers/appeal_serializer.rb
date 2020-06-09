@@ -1,6 +1,7 @@
 class AppealSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  attributes :pet_name, :description, :status, :created_at, :updated_at
+
   belongs_to :user
   belongs_to :clinic
   belongs_to :species
