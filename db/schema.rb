@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_073421) do
+ActiveRecord::Schema.define(version: 2020_06_09_073508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 2020_06_09_073421) do
     t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lifelines", force: :cascade do |t|
+    t.bigint "appeal_id", null: false
+    t.bigint "user_id", null: false
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["appeal_id"], name: "index_lifelines_on_appeal_id"
+    t.index ["user_id"], name: "index_lifelines_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -72,5 +82,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_073421) do
   add_foreign_key "appeals", "clinics"
   add_foreign_key "appeals", "species"
   add_foreign_key "appeals", "users"
+  add_foreign_key "lifelines", "appeals"
+  add_foreign_key "lifelines", "users"
   add_foreign_key "profiles", "users"
 end
