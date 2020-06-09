@@ -23,6 +23,7 @@ Additionally, vet clinics are also limited to appealing for donations only throu
 
 ### Furthers
 - Notifications by WhatsApp/Telegram/Facebook/etc
+- Google Maps Distance Matrix API integration to allow users to find appeals that are located X km away from them
 - Collaborative appeals
 - Featured/boosted appeals
 - Thank you messages (kinda like reviews)
