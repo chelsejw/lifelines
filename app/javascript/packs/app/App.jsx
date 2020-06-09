@@ -1,10 +1,28 @@
-import React from `react`;
-import ReactDOM from 'react-dom'
+import React, {useState, useEffect} from 'react';
+import ReactDOM from 'react-dom';
+import Nav from './components/Nav'
+import axios from 'axios';
 
 const App = ()=> {
 
+    const [appeals, setAppeals] = useState(null)
+
+    axios.get(`/products/search/${searchInput}`)
+    .then((response) => {
+
+      const data = response.data
+      setResults(data)
+
+    }).catch((error)=>{
+      console.log(error);
+    })
+
+    const appeals = 
+
+
     return (
         <div>
+            <Nav/>
             <h1>This is my app.</h1>
         </div>
     )
