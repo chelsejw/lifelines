@@ -7,6 +7,7 @@ import { fetchAllAppeals } from '../../app/appeals/actions'
 class AppealsContainer extends React.Component {
     
     componentDidMount = () => {
+      //Only run if there is no data / initial data hasn't been fetched so that it won't run every re-render.
         this.props.fetchInitialAppeals('/api/v1/appeals.json');
       }
 
