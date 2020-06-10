@@ -1,10 +1,8 @@
-import {items, itemsHasErrored, itemsIsLoading} from './appeals'
+import appealsReducer from '../../app/appeals/reducers'
 import {combineReducers} from 'redux'
 
 const allReducers = combineReducers({
-    items,
-    itemsHasErrored,
-    itemsIsLoading
+    appeals: appealsReducer
 })
 
 export default allReducers

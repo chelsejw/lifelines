@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from './layouts/Nav'
-import AppealResults from './components/appeals/AppealResults'
+import AppealsContainer from './appeals/AppealsContainer'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 
@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
         <Router>
             <Nav/>
-            <Route path="/appeals" component = {AppealResults}/>
+            <Route path="/appeals" component = {AppealsContainer}/>
             <Route path="/hello" exact render={()=> <h1>Hello</h1>} />
         </Router>
     )
