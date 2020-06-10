@@ -1,7 +1,10 @@
 const appealsReducer = (state = {
     data: [],
     isLoading: false,
-    hasErrored: false
+    hasErrored: false,
+    focusedData: null,
+    focusedIsLoading: false,
+    focusedHasErrored: false
 }, action) => {
     switch (action.type) {
         case 'APPEALS_FETCH_DATA_SUCCESS':
@@ -16,6 +19,19 @@ const appealsReducer = (state = {
             return {
                 ...state,
                 hasErrored: action.hasErrored};
+        case 'FOCUSED_APPEAL_FETCH_DATA_SUCCESS':
+            return {
+                ...state,
+                focusedData: action.data
+            }
+        case 'FOCUSED_APPEAL_IS_LOADING':
+            return {
+                ...state,
+                focusedIsLoading: action.isLoading};
+        case 'FOCUSED_APPEAL_HAS_ERROR':
+            return {
+                ...state,
+                focusedHasErrored: action.hasErrored};
         default:
             return state;
     }

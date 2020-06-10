@@ -8,7 +8,7 @@ const AppealResults = (props) => {
         })
 
         return (
-          <div className="col">
+          <div className="col appeal-results-column">
           <h3>Look for Appeals</h3>
           <ul>
             {props.isLoading && "LOADING"}

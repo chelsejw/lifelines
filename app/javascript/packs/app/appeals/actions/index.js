@@ -34,3 +34,40 @@ export function fetchAllAppeals(url) {
             );
     };
 }
+
+export function focusedAppealHasError(bool) {
+    return {
+        type: 'FOCUSED_APPEAL_HAS_ERROR',
+        hasErrored: bool
+    };
+}
+export function focusedAppealIsLoading(bool) {
+    return {
+        type: 'FOCUSED_APPEAL_IS_LOADINF',
+        isLoading: bool
+    };
+}
+export function focusedAppealFetchDataSuccess(data) {
+    return {
+        type: 'FOCUSED_APPEAL_FETCH_DATA_SUCCESS',
+        data
+    };
+}
+
+export function fetchOneAppeal(appealId) {
+    return (dispatch) => {
+        dispatch(focusedAppealIsLoading(true));
+        console.log(`in fetchOneAppeal`)
+        axios.get(`/api/v1/appeals/${appealId}`)
+            .then((response) => {
+                dispatch(focusedAppealIsLoading(false));
+                console.log(`got response`)
+                console.log(response.data)
+                dispatch(focusedAppealFetchDataSuccess(response.data))
+            })
+            .catch((err) => {
+                console.log(err)
+                dispatch(focusedAppealHasError(true))}
+            );
+    };
+}

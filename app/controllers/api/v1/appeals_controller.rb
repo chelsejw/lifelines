@@ -8,7 +8,7 @@ module Api
 
             def show
                 @appeal = Appeal.find(params[:id])
-                render json @appeal
+                render json: @appeal
             end
         end
     end
