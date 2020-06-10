@@ -3,6 +3,7 @@ import AppealResults from './components/AppealResults'
 import FocusedAppeal from './components/FocusedAppeal'
 import { connect } from 'react-redux';
 import { fetchAllAppeals } from '../../app/appeals/actions'
+import ClipLoader from "react-spinners/ClipLoader";
 
 class AppealsContainer extends React.Component {
     
@@ -20,7 +21,11 @@ class AppealsContainer extends React.Component {
 
                 <div className="col position-sticky">
 
-                  {this.props.appeals.focusedIsLoading && "Loading"}
+                  {this.props.appeals.focusedIsLoading && <ClipLoader
+          size={150}
+          color={"#123abc"}
+          loading={this.props.appeals.focusedIsLoading}
+        />}
 
                   {this.props.appeals.focusedHasErrored && "There was an error getting the appeal"}
 

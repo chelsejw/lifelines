@@ -23,10 +23,16 @@ class AppealForm extends React.Component {
         }
 
         const clinicOptions = this.props.appealForm.formData.clinics.map(clinic=> {
+            if (isEditForm && clinic.id==this.props.appealForm.edit.defaultSelect.clinic.id) {
+                return
+            }
             return <option key={clinic.id} value={clinic.id}>{clinic.name}</option>
         })
 
         const speciesOptions = this.props.appealForm.formData.species.map(species=> {
+            if (isEditForm && species.id==this.props.appealForm.edit.defaultSelect.species.id) {
+                return
+            }
             return <option key={species.id} value={species.id}>{species.name}</option>
         })
         
@@ -61,14 +67,15 @@ class AppealForm extends React.Component {
                     }}
                 defaultValue = {{value: 338, label: "Clinic"}}
                     name="clinic_id">
+                                                {isEditForm && <option value={this.props.appealForm.edit.defaultSelect.clinic.id}>{this.props.appealForm.edit.defaultSelect.clinic.name}</option>}
                         {clinicOptions}
                     </select>
                     <select
-                    defaultValue = {{value: 22, label: "Dog"}}
                     onChange={(e)=> {
                         isEditForm ? this.props.trackEditInput(e.target.value, e.target.name) : this.props.trackInput(e.target.value, e.target.name)
                     }}
                     name="species_id">
+                        {isEditForm && <option value={this.props.appealForm.edit.defaultSelect.species.id}>{this.props.appealForm.edit.defaultSelect.species.name}</option>}
                         {speciesOptions}
                     </select>
 

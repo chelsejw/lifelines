@@ -17,7 +17,7 @@ const AppealListing = (props) => {
                     "btn-danger"}`}>{props.appeal.status=="open" ? 
                     "Open" : "Closed"}</div>
                     <NavLink className="btn btn-sm btn-dark"
-                     to="/appeals/edit" exact>Edit Appeal</NavLink>
+                     to={`/appeals/${props.appeal.id}/edit`} exact>Edit Appeal</NavLink>
                 </div>
             </div>
         </div>

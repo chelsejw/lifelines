@@ -1,5 +1,6 @@
 import React from 'react'
 import AppealListing from './AppealListing'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AppealResults = (props) => {
 
@@ -11,7 +12,11 @@ const AppealResults = (props) => {
           <div className="col appeal-results-column">
           <h3>Look for Appeals</h3>
           <ul>
-            {props.isLoading && "LOADING"}
+            {props.isLoading &&  <ClipLoader
+          size={150}
+          color={"#123abc"}
+          loading={props.isLoading}
+        />}
             {props.hasErrored && "Error occured"}
             {results}
           </ul>

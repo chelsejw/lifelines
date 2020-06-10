@@ -16,13 +16,32 @@ const appealsFormReducer = (state = {
     },
     isEditing: false,
     edit: {
+        defaultSelect: {
+            isLoaded: false,
+            clinic: {
+                id: "",
+                name: ""
+            },
+            species: {
+                id: "",
+                name: ""
+            }
+        },
         editInput: {
             species_id: "",
             pet_name: "",
             clinic_id: "",
             description: "",
-            img_url: ""
+            img_url: "",
+            species: {
+                id: "",
+                name: ""
             },
+            clinic: {
+                id: "",
+                name: ""
+            }
+        },
         isLoading: false,
         hasErrored: false,
         errorDetails: {
@@ -50,6 +69,7 @@ const appealsFormReducer = (state = {
                 ...state,
                 isLoading: action.isLoading};
         case 'TRACK_INPUT_DATA':
+            console.log(`triggered normal track inpuit`)
             return {
                 ...state,
                 inputData: {
@@ -75,9 +95,20 @@ const appealsFormReducer = (state = {
                 ...state,
                 edit: {
                     ...state.edit,
-                    editInput: action.data
+                    editInput: action.data,
+                    defaultSelect: {
+                        isLoaded: true,
+                        clinic: {
+                            id: action.data.clinic.id,
+                            name: action.data.clinic.name
+                        },
+                        species: {
+                            id: action.data.species.id,
+                            name: action.data.species.name
+                    }
                 }
             }
+        }
         case 'GET_EDIT_FORM_DATA_HAS_ERROR':
             return {
                 ...state,
@@ -99,6 +130,8 @@ const appealsFormReducer = (state = {
                 }
             }
         case 'TRACK_EDIT_FORM_INPUT':
+            console.log(`triggered edit track inpuit`)
+
             return {
                 ...state,
                 edit: {
