@@ -18,7 +18,7 @@ export function appealsFetchDataSuccess(data) {
         data
     };
 }
-export function appealsFetchData(url) {
+export function fetchAllAppeals(url) {
     return (dispatch) => {
         dispatch(appealsIsLoading(true));
         console.log(`in appealsFetchData`)

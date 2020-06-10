@@ -1,63 +1,23 @@
 import React from 'react'
 import AppealListing from './AppealListing'
-import { connect } from 'react-redux';
-import { itemsFetchData } from '../../../redux/actions'
 
-class AppealResults extends React.Component {
-    
-    componentDidMount = () => {
-        this.props.fetchData('/api/v1/appeals.json');
-      }
+const AppealResults = (props) => {
 
-      render(){
-          let results;
-          if (this.props.hasErrored) {
-            results = <p>Sorry! There was an error loading the items</p>
-          }
-          if (this.props.isLoading) {
-            results = <p>Loading…</p>
-          }
-        
-          results = this.props.items.map((appeal) => {
+        let results = props.data.map((appeal) => {
                   return <AppealListing key={appeal.id} appeal={appeal}/>
         })
+
         return (
-
-          <div className="container-fluid">
-              <div className="row">
-
-                <div className="col">
-                  <h3>Look for Appeals</h3>
-                  <ul>
-                    {results}
-                  </ul>
-                </div>
-
-                <div className="col">
-
-                  Hello put your appeals here
-
-                </div>
-              
-
-              </div>
-            </div>
+          <div className="col">
+          <h3>Look for Appeals</h3>
+          <ul>
+            {props.isLoading && "LOADING"}
+            {props.hasErrored && "Error occured"}
+            {results}
+          </ul>
+        </div>
         )
-      }
 }
 
+export default AppealResults
 
-const mapStateToProps = (state) => {
-    return {
-        items: state.items,
-        hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
-    };
-  };
-  const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchData: (url) => dispatch(itemsFetchData(url))
-    };
-  };
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(AppealResults);

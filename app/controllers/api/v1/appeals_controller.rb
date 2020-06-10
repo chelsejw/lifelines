@@ -5,6 +5,11 @@ module Api
                 @appeals = Appeal.all
                 render json: @appeals
             end
+
+            def show
+                @appeal = Appeal.find(params[:id])
+                render json @appeal
+            end
         end
     end
 end
