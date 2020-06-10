@@ -1,16 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { trackInputData, postAppealForm, getFormRenderData } from '../../app/forms/actions'
+import { trackInputData, postAppealForm, getFormRenderData, getEditFormData, trackEditFormInput } from '../../app/forms/actions'
 
 class AppealForm extends React.Component {
 
     componentDidMount(){
         this.props.getFormData();
+        
+        //If this isn't the new appeal form, we want to get the original of the appeal we want to edit.
+        if ( this.props.match.path!=="/appeals/new") {
+            this.props.getEditFormData(this.props.match.params.id)
+        }
     }
 
       render(){
-          
-        const fakeInput = {
+
+        const isEditForm = this.props.match.path!=="/appeals/new"
+
+        let fakeInput = {
             user_id: 330,
             status: "open",
         }
@@ -28,19 +35,21 @@ class AppealForm extends React.Component {
           <div className="container-fluid">
             <form>
                     <input
+                    defaultValue = {isEditForm && this.props.appealForm.edit.editInput.pet_name}
                     placeholder="Pet's Name"
                     onChange={(e)=> {
-                        this.props.trackInput(e.target.value, e.target.name)
+                        isEditForm ? this.props.trackEditInput(e.target.value, e.target.name) : this.props.trackInput(e.target.value, e.target.name)
                     }}
                     name="pet_name"/>
                     <input
+                    defaultValue = {isEditForm && this.props.appealForm.edit.editInput.img_url}                    
                     placeholder = "Image URL"
                     onChange={(e)=> {
-                        this.props.trackInput(e.target.value, e.target.name)
+                        isEditForm ? this.props.trackEditInput(e.target.value, e.target.name) : this.props.trackInput(e.target.value, e.target.name)
                     }}
                     name="img_url"/>
                     <input
-
+                    defaultValue = {isEditForm && this.props.appealForm.edit.editInput.description}     
                 placeholder = "Description"
                     onChange={(e)=> {
                         this.props.trackInput(e.target.value, e.target.name)
@@ -48,15 +57,17 @@ class AppealForm extends React.Component {
                     name="description"/>
                     <select
                     onChange={(e)=> {
-                    this.props.trackInput(parseInt(e.target.value), e.target.name)
-                }}
+                        isEditForm ? this.props.trackEditInput(e.target.value, e.target.name) : this.props.trackInput(e.target.value, e.target.name)
+                    }}
+                defaultValue = {{value: 338, label: "Clinic"}}
                     name="clinic_id">
                         {clinicOptions}
                     </select>
                     <select
+                    defaultValue = {{value: 22, label: "Dog"}}
                     onChange={(e)=> {
-                    this.props.trackInput(parseInt(e.target.value), e.target.name)
-                }}
+                        isEditForm ? this.props.trackEditInput(e.target.value, e.target.name) : this.props.trackInput(e.target.value, e.target.name)
+                    }}
                     name="species_id">
                         {speciesOptions}
                     </select>
@@ -72,6 +83,9 @@ class AppealForm extends React.Component {
               {this.props.appealForm.isLoading && "Submitting Appeal......"}
 
               {this.props.appealForm.hasErrored && "Sorry there was an error!!"}
+
+              {this.props.appealForm.edit.hasErrored && `Sorry, an error has occured. Error (${this.props.appealForm.edit.errorDetails.statusCode}): ${this.props.appealForm.edit.errorDetails.statusText}`}
+
             </div>
         )
       }
@@ -90,6 +104,9 @@ const mapStateToProps = (state) => {
             console.log(`track input triggered for ${field}`)
             dispatch(trackInputData(input,field));
         },
+        trackEditInput: (input, field) => {
+            dispatch(trackEditFormInput(input,field))
+        },
         post: (payload)=> {
             console.log(`posting`)
             console.log(`payload`, payload)
@@ -97,6 +114,9 @@ const mapStateToProps = (state) => {
         },
         getFormData: ()=> {
             dispatch(getFormRenderData())
+        },
+        getEditFormData: (appealId) => {
+            dispatch(getEditFormData(appealId))
         }
     };
   };
