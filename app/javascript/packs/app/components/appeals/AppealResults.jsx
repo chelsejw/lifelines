@@ -1,7 +1,7 @@
 import React from 'react'
 import AppealListing from './AppealListing'
 import { connect } from 'react-redux';
-import { itemsFetchData } from '../../redux/actions'
+import { itemsFetchData } from '../../../redux/actions'
 
 class AppealResults extends React.Component {
     
@@ -22,8 +22,25 @@ class AppealResults extends React.Component {
                   return <AppealListing key={appeal.id} appeal={appeal}/>
         })
         return (
-            <div>
-              {results}
+
+          <div className="container-fluid">
+              <div className="row">
+
+                <div className="col">
+                  <h3>Look for Appeals</h3>
+                  <ul>
+                    {results}
+                  </ul>
+                </div>
+
+                <div className="col">
+
+                  Hello put your appeals here
+
+                </div>
+              
+
+              </div>
             </div>
         )
       }

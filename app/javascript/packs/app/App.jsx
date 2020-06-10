@@ -1,33 +1,17 @@
 import React from 'react';
-import Nav from './components/Nav'
-import AppealResults from './components/AppealResults'
+import Nav from './layouts/Nav'
+import AppealResults from './components/appeals/AppealResults'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 
 class App extends React.Component {
   render(){
     return (
-        <div>
+        <Router>
             <Nav/>
-            <div className="container-fluid">
-              <div className="row">
-
-                <div className="col">
-                  <h3>Look for Appeals</h3>
-                  <ul>
-                    <AppealResults/>
-                  </ul>
-                </div>
-
-                <div className="col">
-
-                  Hello put your appeals here
-
-                </div>
-              
-
-              </div>
-            </div>
-        </div>
+            <Route path="/appeals" component = {AppealResults}/>
+            <Route path="/hello" exact render={()=> <h1>Hello</h1>} />
+        </Router>
     )
   }
 }
