@@ -1,0 +1,2 @@
+module LifelineHelper
+end

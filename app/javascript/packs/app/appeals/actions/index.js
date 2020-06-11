@@ -30,8 +30,8 @@ export function fetchAllAppeals(url) {
             })
             .catch((err) => {
                 console.log(err)
-                dispatch(appealsHasError(true))}
-            );
+                dispatch(appealsHasError(true))
+            });
     };
 }
 
@@ -67,7 +67,51 @@ export function fetchOneAppeal(appealId) {
             })
             .catch((err) => {
                 console.log(err)
-                dispatch(focusedAppealHasError(true))}
-            );
+                dispatch(focusedAppealHasError(true))
+            });
     };
+}
+
+export function lifelinesFetchDataSuccess(data) {
+    return {
+        type: 'LIFELINES_FETCH_DATA_SUCCESS',
+        data
+    };
+}
+
+export function fetchLifelineData(appealId) {
+    return (dispatch) => {
+        console.log(`in fetch lifelines`)
+        axios.get(`/api/v1/appeals/${appealId}/get-lifelines`)
+            .then((response) => {
+                console.log(`got response for lifelines`)
+                console.log(response.data)
+                dispatch(lifelinesFetchDataSuccess(response.data))
+            })
+            .catch((err) => {
+                console.log(`Alamak got error`)
+                console.log(err)
+            });
+    }
+};
+
+export function throwLifelineSuccess(data){
+    return {
+        type: 'THROW_LIFELINE_SUCCESS',
+        data
+    }
+}
+
+export function throwLifeline(appealId){
+    return (dispatch)=>{
+        const token = document.querySelector("[name=csrf-token]").content;
+        axios.defaults.headers.common["X-CSRF-TOKEN"] = token;  
+        axios
+        .post(`/api/v1/appeals/${appealId}/throw-lifeline`)
+        .then(res => {
+            console.log(`response received`);
+            dispatch(throwLifelineSuccess(res.data))
+        })
+        .catch(err=>console.log(err))
+    }
 }

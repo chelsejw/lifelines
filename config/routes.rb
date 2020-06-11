@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :appeals
+        get '/appeals/:id/get-lifelines', to: "appeals#get_lifelines"
+        post '/appeals/:id/throw-lifeline', to: "appeals#throw_lifeline"
+
       resources :clinics
       resources :species
       resources :users

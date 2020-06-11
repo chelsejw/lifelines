@@ -2,53 +2,43 @@ module Api
     module V1
         class AppealsController < ApplicationController
             
-            before_action :set_appeal, only: [:show, :edit, :update, :destroy]
-
-
+            before_action :set_appeal, only: [:show, :edit, :update, :destroy, :get_lifelines]
             # GET /appeals
             # GET /appeals.json
             def index
               @appeals = Appeal.all.order('id DESC')
               render json: @appeals
             end
-            module Api 
-              module V1
-                  class ClinicsController < ApplicationController
-          
-                      before_action :set_clinic, only: [:show, :edit, :update, :destroy]
-                      # GET /appeals
-                      # GET /appeals.json
-                      def index
-                        @clinics = Clinic.all.order('id DESC')
-                        render json: @clinics
-                      end
-                    
-                      # GET /appeals/1
-                      # GET /appeals/1.json
-                      def show
-                      render json: @clinic
-                      end
-               
-                      private
-                        # Use callbacks to share common setup or constraints between actions.
-                        def set_clinic
-                          @clinic = Clinic.find(params[:id])
-                        end
-                    
-                        # Only allow a list of trusted parameters through.
-                        def clinic_params
-                          params.require(:clinic).permit(:name, :phone, :address, :email)
-                        end
-                    end
-                    
-              end
-          end
+            
             # GET /appeals/1
             # GET /appeals/1.json
             def show
             @appeal = Appeal.find(params[:id])
             render json: @appeal
             end
+
+            def get_lifelines
+              @lifelines = @appeal.lifelines
+              puts current_user.id
+              user_lifelines = @lifelines.where({user_id: current_user.id})
+              if user_lifelines.length==0
+                is_user_connected = false
+              else
+                is_user_connected = true
+              end
+              render json: { lifelines: @lifelines, isUserConnected: is_user_connected }
+            end
+
+            def throw_lifeline
+              @lifeline = Lifeline.new(user_id: current_user.id, appeal_id: params[:id], confirmed: false)
+              
+              if @lifeline.save
+                render json: @lifeline
+              else
+                byebug
+                render json: {error: @lifeline.errors}, status: 403
+              end
+            end 
           
             # GET /appeals/new
             def new
@@ -78,7 +68,6 @@ module Api
             # PATCH/PUT /appeals/1.json
             def update
               if @appeal.user_id!=current_user.id
-                byebug
                 render json: {error: "You are not allowed to edit this appeal."}, status: 403
               
               end
@@ -109,7 +98,7 @@ module Api
           
               # Only allow a list of trusted parameters through.
               def appeal_params
-                params.require(:appeal).permit(:user_id, :img_url, :clinic_id, :species_id, :pet_name, :description, :status)
+                params.require(:appeal).permit(:user_id, :img_url, :clinic_id, :species_id, :pet_name, :description, :status, :lifelines=> [])
               end
           end
           

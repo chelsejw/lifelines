@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_171604) do
+ActiveRecord::Schema.define(version: 2020_06_11_121422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_171604) do
   create_table "lifelines", force: :cascade do |t|
     t.bigint "appeal_id", null: false
     t.bigint "user_id", null: false
-    t.string "status"
+    t.boolean "confirmed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["appeal_id"], name: "index_lifelines_on_appeal_id"

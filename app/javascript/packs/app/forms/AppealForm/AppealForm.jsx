@@ -15,7 +15,6 @@ class AppealForm extends React.Component {
         }
 
     }
-
       render(){
 
         const isEditForm = this.props.match.path!=="/appeals/new"
