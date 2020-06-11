@@ -11,14 +11,16 @@ const AppealResults = (props) => {
 
         return (
           <div className="col-5 appeal-results-column">
-            {props.isLoading &&  <div className="mx-auto w-50 p-5"><MoonLoad
+            {props.isLoading &&  <div className="mx-auto w-50"><MoonLoad
           size={150}
           color={"red"}
           loading={props.isLoading}
         /></div>}
             {props.hasErrored && "Error occured"}
-
+            <div className="p-3">
             {results}
+
+            </div>
         </div>
         )
 }

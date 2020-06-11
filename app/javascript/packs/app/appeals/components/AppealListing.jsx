@@ -2,12 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { fetchOneAppeal } from '../actions'
 import { NavLink } from 'react-router-dom';
-import '../css/appeals.scss'
 
 const AppealListing = (props) => {
 
     return (
-        <div className="media appeal-listing container shadow-sm my-2 p-2">
+        <div className="media appeal-listing container shadow-sm my-2">
             <div className="row">
                 <img onClick={()=> {props.fetchOneAppeal(props.appeal.id)}} src={props.appeal.img_url} className="mr-3 result-thumbnail" alt="..."/>
                 <div className="media-body col-9">

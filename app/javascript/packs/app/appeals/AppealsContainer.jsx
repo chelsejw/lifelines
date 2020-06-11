@@ -19,7 +19,7 @@ class AppealsContainer extends React.Component {
 
                 <AppealResults data={this.props.appeals.data} hasError={this.props.appeals.hasErrored} isLoading={this.props.appeals.isLoading}/>
 
-                <div className="col-7 position-sticky">
+                <div className="col-7 mt-2 position-sticky">
 
                   {this.props.appeals.focusedIsLoading && <ClipLoader
           size={150}

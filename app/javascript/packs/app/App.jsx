@@ -4,7 +4,6 @@ import AppealsContainer from './appeals/AppealsContainer'
 import AppealForm from './forms/AppealForm'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
-
 class App extends React.Component {
   render(){
     return (
