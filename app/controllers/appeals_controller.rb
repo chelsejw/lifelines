@@ -1,5 +1,6 @@
 class AppealsController < ApplicationController
   before_action :set_appeal, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   # GET /appeals
   # GET /appeals.json

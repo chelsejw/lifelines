@@ -12,7 +12,8 @@ class App extends React.Component {
             <Route path="/appeals/new" exact component = {AppealForm}/>
             <Route path="/appeals/:id/edit" exact component = {AppealForm}/>
             <Route path="/appeals" exact component = {AppealsContainer}/>
-            <Route path="/hello" exact render={()=> <h1>Hello</h1>} />
+            <Route path="/profile" exact render={()=> <h1>My Profile</h1>} />
+
         </Router>
     )
   }

@@ -12,12 +12,6 @@ const Nav = (props) => {
     console.log(`rendered nav`)
   }, [])
 
-  const logout = (e) => {
-
-    axios.get('/users/sign_out')
-    .then(res=> console.log(res))
-    .catch(err => console.log(err))
-  }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
@@ -36,9 +30,19 @@ const Nav = (props) => {
       <li className="nav-item">
       <NavLink exact className="nav-link" to="/appeals/new">New Appeal</NavLink>
       </li>
-
-      {props.auth.isLoggedIn && <li className="nav-item">
-        <a className="nav-link" onClick={logout} href="/users/sign_out">Sign Out</a>
+      <li className="nav-item">
+      <NavLink exact className="nav-link" to="/profile">My Profile</NavLink>
+      </li>
+      {!props.auth.isLoggedIn && <li className="nav-item">
+        <a className="nav-link" href="/users/sign_in">Sign In</a>
+      </li>}
+      {!props.auth.isLoggedIn && <li className="nav-item">
+        <a className="nav-link" href="/users/sign_up">Sign Up</a>
+      </li>}
+      
+  {props.auth.isLoggedIn && 
+      <li className="nav-item">
+        <a className="nav-link" href="/api/v1/auth/logout">Sign Out</a>
       </li>}
     </ul>
   </div>
