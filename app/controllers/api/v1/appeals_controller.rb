@@ -47,6 +47,10 @@ module Api
             # PATCH/PUT /appeals/1
             # PATCH/PUT /appeals/1.json
             def update
+
+              puts appeal_params
+              puts "helloooooo"
+
               respond_to do |format|
                 if @appeal.update(appeal_params)
                   format.html { redirect_to @appeal, notice: 'Appeal was successfully updated.' }

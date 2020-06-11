@@ -51,6 +51,7 @@ const appealsFormReducer = (state = {
     },
     patch: {
         data: {},
+        submitted: false,
         isLoading: false,
         hasErrored: false,
         errorDetails: {
@@ -83,19 +84,32 @@ const appealsFormReducer = (state = {
                 hasErrored: action.hasErrored
             };
         case 'GET_FORM_FIELD_DATA':
+            let inputKey = 'species'
+            if (action.field=='clinics'){
+                inputKey = 'clinic'
+            } 
+
             return {
-                ...state,
-                formData: {
-                    ...state.formData,
-                    [action.field]: action.data
-                }
-            }
+              ...state,
+              inputData: {
+                ...state.inputData,
+                [`${inputKey}_id`]: parseInt(action.data[0].id),
+              },
+              formData: {
+                ...state.formData,
+                [action.field]: action.data,
+              },
+            };
         case 'GET_EDIT_FORM_DATA_SUCCESS':
             return {
                 ...state,
                 edit: {
                     ...state.edit,
-                    editInput: action.data,
+                    editInput: {
+                        ...action.data,
+                        species_id: action.data.species.id,
+                        clinic_id: action.data.clinic.id
+                    },
                     defaultSelect: {
                         isLoaded: true,
                         clinic: {
@@ -133,15 +147,15 @@ const appealsFormReducer = (state = {
             console.log(`triggered edit track inpuit`)
 
             return {
-                ...state,
-                edit: {
-                    ...state.edit,
-                    inputData: {
-                        ...state.edit.inputData,
-                        [action.field]: action.input
-                    }
-                }
-            }
+              ...state,
+              edit: {
+                ...state.edit,
+                editInput: {
+                  ...state.edit.editInput,
+                  [action.field]: action.input,
+                },
+              },
+            };
         case 'APPEAL_PATCH_REQUEST_IS_LOADING':
             return {
                 ...state,
@@ -167,7 +181,8 @@ const appealsFormReducer = (state = {
                     ...state,
                     patch: {
                         ...state.patch,
-                        data: action.data
+                        data: action.data,
+                        submitted: true
                     }
                 }
         default:

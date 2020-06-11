@@ -22,8 +22,6 @@ export function appealPostRequestSuccess(data) {
 }
 
 export function trackInputData(input, field) {
-    console.log(`Input: `, input)
-    console.log(`Field: `, field)
     return {
         type: 'TRACK_INPUT_DATA',
         field,
@@ -79,26 +77,25 @@ export function getFormRenderData(){
 
 export function postAppealForm(payload) {
     return (dispatch) => {
-        dispatch(appealPostRequestIsLoading(true));
-        console.log(`in post appeals`)
-        console.log(`my payload is`, payload)
+      dispatch(appealPostRequestIsLoading(true));
+      console.log(`in post appeals`);
+      console.log(`my payload is`, payload);
 
-        const token = 
-        document.querySelector('[name=csrf-token]').content
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = token
-        
-        axios
+      const token = document.querySelector("[name=csrf-token]").content;
+      axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+
+      axios
         .post(`/api/v1/appeals`, payload)
         .then((response) => {
-            dispatch(appealPostRequestIsLoading(false));
-            console.log(`got response`)
-            dispatch(appealPostRequestSuccess(response.data))
+          dispatch(appealPostRequestIsLoading(false));
+          console.log(`got response`);
+          dispatch(appealPostRequestSuccess(response.data));
         })
         .catch((err) => {
-            console.log(err)
-            dispatch(appealPostRequestIsLoading(false));
-            dispatch(appealPostRequestHasError(true))}
-         );
+          console.log(err.response);
+          dispatch(appealPostRequestIsLoading(false));
+          dispatch(appealPostRequestHasError(true));
+        });
     };
 }
 
@@ -146,15 +143,47 @@ export function appealPatchRequestIsLoading(bool){
 
 export function appealPatchRequestHasError(bool, statusCode, statusText){
     return {
-        type: 'APPEAL_PATCH_REQUEST_IS_LOADING',
+        type: 'APPEAL_PATCH_REQUEST_HAS_ERROR',
         hasErrored: bool,
         statusCode,
         statusText
     }
 }
-export function sendPatchAppealRequest(appealId){
-    return dispatch => {
-        dispatch
 
-    }
+
+export function appealPatchRequestSuccess(data) {
+  return {
+    type: "APPEAL_PATCH_REQUEST_SUCCESS",
+    data
+  };
+}
+
+export function sendPatchAppealRequest(data){
+    return (dispatch) => {
+      dispatch(appealPatchRequestIsLoading(true));
+      delete data["species"];
+      delete data["clinic"];
+            delete data["user"];
+
+      console.log(data);
+
+      let appealId = data.id
+      axios
+        .patch(`${api}appeals/${appealId}`, data)
+        .then((response) => {
+            console.log(`Got response from patch appeal request`)
+          dispatch(appealPatchRequestIsLoading(false));
+          dispatch(appealPatchRequestSuccess(response.data));
+        })
+        .catch((err) => {
+          console.log(err.response);
+          dispatch(
+            appealPatchRequestHasError(
+              true,
+              err.response.status,
+              err.response.statusText
+            )
+          );
+        });
+    };
 }
