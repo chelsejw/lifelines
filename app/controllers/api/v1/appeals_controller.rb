@@ -33,33 +33,22 @@ module Api
             def create
               @appeal = Appeal.new(appeal_params)
           
-              respond_to do |format|
-                if @appeal.save
-                  format.html { redirect_to '/appeals', notice: 'Appeal was successfully created.' }
-                  format.json { render :show, status: :created, location: @appeal }
-                else
-                  format.html { render :new }
-                  format.json { render json: @appeal.errors, status: :unprocessable_entity }
-                end
+              if @appeal.save
+                render json: @appeal
+              else
+                render json: @appeal.errors
               end
             end
           
             # PATCH/PUT /appeals/1
             # PATCH/PUT /appeals/1.json
             def update
-
-              puts appeal_params
-              puts "helloooooo"
-
-              respond_to do |format|
-                if @appeal.update(appeal_params)
-                  format.html { redirect_to @appeal, notice: 'Appeal was successfully updated.' }
-                  format.json { render :show, status: :ok, location: @appeal }
-                else
-                  format.html { render :edit }
-                  format.json { render json: @appeal.errors, status: :unprocessable_entity }
-                end
+              if @appeal.update(appeal_params)
+                render json: @appeal
+              else
+                render json: @appeal.errors
               end
+          
             end
           
             # DELETE /appeals/1

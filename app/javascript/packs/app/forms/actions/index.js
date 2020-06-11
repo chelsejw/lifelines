@@ -161,17 +161,28 @@ export function appealPatchRequestSuccess(data) {
 export function sendPatchAppealRequest(data){
     return (dispatch) => {
       dispatch(appealPatchRequestIsLoading(true));
-      delete data["species"];
-      delete data["clinic"];
-            delete data["user"];
-
       console.log(data);
 
+      const token = document.querySelector("[name=csrf-token]").content;
+      axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+
       let appealId = data.id
+
+      let cleanData = (object)=> {
+        delete data["species"];
+        delete data["clinic"];
+      delete data["user"];
+      delete data["id"];
+      delete data["created_at"];
+      delete data["updated_at"];  
+      return data
+      }
+
       axios
-        .patch(`${api}appeals/${appealId}`, data)
+        .patch(`${api}appeals/${appealId}`, cleanData(data) )
         .then((response) => {
             console.log(`Got response from patch appeal request`)
+            console.log(response.data)
           dispatch(appealPatchRequestIsLoading(false));
           dispatch(appealPatchRequestSuccess(response.data));
         })
