@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {NavLink} from 'react-router-dom'
+import {checkAuth} from '../auth/actions'
+import { connect } from 'react-redux';
+import axios from 'axios'
 
 const Nav = (props) => {
+
+  useEffect(()=>{
+    
+    props.checkAuth();
+    console.log(`rendered nav`)
+  }, [])
+
+  const logout = (e) => {
+
+    axios.get('/users/sign_out')
+    .then(res=> console.log(res))
+    .catch(err => console.log(err))
+  }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
-  <a className="navbar-brand" href="#">Lifelines</a>
+  <a className="navbar-brand" href="/">Lifeline</a>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -19,19 +36,10 @@ const Nav = (props) => {
       <li className="nav-item">
       <NavLink exact className="nav-link" to="/appeals/new">New Appeal</NavLink>
       </li>
-      <li className="nav-item">
-        <a className="nav-link" href="#">Pricing</a>
-      </li>
-      <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a className="dropdown-item" href="#">Action</a>
-          <a className="dropdown-item" href="#">Another action</a>
-          <a className="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+
+      {props.auth.isLoggedIn && <li className="nav-item">
+        <a className="nav-link" onClick={logout} href="/users/sign_out">Sign Out</a>
+      </li>}
     </ul>
   </div>
 </nav>
@@ -39,4 +47,19 @@ const Nav = (props) => {
 
 }
 
-export default Nav
+
+const mapStateToProps = (state) => {
+  return {
+      auth: state.auth,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+      checkAuth: ()=>{
+        dispatch(checkAuth());
+      }
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

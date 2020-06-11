@@ -5,13 +5,14 @@ Rails.application.routes.draw do
       resources :appeals
       resources :clinics
       resources :species
+      resources :users
+      get '/auth/check-login', to: "users#isloggedin"
+      get '/auth/logout', to: "users#logout"
     end
   end
 
-  root 'pages#index'
-
-  match '*path', to: 'pages#index', via: :all
-
   devise_for :users
+  root 'pages#index', to: "/"
+  match '*path', to: 'pages#index', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
