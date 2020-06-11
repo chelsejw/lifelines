@@ -89,6 +89,7 @@ export function postAppealForm(payload) {
         .then((response) => {
           dispatch(appealPostRequestIsLoading(false));
           console.log(`got response`);
+          console.log(response.data)
           dispatch(appealPostRequestSuccess(response.data));
         })
         .catch((err) => {
