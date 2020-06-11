@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from './layouts/Nav'
 import AppealsContainer from './appeals/AppealsContainer'
-import AppealForm from './forms/AppealForm'
+import AppealForm from './forms/AppealForm/AppealForm'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 class App extends React.Component {

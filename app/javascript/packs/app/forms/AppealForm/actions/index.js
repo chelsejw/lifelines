@@ -75,17 +75,21 @@ export function getFormRenderData(){
 
 }
 
-export function postAppealForm(payload) {
+export function postAppealForm(payload, userId) {
     return (dispatch) => {
+        dispatch(appealPostRequestHasError(false));
       dispatch(appealPostRequestIsLoading(true));
-      console.log(`in post appeals`);
-      console.log(`my payload is`, payload);
-
       const token = document.querySelector("[name=csrf-token]").content;
       axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
 
+      let appealData = {
+          ...payload,
+          user_id: userId,
+          status: "open"
+      }
+
       axios
-        .post(`/api/v1/appeals`, payload)
+        .post(`/api/v1/appeals`, appealData)
         .then((response) => {
           dispatch(appealPostRequestIsLoading(false));
           console.log(`got response`);
@@ -138,7 +142,7 @@ export function getEditFormData(appealId){
 export function appealPatchRequestIsLoading(bool){
     return {
         type: 'APPEAL_PATCH_REQUEST_IS_LOADING',
-        isLoading: bool
+        isLoading: bool,
     }
 }
 
@@ -162,6 +166,8 @@ export function appealPatchRequestSuccess(data) {
 export function sendPatchAppealRequest(data){
     return (dispatch) => {
       dispatch(appealPatchRequestIsLoading(true));
+      dispatch(appealPostRequestHasError(false));
+
       console.log(data);
 
       const token = document.querySelector("[name=csrf-token]").content;

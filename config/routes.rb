@@ -10,8 +10,7 @@ Rails.application.routes.draw do
       get '/auth/logout', to: "users#logout"
     end
   end
-
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
   root 'pages#index', to: "/"
   match '*path', to: 'pages#index', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

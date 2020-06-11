@@ -62,6 +62,9 @@ module Api
             # POST /appeals
             # POST /appeals.json
             def create
+              if !user_signed_in?
+                render json: {error: "You must be signed in to create an appeal."}, status: 403
+              end
               @appeal = Appeal.new(appeal_params)
           
               if @appeal.save
@@ -74,6 +77,12 @@ module Api
             # PATCH/PUT /appeals/1
             # PATCH/PUT /appeals/1.json
             def update
+              if @appeal.user_id!=current_user.id
+                byebug
+                render json: {error: "You are not allowed to edit this appeal."}, status: 403
+              
+              end
+              
               if @appeal.update(appeal_params)
                 render json: @appeal
               else

@@ -40,6 +40,9 @@ const appealsFormReducer = (state = {
             clinic: {
                 id: "",
                 name: ""
+            },
+            user: {
+                id: ""
             }
         },
         isLoading: false,
@@ -161,7 +164,8 @@ const appealsFormReducer = (state = {
                 ...state,
                 patch: {
                     ...state.patch,
-                    isLoading: action.isLoading
+                    isLoading: action.isLoading,
+                    submitted: false
                 }
             }
             case 'APPEAL_PATCH_REQUEST_HAS_ERROR':

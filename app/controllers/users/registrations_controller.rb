@@ -12,9 +12,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    @profile = Profile.new(user_id: @user.id, account_type: "user", display_name: @user.email)
+    puts @profile
+    if @profile.save
+      puts "CREATED PROFILE SUCCESSFULLY"
+    else
+      puts "ERROR IN CREATING PROFILE"
+    end
+  end
 
   # GET /resource/edit
   # def edit

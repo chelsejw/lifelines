@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { trackInputData, postAppealForm, getFormRenderData, getEditFormData, trackEditFormInput, sendPatchAppealRequest } from '../../app/forms/actions'
+import { trackInputData, postAppealForm, getFormRenderData, getEditFormData, trackEditFormInput, sendPatchAppealRequest } from './actions'
 import ClipLoader from "react-spinners/ClipLoader";
+import ErrorPage from '../../layouts/ErrorPage'
 
 class AppealForm extends React.Component {
 
@@ -12,15 +13,15 @@ class AppealForm extends React.Component {
         if ( this.props.match.path!=="/appeals/new") {
             this.props.getEditFormData(this.props.match.params.id)
         }
+
     }
 
       render(){
 
         const isEditForm = this.props.match.path!=="/appeals/new"
 
-        let fakeInput = {
-            user_id: 1,
-            status: "open",
+        if (isEditForm && this.props.appealForm.edit.editInput.user.id!==this.props.auth.currentUser.id){
+          return <ErrorPage message="You are not authorised to edit this appeal"/>
         }
 
         const clinicOptions = this.props.appealForm.formData.clinics.map((clinic,index)=> {
@@ -49,6 +50,7 @@ class AppealForm extends React.Component {
         })
         
         
+        
         return (
           <div className="container-fluid">
             <div className="jumbotron bg-light">
@@ -59,6 +61,7 @@ class AppealForm extends React.Component {
                   loading={this.props.appealForm.isLoading}
                 />
               )}
+              {this.props.appealForm.patch.submitted && "Successfully updated!"}
 
               {this.props.appealForm.hasErrored && "Sorry there was an error!!"}
 
@@ -189,6 +192,35 @@ class AppealForm extends React.Component {
                   </div>
                 </div>
 
+                {isEditForm &&
+                <div className="row">
+                  <div className="col-4">
+                    <label for="status">Status</label>
+
+                    <select
+                      id="status"
+                      className="form-control"
+                      onChange={(e) => {
+                        isEditForm
+                          ? this.props.trackEditInput(
+                              e.target.value,
+                              e.target.name
+                            )
+                          : this.props.trackInput(
+                              e.target.value,
+                              e.target.name
+                            );
+                      }}
+                      name="status"
+                    >
+                      <option value="open" selected={this.props.appealForm.edit.editInput.status=="open" ? "selected" : "" }>Open</option>
+                      <option value="closed" selected={this.props.appealForm.edit.editInput.status=="closed" ? "selected" : ""} >Closed</option>
+                    </select>
+                </div>
+                </div>
+
+                }
+
                 <div className="row my-4">
                   <button
                     type="submit"
@@ -198,10 +230,7 @@ class AppealForm extends React.Component {
                       console.log(`clicked submit button`);
                       isEditForm
                         ? this.props.patch(this.props.appealForm.edit.editInput)
-                        : this.props.post({
-                            ...fakeInput,
-                            ...this.props.appealForm.inputData,
-                          });
+                        : this.props.post(this.props.appealForm.inputData, this.props.auth.currentUser.id);
                     }}
                   >
                     Submit
@@ -219,6 +248,7 @@ class AppealForm extends React.Component {
 const mapStateToProps = (state) => {
     return {
         appealForm: state.appealForm,
+        auth: state.auth
     };
   };
   const mapDispatchToProps = (dispatch) => {
@@ -230,12 +260,13 @@ const mapStateToProps = (state) => {
         trackEditInput: (input, field) => {
             dispatch(trackEditFormInput(input,field))
         },
-        post: (payload)=> {
+        post: (payload, userId)=> {
             console.log(`posting`)
             console.log(`payload`, payload)
-            dispatch(postAppealForm(payload))
+            dispatch(postAppealForm(payload, userId))
         },
         patch: (payload) => {
+          console.log(`in patch function`)
             dispatch(sendPatchAppealRequest(payload))
         },
         getFormData: ()=> {
