@@ -19,7 +19,7 @@ class AppealForm extends React.Component {
         const isEditForm = this.props.match.path!=="/appeals/new"
 
         let fakeInput = {
-            user_id: 330,
+            user_id: 1,
             status: "open",
         }
 
