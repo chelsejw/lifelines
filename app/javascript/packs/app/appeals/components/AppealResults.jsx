@@ -1,6 +1,7 @@
 import React from 'react'
 import AppealListing from './AppealListing'
-import ClipLoader from "react-spinners/ClipLoader";
+import MoonLoad from "react-spinners/MoonLoader";
+
 
 const AppealResults = (props) => {
 
@@ -10,16 +11,14 @@ const AppealResults = (props) => {
 
         return (
           <div className="col appeal-results-column">
-          <h3>Look for Appeals</h3>
-          <ul>
-            {props.isLoading &&  <ClipLoader
+            {props.isLoading &&  <div className="mx-auto w-50 p-5"><MoonLoad
           size={150}
-          color={"#123abc"}
+          color={"red"}
           loading={props.isLoading}
-        />}
+        /></div>}
             {props.hasErrored && "Error occured"}
+
             {results}
-          </ul>
         </div>
         )
 }
