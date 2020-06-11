@@ -1,6 +1,9 @@
 .appeal-listing {
-    border: 1px solid rgba(0,0,0,0.2);
-    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.appeal-listing:hover {
+    border: 1px solid lightgray
 }
 
 .result-thumbnail {

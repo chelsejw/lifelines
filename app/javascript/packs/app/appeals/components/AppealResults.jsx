@@ -10,7 +10,7 @@ const AppealResults = (props) => {
         })
 
         return (
-          <div className="col appeal-results-column">
+          <div className="col-5 appeal-results-column">
             {props.isLoading &&  <div className="mx-auto w-50 p-5"><MoonLoad
           size={150}
           color={"red"}
