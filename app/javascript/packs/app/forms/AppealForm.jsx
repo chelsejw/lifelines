@@ -22,16 +22,27 @@ class AppealForm extends React.Component {
             status: "open",
         }
 
-        const clinicOptions = this.props.appealForm.formData.clinics.map(clinic=> {
+        const clinicOptions = this.props.appealForm.formData.clinics.map((clinic,index)=> {
             if (isEditForm && clinic.id==this.props.appealForm.edit.defaultSelect.clinic.id) {
-                return
+            return <option selected="selected" key={clinic.id} value={clinic.id}>{clinic.name}</option>;
             }
+            else if (index==0) {
+                return (
+                  <option selected="selected" key={clinic.id} value={clinic.id}>
+                    {clinic.name}
+                  </option>
+                );
+            } 
             return <option key={clinic.id} value={clinic.id}>{clinic.name}</option>
         })
 
         const speciesOptions = this.props.appealForm.formData.species.map(species=> {
             if (isEditForm && species.id==this.props.appealForm.edit.defaultSelect.species.id) {
-                return
+                return (
+                  <option selected="selected" key={species.id} value={species.id}>{species.name}</option>
+                );
+            } else if (index==0) {
+                return <option selected="selected" key={species.id} value={species.id}>{species.name} </option>
             }
             return <option key={species.id} value={species.id}>{species.name}</option>
         })
@@ -41,21 +52,21 @@ class AppealForm extends React.Component {
           <div className="container-fluid">
             <form>
                     <input
-                    defaultValue = {isEditForm && this.props.appealForm.edit.editInput.pet_name}
+                    defaultValue = {isEditForm ? this.props.appealForm.edit.editInput.pet_name : ""}
                     placeholder="Pet's Name"
                     onChange={(e)=> {
                         isEditForm ? this.props.trackEditInput(e.target.value, e.target.name) : this.props.trackInput(e.target.value, e.target.name)
                     }}
                     name="pet_name"/>
                     <input
-                    defaultValue = {isEditForm && this.props.appealForm.edit.editInput.img_url}                    
+                    defaultValue = {isEditForm ? this.props.appealForm.edit.editInput.img_url : ""}                    
                     placeholder = "Image URL"
                     onChange={(e)=> {
                         isEditForm ? this.props.trackEditInput(e.target.value, e.target.name) : this.props.trackInput(e.target.value, e.target.name)
                     }}
                     name="img_url"/>
                     <input
-                    defaultValue = {isEditForm && this.props.appealForm.edit.editInput.description}     
+                    defaultValue = {isEditForm ? this.props.appealForm.edit.editInput.description : ""}     
                 placeholder = "Description"
                     onChange={(e)=> {
                         this.props.trackInput(e.target.value, e.target.name)
