@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 
   ReactDOM.render(
     <Provider store={store}>
-    <App />
+        <App />
     </Provider>,
     document.body.appendChild(document.createElement('div')),
   )

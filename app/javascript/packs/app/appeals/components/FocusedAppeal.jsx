@@ -15,7 +15,7 @@ const FocusedAppeal = (props) => {
             <h3>Needed: {props.data.species.name} donor needed to save {props.data.pet_name}!</h3>
             <img src={props.data.img_url} className="img-fluid"/>
             <p>{props.data.description}</p>
-    {props.auth.isLoggedIn && !props.lifelines.isUserConnected && <button onClick={()=> {props.throwLifeline(props.data.id)}} className="btn btn-big btn-warning">Throw A Lifeline!</button>}
+    {props.auth.isLoggedIn && !props.lifelines.isUserConnected && <button onClick={()=> {props.throwLifeline(props.auth.currentUser, props.data.user, props.data.id)}} className="btn btn-big btn-warning">Throw A Lifeline!</button>}
     {props.auth.isLoggedIn && props.lifelines.isUserConnected && <button className="btn btn-lg btn-danger">See Chat</button>}
     {!props.auth.isLoggedIn && <a href="/users/sign_in"><button className="btn btn-big btn-warning">Login now to help!</button></a>}
 
@@ -42,8 +42,8 @@ const mapStateToProps = (state) => {
         fetchLifelineData: (appealId)=>{
             dispatch(fetchLifelineData(appealId))
         },
-        throwLifeline: appealId =>{
-            dispatch(throwLifeline(appealId))
+        throwLifeline: (user, appealOwner, appealId) =>{
+            dispatch(throwLifeline(user, appealOwner, appealId))
         }
     };
   };
