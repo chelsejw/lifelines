@@ -36,7 +36,7 @@ module Api
               if @appeal.save
                 render json: @appeal
               else
-                render json: @appeal.errors
+                render json: { error: @appeal.errors.messages }, status: 422
               end
             end
           
@@ -46,7 +46,7 @@ module Api
               if @appeal.update(appeal_params)
                 render json: @appeal
               else
-                render json: @appeal.errors
+                render json: { error: @appeal.errors.messages }, status: 422
               end
           
             end
