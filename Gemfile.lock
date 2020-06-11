@@ -222,7 +222,6 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
-  fast_jsonapi
   ffaker (~> 2.15)
   jbuilder (~> 2.7)
   listen (~> 3.2)

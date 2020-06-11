@@ -59,11 +59,11 @@ require 'ffaker'
 # end
 
 50.times do
-    @appeal = Appeal.create!(user_id: rand(User.first.id..User.last.id), img_url: "https://i.picsum.photos/id/#{rand(1..999)}/200/300.jpg", clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: 22, pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
+    @appeal = Appeal.create!(user_id: rand(User.first.id..User.last.id), img_url: "https://i.picsum.photos/id/#{rand(1..999)}/200/300.jpg", clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: rand(Species.first.id..Species.last.id), pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
     puts "Created appeal for #{@appeal.user.profile.username}"
 end
-50.times do
-    @appeal = Appeal.create!(user_id: rand(User.first.id..User.last.id), img_url: "https://i.picsum.photos/id/#{rand(1..999)}/200/300.jpg", clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: 22, pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
-    puts "Created appeal for #{@appeal.user.profile.username}"
-end
+# 50.times do
+#     @appeal = Appeal.create!(user_id: rand(User.first.id..User.last.id), img_url: "https://i.picsum.photos/id/#{rand(1..999)}/200/300.jpg", clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: 22, pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
+#     puts "Created appeal for #{@appeal.user.profile.username}"
+# end
 
