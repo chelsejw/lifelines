@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-
+  resources :conversations, only: [:index, :create]
+  resources :messages, only: [:create]
+  mount ActionCable.server => '/cable'
+  
   namespace :api do
     namespace :v1 do
       resources :appeals
