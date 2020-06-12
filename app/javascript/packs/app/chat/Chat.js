@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {API_WS_ROOT} from '../constants'
-import {ActionCableConsumer, ActionCableProvider} from 'react-actioncable-provider'
+import React from 'react'
+import {ActionCableProvider} from 'react-actioncable-provider';
 import ConversationsList from './ConversationsList'
 
 const Chat = (props) => {

@@ -1,22 +1,35 @@
 // src/components/Cables.js
 
 import React, { Fragment } from 'react';
-import { ActionCable } from 'react-actioncable-provider';
+import { ActionCableConsumer } from 'react-actioncable-provider';
+import {connect} from 'react-redux'
 
-const Cable = ({ conversations, handleReceivedMessage }) => {
+const Cable = (props) => {
   return (
     <Fragment>
-      {conversations.map(conversation => {
+      {props.chat.conversations.map((conversation, index) => {
         return (
-          <ActionCable
-            key={conversation.id}  
+          <ActionCableConsumer 
+            onDisconnected={(res)=> {
+              console.log(`triggered on disconnected`)
+              console.log(res)
+            }}
+            key={index}  
             channel={{ channel: 'MessagesChannel', conversation: conversation.id }}
-            onReceived={handleReceivedMessage}
+            onReceived={(res)=>{
+              console.log(`triggered onreceived`)
+              console.log(res)
+            }}
           />
         );
       })}
     </Fragment>
   );
 };
-
-export default Cable;
+const mapStateToProps = (state) => {
+  return {
+      chat: state.chat,
+      auth: state.auth
+  };
+};
+export default connect(mapStateToProps)(Cable);

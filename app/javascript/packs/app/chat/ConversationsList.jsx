@@ -1,53 +1,42 @@
 
-import React, {useState, useEffect} from 'react';
-import { ActionCable, ActionCableConsumer } from 'react-actioncable-provider';
-import NewConversationForm from './NewConversationForm';
+import React, {useEffect} from 'react';
+import { ActionCableConsumer } from 'react-actioncable-provider';
 import MessagesArea from './MessagesArea';
 import Cable from './Cable';
-import axios from 'axios'
+import {connect} from 'react-redux'
 
-const ConversationsList = () => {
-  const [conversations, setConversations] = useState([])
-  const [activeConversation, setActiveConversation] = useState(null)
+import {getUserConversations, setConversations, setActiveConversation} from './actions'
 
-  const fetchConvos = ()=> {
-    axios.get(`/conversations/user`)
-    .then(res => {
-      console.log(`got something`)
-      console.log(res.data)
-      return setConversations(res.data)
-    })
-    .catch(err => {
-      console.log(err.response)
-    });
-  }
-
-
+const ConversationsList = (props) => {
   //First render.
   useEffect(()=> {
-    console.log(`useeffect`)
-    fetchConvos();
-  }
-    ,[])
-
+    props.getUserConversations();
+  }, [])
   const handleClick = id => {
-    setActiveConversation(id)
+    props.setActiveConversation(id)
   };
 
   const handleReceivedConversation = response => {
+    console.log(`triggered handle received convo`, response)
     const { conversation } = response;
-    setConversations(currentConvos => [...currentConvos, conversation])
+    setConversations([...props.chat.conversations, conversation])
   };
 
   const handleReceivedMessage = response => {
+    console.log(`triggered handle received mesage`, response)
     const { message } = response;
-    const convos = [...conversations];
+    const convos = [...props.chat.conversations];
     const convo = convos.find(
       convo => convo.id === message.conversation_id
     );
     convo.messages = [...convo.messages, message];
     setConversations(convos)
   };
+
+  const otherUser = (convo, currentUserId) => {
+    let user = convo.users.find(user => user.id!==currentUserId)
+    return user ? user.email : "yourself"
+  }
 
 
   const findActiveConversation = (conversations, activeConversation) => {
@@ -56,10 +45,10 @@ const ConversationsList = () => {
   );
   };
 
-  const convoList = conversations.map(convo=>{
+  const convoList = props.chat.conversations.map((convo, index)=>{
     return (
-      <li key={convo.id} onClick={()=> handleClick(convo.id)}>
-        CONVERSATION {convo.id} between user {convo.users[0].email} and user {convo.users[1].email}
+      <li key={index} onClick={()=> handleClick(convo.id)}>
+        CONVERSATION {convo.id} with {otherUser(convo, props.auth.currentUser.id)}
       </li>
     )})
 
@@ -69,27 +58,46 @@ const ConversationsList = () => {
           channel={{ channel: 'ConversationsChannel' }}
           onReceived={handleReceivedConversation}
         />
-        {conversations.length ? (
+        {props.chat.conversations.length ? (
           <Cable
-            conversations={conversations}
+            conversations={props.chat.conversations}
             handleReceivedMessage={handleReceivedMessage}
           />
         ) : null}
         <h2>Conversations</h2>
         <ul>{convoList}</ul>
-        <NewConversationForm />
-        {activeConversation ? (
+        {props.chat.activeConversation ? (
           <MessagesArea
             conversation={findActiveConversation(
-              conversations,
-              activeConversation
+              props.chat.conversations,
+              props.chat.activeConversation
             )}
           />
         ) : null}
       </div>
     );
+};
+
+
+
+const mapStateToProps = (state) => {
+  return {
+      chat: state.chat,
+      auth: state.auth
   };
-
-export default ConversationsList;
-
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+      getUserConversations: () => {
+        dispatch(getUserConversations());
+      },
+      setConversations: (convoId) => {
+        dispatch(setConversations(convoId))
+      },
+      setActiveConversation: (convoId) => {
+        dispatch(setActiveConversation(convoId))
+      }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ConversationsList);
 // helpers

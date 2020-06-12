@@ -1029,6 +1029,16 @@
     webpack-cli "^3.3.10"
     webpack-sources "^1.4.3"
 
+"@thrash-industries/react-actioncable-provider@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@thrash-industries/react-actioncable-provider/-/react-actioncable-provider-2.0.5.tgz#c02b37f9ba389f68a8f20f6ac08727f55d7e62f5"
+  integrity sha512-/lHxlR5wQBCTs4PexDDBpJN6abPR3k8UVtvDKc8HIj1j+mGylXSmzs0rHRO5bHsA+sZ9oKQ9ojPlamRmutMFxQ==
+  dependencies:
+    actioncable "^5.0.0"
+    create-react-class "^15.6.2"
+    prop-types "^15.6.0"
+    react "^16.9.0"
+
 "@types/glob@^7.1.1":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.2.tgz#06ca26521353a545d94a0adc74f38a59d232c987"
@@ -6462,7 +6472,7 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@^16.13.1:
+react@^16.13.1, react@^16.9.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==

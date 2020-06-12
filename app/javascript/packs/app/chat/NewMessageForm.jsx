@@ -1,48 +1,54 @@
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {trackMessageInput, sendMessage} from './actions'
+import {connect} from 'react-redux'
 import { API_ROOT, HEADERS } from '../constants';
 
-class NewMessageForm extends React.Component {
-  state = {
-    text: '',
-    conversation_id: this.props.conversation_id
-  };
+const NewMessageForm = (props) => {
 
-  componentWillReceiveProps = nextProps => {
-    this.setState({ conversation_id: nextProps.conversation_id });
-  };
+  // componentWillReceiveProps = nextProps => {
+  //   this.setState({ conversation_id: nextProps.conversation_id });
+  // };
 
-  handleChange = e => {
-    this.setState({ text: e.target.value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-
-    fetch(`${API_ROOT}/messages`, {
-      method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify(this.state)
-    });
-    this.setState({ text: '' });
-  };
-
-  render = () => {
     return (
       <div className="newMessageForm">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>New Message:</label>
           <br />
           <input
             type="text"
-            value={this.state.text}
-            onChange={this.handleChange}
+            defaultValue={props.chat.messageInput}
+            onChange={(e)=> props.trackMessageInput(e.target.value)}
           />
-          <input type="submit" />
+          <button onClick={(e)=> {
+            e.preventDefault();
+            console.log(`clicked btn`)
+            props.sendMessage(props.auth.currentUser.id, props.chat.activeConversation, props.chat.messageInput)
+            }}
+            className="btn btn-sm btn-danger">Send</button>
         </form>
       </div>
     );
   };
-}
 
-export default NewMessageForm;
+
+const mapStateToProps = (state) => {
+  return {
+      chat: state.chat,
+      auth: state.auth
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+      trackMessageInput: (input)=>{
+        dispatch(trackMessageInput(input));
+      },
+      sendMessage: (userId, convoId, text) =>{
+        dispatch(sendMessage(userId, convoId, text))
+      }
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewMessageForm);
+// helpers

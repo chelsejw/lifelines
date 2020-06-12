@@ -22,7 +22,7 @@ const orderedMessages = messages => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.created_at) - new Date(b.created_at)
   );
-  return sortedMessages.map(message => {
-    return <li key={message.id}>{message.text}</li>;
+  return sortedMessages.map((message, index) => {
+    return <li key={index}>{message.text}</li>;
   });
 };
