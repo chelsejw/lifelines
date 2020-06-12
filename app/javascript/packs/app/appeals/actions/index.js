@@ -116,7 +116,7 @@ export function throwLifeline(user, appealOwner, appealId){
             axios
             .post(`http://localhost:5000/api/find_convo`, {users: [user, appealOwner]})
         }).then(res=>{
-            if (res.data.convoExists) {
+            if (res.data.convo_exists) {
                 console.log(`convo exists`)
                 return //Should redirect to convo here
             }

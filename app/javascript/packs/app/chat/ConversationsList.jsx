@@ -14,7 +14,11 @@ class ConversationsList extends React.Component {
 
   componentDidMount = () => {
     fetch(`${API_ROOT}/conversations`)
-      .then(res => res.json())
+      .then(res => {
+        console.log(`got something`)
+        console.log(res)
+        res.json()
+      })
       .then(conversations => this.setState({ conversations }));
   };
 

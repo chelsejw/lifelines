@@ -9,9 +9,6 @@ const Chat = (props) => {
         <ActionCableProvider url={API_WS_ROOT}>
 
         <div>
-
-            <h1>MY CHATS</h1>
-
             <ConversationsList/>
 
         </div>
