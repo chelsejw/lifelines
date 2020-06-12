@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :conversations, only: [:index, :create, :show]
+
+  
+  get '/conversations/user', to: "conversations#user_convos"
+  resources :conversations, only: [:index, :create, :show, :my_convos]
   resources :messages, only: [:create, :show]
   mount ActionCable.server => '/cable'
   

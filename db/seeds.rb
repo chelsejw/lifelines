@@ -66,8 +66,3 @@ require 'ffaker'
 #     @appeal = Appeal.create!(user_id: rand(User.first.id..User.last.id), img_url: "https://i.picsum.photos/id/#{rand(1..999)}/200/300.jpg", clinic_id: rand(Clinic.first.id..Clinic.last.id), species_id: 22, pet_name: FFaker::Name.first_name, status: "open", description: FFaker::Lorem.paragraph)
 #     puts "Created appeal for #{@appeal.user.profile.username}"
 # end
-
-10.times do
-    Message.create(conversation_id: 4, user_id: 342, text: FFaker:: Lorem.paragraph)
-    Message.create(conversation_id: 4, user_id: 325, text: FFaker:: Lorem.paragraph)
-end

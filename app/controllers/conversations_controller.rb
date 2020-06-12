@@ -9,6 +9,11 @@ class ConversationsController < ApplicationController
       render json: @conversation
     end
 
+    def user_convos
+      @conversations = Conversation.joins(:users).where('users.id' => current_user.id)
+      render json: @conversations
+    end
+
 
     def create
     
