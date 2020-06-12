@@ -5,7 +5,7 @@ import { API_ROOT } from '../constants';
 import NewConversationForm from './NewConversationForm';
 import MessagesArea from './MessagesArea';
 import Cable from './Cable';
-
+import axios from 'axios'
 class ConversationsList extends React.Component {
   state = {
     conversations: [],
@@ -13,13 +13,17 @@ class ConversationsList extends React.Component {
   };
 
   componentDidMount = () => {
-    fetch(`${API_ROOT}/conversations`)
+    axios.get(`/conversations`)
       .then(res => {
         console.log(`got something`)
-        console.log(res)
+        console.log(res.data)
         res.json()
       })
-      .then(conversations => this.setState({ conversations }));
+      .then(conversations => this.setState({ conversations }))
+      .catch(err => {
+        console.log(err.response)
+      });
+
   };
 
   handleClick = id => {

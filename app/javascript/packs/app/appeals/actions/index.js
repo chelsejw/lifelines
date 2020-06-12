@@ -102,6 +102,7 @@ export function throwLifelineSuccess(data){
     }
 }
 
+
 export function throwLifeline(user, appealOwner, appealId){
     return (dispatch)=>{
         const token = document.querySelector("[name=csrf-token]").content;
@@ -111,25 +112,27 @@ export function throwLifeline(user, appealOwner, appealId){
         .then(res => {
             console.log(`response received`);
             dispatch(throwLifelineSuccess(res.data))
+            return res.data
         })
-        .then(()=>{
-            axios
-            .post(`http://localhost:5000/api/find_convo`, {users: [user, appealOwner]})
-        }).then(res=>{
-            if (res.data.convo_exists) {
-                console.log(`convo exists`)
-                return //Should redirect to convo here
-            }
-
-            axios
-            .post(`http://localhost:5000/conversations`, {users: [user, appealOwner]})
-            .then(res=>{
-                console.log(`Got a response back!`)
-                console.log(res.data)
-                console.log(res.response)
-                //Redirect to convo
+        .then((res)=>{
+            console.log(`in axios convo part of lifeline`)
+            console.log(`res data after lifeline`, res)
+            axios.
+            post(`/conversations`, {
+                conversation: {
+                  lifeline_id: res.id,
+                  user_ids: [user.id, appealOwner.id]
+                }
             })
-        })
-        .catch(err=>console.log(err.response))
+            .then((res)=>{
+              console.log(`was there a response from post to convos`)
+              console.log(`res,`, res)
+            })  
+            .catch(err => {
+              console.log(`error in post request`)
+              console.log(err.response)
+            })
+          })
+        .catch(err=>console.log(err))
     }
 }

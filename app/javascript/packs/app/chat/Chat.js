@@ -6,7 +6,7 @@ import ConversationsList from './ConversationsList'
 const Chat = (props) => {
 
     return (
-        <ActionCableProvider url={API_WS_ROOT}>
+        <ActionCableProvider url={"ws://localhost:3000/cable"}>
 
         <div>
             <ConversationsList/>

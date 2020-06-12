@@ -1,9 +1,31 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'
 import {fetchLifelineData, throwLifeline} from '../actions'
+import axios from 'axios'
 
 const FocusedAppeal = (props) => {
+
+      const handleSubmit = e => {
+        e.preventDefault()
+        const token = document.querySelector("[name=csrf-token]").content;
+        axios.defaults.headers.common["X-CSRF-TOKEN"] = token;  
+        axios.post(`/conversations`, {
+            conversation: {
+              appeal_id: props.data.id,
+              user_ids: [props.auth.currentUser.id, props.data.user.id]
+            }
+        })
+        .then((res)=>{
+          console.log(`was there a response?`)
+          console.log(`res,`, res.data)
+        })
+        .catch(err => {
+          console.log(`error in post request`)
+          console.log(err.response)
+        })
+    
+      };
+    
 
     useEffect(()=> {
         console.log(`use effect triggered`)
@@ -15,12 +37,16 @@ const FocusedAppeal = (props) => {
             <h3>Needed: {props.data.species.name} donor needed to save {props.data.pet_name}!</h3>
             <img src={props.data.img_url} className="img-fluid"/>
             <p>{props.data.description}</p>
-    {props.auth.isLoggedIn && !props.lifelines.isUserConnected && <button onClick={()=> {props.throwLifeline(props.auth.currentUser, props.data.user, props.data.id)}} className="btn btn-big btn-warning">Throw A Lifeline!</button>}
+
+    <button onClick={()=> {props.throwLifeline(props.auth.currentUser, props.data.user, props.data.id)}} className="btn btn-big btn-warning">Throw A Lifeline!</button>
+
+    
     {props.auth.isLoggedIn && props.lifelines.isUserConnected && <button className="btn btn-lg btn-danger">See Chat</button>}
     {!props.auth.isLoggedIn && <a href="/users/sign_in"><button className="btn btn-big btn-warning">Login now to help!</button></a>}
 
     {props.throwLifelineData.success && <p>Thank you for throwing a lifeline! Start a conversation.</p>}
-    
+
+    <button onClick={handleSubmit}>TEST BUTTON</button>
         </div>
     )
 }

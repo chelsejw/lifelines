@@ -27,15 +27,11 @@ class LifelineController < ApplicationController
     def create
       @lifeline = Lifeline.new(lifeline_params)
   
-      respond_to do |format|
         if @lifeline.save
-          format.html { redirect_to @lifeline, notice: 'lifeline was successfully created.' }
-          format.json { render :show, status: :created, location: @lifeline }
+          render json: @lifeline
         else
-          format.html { render :new }
-          format.json { render json: @lifeline.errors, status: :unprocessable_entity }
+          render json: {errors: @lifeline.errors}, status: 422
         end
-      end
     end
   
     # PATCH/PUT /lifelines/1
