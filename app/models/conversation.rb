@@ -1,5 +1,7 @@
 class Conversation < ApplicationRecord
   belongs_to :lifeline
+  has_and_belongs_to_many :users
+
 
   before_create :generate_token
   def generate_token(length=50)

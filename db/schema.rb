@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_080839) do
+ActiveRecord::Schema.define(version: 2020_06_12_083554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2020_06_12_080839) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "token"
     t.index ["lifeline_id"], name: "index_conversations_on_lifeline_id"
+  end
+
+  create_table "conversations_users", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_conversations_users_on_conversation_id"
+    t.index ["user_id"], name: "index_conversations_users_on_user_id"
   end
 
   create_table "lifelines", force: :cascade do |t|
@@ -103,6 +112,8 @@ ActiveRecord::Schema.define(version: 2020_06_12_080839) do
   add_foreign_key "appeals", "species"
   add_foreign_key "appeals", "users"
   add_foreign_key "conversations", "lifelines"
+  add_foreign_key "conversations_users", "conversations"
+  add_foreign_key "conversations_users", "users"
   add_foreign_key "lifelines", "appeals"
   add_foreign_key "lifelines", "users"
   add_foreign_key "messages", "conversations"

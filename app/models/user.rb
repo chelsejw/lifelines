@@ -4,7 +4,8 @@ class User < ApplicationRecord
   has_one :profile
   has_many :appeals
   has_many :lifelines
-  
+  has_and_belongs_to_many :conversations
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
