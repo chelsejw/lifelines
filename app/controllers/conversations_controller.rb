@@ -18,6 +18,6 @@ class ConversationsController < ApplicationController
     private
     
     def conversation_params
-      params.require(:conversation).permit(:user_ids => [], :token, :lifeline_id)
+      params.require(:conversation).permit(:id, :token, :lifeline_id, :user_ids => [], :messages_ids => [])
     end
   end
