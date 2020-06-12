@@ -1,9 +1,15 @@
 class ConversationsController < ApplicationController 
     def index
-      conversations = Conversation.all
-      render json: conversations
+      @conversations = Conversation.all
+      render json: @conversations
     end
-  
+
+    def show
+      @conversation = Conversation.where(token: params[:id])
+      render json: @conversation
+    end
+
+
     def create
     
       @conversation = Conversation.new(conversation_params)
@@ -17,7 +23,6 @@ class ConversationsController < ApplicationController
     end
     
     private
-    
     def conversation_params
       params.require(:conversation).permit(:id, :token, :lifeline_id, :user_ids => [], :messages_ids => [])
     end

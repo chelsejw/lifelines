@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :conversations, only: [:index, :create]
-  resources :messages, only: [:create]
+  resources :conversations, only: [:index, :create, :show]
+  resources :messages, only: [:create, :show]
   mount ActionCable.server => '/cable'
   
   namespace :api do
