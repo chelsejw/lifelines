@@ -24,7 +24,7 @@ const Nav = (props) => {
         <NavLink className="nav-link" to="/" exact>Home</NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/chat" exact>Chats</NavLink>
+        <NavLink className="nav-link" to="/chats" exact>Chats</NavLink>
       </li>
       <li className="nav-item">
       <NavLink exact className="nav-link" to="/appeals">Appeals</NavLink>

@@ -17,9 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @profile = Profile.new(user_id: @user.id, account_type: "user", display_name: @user.email)
     puts @profile
     if @profile.save
-      puts "CREATED PROFILE SUCCESSFULLY"
-    else
-      puts "ERROR IN CREATING PROFILE"
+      UserNotifierMailer.send_signup_email(@user).deliver_later
     end
   end
 
