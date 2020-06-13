@@ -28,6 +28,9 @@ class ConversationsList extends React.Component {
   };
 
   handleReceivedMessage = (response) => {
+
+    console.log(`Handle received message triggered`)
+    console.log(`Reponse data is`, response)
     const { message } = response;
     const conversations = [...this.state.conversations];
     const conversation = conversations.find(
@@ -77,9 +80,9 @@ const findActiveConversation = (conversations, activeConversation) => {
 };
 
 const mapConversations = (conversations, handleClick) => {
-  return conversations.map((conversation) => {
+  return conversations.map((conversation, index) => {
     return (
-      <li key={conversation.id} onClick={() => handleClick(conversation.id)}>
+      <li key={index} onClick={() => handleClick(conversation.id)}>
        Conversation {conversation.id}
       </li>
     );
