@@ -23,14 +23,18 @@ export function checkAuthError(bool) {
     };
 }
 
+export function setActiveConversation(conversationId){
+    return {
+      type: "SET_ACTIVE_CONVERSATION",
+      conversationId,
+    };
+}
+
 export function checkAuth() {
     return (dispatch)=>{
-        console.log(`in check auth`)
         axios
         .get(`${api}/auth/check-login`)
         .then(res=>{
-            console.log(`got response in checkauth`)
-            console.log(res)
             if (res.data.isLoggedIn==false){
                 return dispatch(setIsLoggedIn(false));
             }

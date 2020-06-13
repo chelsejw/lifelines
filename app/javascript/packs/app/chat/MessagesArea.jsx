@@ -3,8 +3,6 @@ import NewMessageForm from "./NewMessageForm";
 
 const MessagesArea = (props) => {
 
-  console.log(`my convo`, props.conversation)
-
   return (
     <div className="messagesArea">
       <h2>Conversation {props.conversation.id}</h2>

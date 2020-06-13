@@ -9,7 +9,6 @@ const Nav = (props) => {
   useEffect(()=>{
     
     props.checkAuth();
-    console.log(`rendered nav`)
   }, [])
 
 

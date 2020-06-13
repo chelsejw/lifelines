@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   def index
-    conversations = Conversation.all
+    conversations = Conversation.joins(:users).where('users.id' => current_user.id)
     render json: conversations
   end
 
