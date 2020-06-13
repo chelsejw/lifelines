@@ -23,12 +23,10 @@ module Api
               user_lifelines = @lifelines.where({user_id: current_user.id})
               if user_lifelines.length==0
                 is_user_connected = false
-                conversation = ""
               else
                 is_user_connected = true
-                conversation = user_lifelines.first.conversation.id
               end
-              render json: { lifelines: @lifelines, isUserConnected: is_user_connected, conversation_id: conversation }
+              render json: { lifelines: @lifelines, isUserConnected: is_user_connected}
             end
 
             def throw_lifeline
@@ -60,7 +58,7 @@ module Api
               @appeal = Appeal.new(appeal_params)
           
               if @appeal.save
-                UserNotifierMailer.send_appeal_notice(@appeal).deliver_later
+                UserNotifierMailer.send_appeal_notice(@appeal).deliver_now
                 render json: @appeal
               else
                 render json: { error: @appeal.errors.messages }, status: 422
