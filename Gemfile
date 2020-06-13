@@ -54,3 +54,4 @@ gem 'devise'
 
 gem "ffaker", "~> 2.15"
 gem 'active_model_serializers'
+gem 'sendgrid-ruby'
