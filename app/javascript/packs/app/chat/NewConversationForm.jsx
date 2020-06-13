@@ -1,31 +1,23 @@
-
-import React from 'react';
-import axios from 'axios'
+import React from "react";
+import { API_ROOT, HEADERS } from "./constants";
 
 class NewConversationForm extends React.Component {
   state = {
-    title: ''
+    title: "",
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ title: e.target.value });
   };
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const token = document.querySelector("[name=csrf-token]").content;
-    axios.defaults.headers.common["X-CSRF-TOKEN"] = token;  
-    axios.post(`/conversations`, this.state)
-    .then((res)=>{
-      console.log(`was there a response?`)
-      console.log(`res,`, res.data)
-    })
-    .catch(err => {
-      console.log(`error in post request`)
-      console.log(err.response)
-    })
-
-    this.setState({ title: '' });
+  handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`${API_ROOT}/conversations`, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify(this.state),
+    });
+    this.setState({ title: "" });
   };
 
   render = () => {

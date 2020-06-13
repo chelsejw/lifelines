@@ -1,9 +1,9 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("ConversationsChannel", {
+consumer.subscriptions.create({channel: "ConversationChannel", conversation_id: 2}, {
   connected() {
     console.log(`connected on convos`)
-
+ 
     // Called when the subscription is ready for use on the server
   },
 

@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
   
-  get '/chats', to: "conversations#user_convos"
   resources :conversations
   resources :messages
-  mount ActionCable.server => '/cable'
-  
+    mount ActionCable.server => '/websocket'
+
   namespace :api do
     namespace :v1 do
       resources :appeals
