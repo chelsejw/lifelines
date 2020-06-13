@@ -4,7 +4,6 @@ import AppealsContainer from './appeals/AppealsContainer'
 import AppealForm from './forms/AppealForm/AppealForm'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import Chat from './chat/Chat'
-import {ActionCableConsumer} from 'react-actioncable-provider'
 
 class App extends React.Component {
   render(){

@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
   
-  get '/conversations/user', to: "conversations#user_convos"
-  resources :conversations, only: [:index, :create, :show, :my_convos]
-  resources :messages, only: [:create, :show]
-  mount ActionCable.server => '/cable'
-  
+  resources :conversations
+  resources :messages
+    mount ActionCable.server => '/websocket'
+
   namespace :api do
     namespace :v1 do
       resources :appeals

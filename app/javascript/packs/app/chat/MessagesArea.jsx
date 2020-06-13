@@ -1,15 +1,17 @@
+import React from "react";
+import NewMessageForm from "./NewMessageForm";
 
-import React from 'react';
-import NewMessageForm from './NewMessageForm';
+const MessagesArea = (props) => {
 
-const MessagesArea = ({
-  conversation: { id, title, messages },
-}) => {
+  console.log(`my convo`, props.conversation)
+
   return (
     <div className="messagesArea">
-      <h2>{title}</h2>
-      <ul>{orderedMessages(messages)}</ul>
-      <NewMessageForm conversation_id={id} />
+      <h2>Conversation {props.conversation.id}</h2>
+
+      <NewMessageForm conversation_id={props.conversation.id}/>
+
+      <ul>{orderedMessages(props.conversation.messages)}</ul>
     </div>
   );
 };
@@ -18,11 +20,11 @@ export default MessagesArea;
 
 // helpers
 
-const orderedMessages = messages => {
+const orderedMessages = (messages) => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.created_at) - new Date(b.created_at)
   );
-  return sortedMessages.map((message, index) => {
-    return <li key={index}>{message.text}</li>;
+  return sortedMessages.map((message) => {
+    return <li key={message.id}>{message.user.email} says: {message.text}</li>;
   });
 };
