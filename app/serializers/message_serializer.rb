@@ -1,4 +1,9 @@
-class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :text, :conversation_id, :user_id, :created_at 
 
+# app/serializers/message_serializer.rb
+
+class MessageSerializer < ActiveModel::Serializer
+  attributes :id, :conversation_id, :text, :created_at, :user
+
+  belongs_to :conversation
+  belongs_to :user
 end

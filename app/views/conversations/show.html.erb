@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'Back', conversations_path %>
+
+<%= form_with(model: @message, remote: true) do |form| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+        <% @message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.hidden_field :conversation_id, value: @conversation.id %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="input-group">
+    <%= form.text_field :text, placeholder: "Type your message here...", class: 'form-control' %>
+    <div class="input-group-append">
+      <%= form.submit "Add Message", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="chat" data-channel-subscribe="conversation" data-conversation-id="<%= @conversation.id %>">
+
+<% @messages.each do |message|%>
+    <p><%= message.user.email %> says: <%= message.text %></p>
+<%end%>
+</div>
+<div id="new_message"></div>
