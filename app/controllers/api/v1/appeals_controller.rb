@@ -23,10 +23,12 @@ module Api
               user_lifelines = @lifelines.where({user_id: current_user.id})
               if user_lifelines.length==0
                 is_user_connected = false
+                conversation = ""
               else
                 is_user_connected = true
+                conversation = user_lifelines.first.conversation.id
               end
-              render json: { lifelines: @lifelines, isUserConnected: is_user_connected }
+              render json: { lifelines: @lifelines, isUserConnected: is_user_connected, conversation_id: conversation }
             end
 
             def throw_lifeline

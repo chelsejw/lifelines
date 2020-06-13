@@ -1,7 +1,8 @@
 const authReducer = (state = {
     currentUser: {},
     isLoggedIn: false,
-    checkAuthError: false
+    checkAuthError: false,
+    activeConvo: "" 
 }, action) => {
     switch (action.type) {
         case "SET_IS_LOGGED_IN":
@@ -19,6 +20,11 @@ const authReducer = (state = {
                 ...state,
                 checkAuthError: action.checkAuthError
             }
+        case "SET_ACTIVE_CONVERSATION":
+            return {
+              ...state,
+              activeConvo: action.conversationId,
+            };
         default:
             return state;
     }

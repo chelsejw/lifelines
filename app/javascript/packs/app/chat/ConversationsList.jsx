@@ -1,7 +1,6 @@
 import React from "react";
-import { ActionCable } from "react-actioncable-provider";
+import { ActionCableConsumer } from "react-actioncable-provider";
 import { API_ROOT } from "./constants";
-import NewConversationForm from "./NewConversationForm";
 import MessagesArea from "./MessagesArea";
 import Cable from "./Cable";
 
@@ -19,9 +18,6 @@ class ConversationsList extends React.Component {
 
   handleClick = (id) => {
     this.setState({ activeConversation: id });
-    console.log(`triggered click`)
-
-    console.log(`id is`, id)
   };
 
   handleReceivedConversation = (response) => {
@@ -45,7 +41,7 @@ class ConversationsList extends React.Component {
     const { conversations, activeConversation } = this.state;
     return (
       <div className="conversationsList">
-        <ActionCable
+        <ActionCableConsumer
           channel={{ channel: "ConversationsChannel" }}
           onReceived={this.handleReceivedConversation}
         />
@@ -57,7 +53,6 @@ class ConversationsList extends React.Component {
         ) : null}
         <h2>Conversations</h2>
         <ul>{mapConversations(conversations, this.handleClick)}</ul>
-        {/* <NewConversationForm /> */}
         {activeConversation ? (
           <MessagesArea
             conversation={findActiveConversation(
@@ -82,8 +77,6 @@ const findActiveConversation = (conversations, activeConversation) => {
 };
 
 const mapConversations = (conversations, handleClick) => {
-    console.log(`map convos`)
-    console.log(conversations)
   return conversations.map((conversation) => {
     return (
       <li key={conversation.id} onClick={() => handleClick(conversation.id)}>
