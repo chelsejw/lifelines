@@ -58,7 +58,7 @@ module Api
               @appeal = Appeal.new(appeal_params)
           
               if @appeal.save
-                UserNotifierMailer.send_appeal_notice(@appeal).deliver_now
+                UserNotifierMailer.send_appeal_notice(@appeal).deliver_later
                 render json: @appeal
               else
                 render json: { error: @appeal.errors.messages }, status: 422

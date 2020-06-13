@@ -2,6 +2,7 @@ class UserNotifierMailer < ApplicationMailer
     default :from => 'lifelines.team@gmail.com'
 
   # send a signup email to the user, pass in the user object that   contains the user's email address
+  
   def send_signup_email(user)
     @user = user
     mail( :to => 'chelsejw@gmail.com',
@@ -9,10 +10,8 @@ class UserNotifierMailer < ApplicationMailer
   end
 
   def send_appeal_notice(appeal)
-    @appeal = appeal
-    mail( :to=> 'chelsejw@gmail.com',
-    :subject => "#{@appeal.species.name} donor needed at #{@appeal.clinic.name}!" )
+        @appeal = appeal
+        
+        mail( :bcc=> User.pluck(:email), :subject => "#{@appeal.species.name} donor needed at #{@appeal.clinic.name}!" )
   end
-
-
 end
