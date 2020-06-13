@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_083554) do
+ActiveRecord::Schema.define(version: 2020_06_13_200438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2020_06_12_083554) do
     t.index ["clinic_id"], name: "index_appeals_on_clinic_id"
     t.index ["species_id"], name: "index_appeals_on_species_id"
     t.index ["user_id"], name: "index_appeals_on_user_id"
+  end
+
+  create_table "bots", force: :cascade do |t|
+    t.integer "chat_id"
+    t.string "name"
+    t.boolean "started"
+    t.string "step"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "clinics", force: :cascade do |t|
