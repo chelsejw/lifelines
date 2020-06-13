@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @profile = Profile.new(user_id: @user.id, account_type: "user", display_name: @user.email)
     puts @profile
     if @profile.save
-      UserNotifierMailer.send_signup_email(@user).deliver
+      UserNotifierMailer.send_signup_email(@user).deliver_later
     end
   end
 
