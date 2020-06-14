@@ -9,6 +9,7 @@ const AppealResults = (props) => {
                       key={appeal.id}
                       appeal={appeal}
                       geolocation={props.geolocation}
+                      postal={props.postal}
                       google={props.google}
                     />
                   );

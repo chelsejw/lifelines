@@ -7,6 +7,8 @@ const Dashboard = ()=> {
     const [uploadStatus, setUploadStatus] = useState("Click the button to upload!")
     const [profile, setProfile] = useState("")
     const [formInput, setFormInput] = useState({})
+    const [editSuccess, setEditSuccess] = useState(false)
+    const [editStatus, setEditStatus] = useState("")
 
     useEffect(()=> {
         axios.get(`/api/v1/auth/user-profile`)
@@ -15,10 +17,7 @@ const Dashboard = ()=> {
             setProfile(res.data.profile)
             setFormInput(res.data.profile);
 
-            if (res.data.img_url!==""){
-                return setUploadStatus("has_img")
-            }
-            setUploadStatus("no_img")
+            res.data.img_url!=="" ? setUploadStatus("has_img") : setUploadStatus("no_img")
         })
         .catch(err => {
             console.log(`erroorrrrrrr`)
@@ -75,20 +74,47 @@ const Dashboard = ()=> {
                 break;
             case 'has_img':
                 setImgInputText(profile.img_url);
+                break;
             default:
                 setImgInputText("Click the button to upload!");
                 break;
         }
     }, [uploadStatus])
 
+    const patchRequest = ()=> {
+      const token = document.querySelector("[name=csrf-token]").content;
+      axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+          setEditStatus("");
+
+      axios.patch(`/api/v1/auth/user-profile`, {profile: formInput})
+      .then(res => {
+          console.log(res.data.status)
+          console.log(res.data)
+          
+          setEditStatus('Updated successfully')
+          setEditSuccess(true)
+      })
+      .catch(err=> {
+          console.log(err)
+          setEditStatus('Error updating.')
+                    setEditSuccess(false)
+
+      })
+
+    }
+
     return (
       <div>
         <div className="jumbotron bg-light">
-        <div className="row text-center">
-        </div>
+          <div className="row text-center"></div>
           <div className="container w-50">
+            <h2> Edit Your Profile</h2>
 
-          <h2> Edit Your Profile</h2>
+            {editStatus !== "" && (
+              <div className={`alert alert-${editSuccess ? "success" : "danger"}`} role="alert">
+                {editStatus}
+              </div>
+            )}
 
             <div className="row my-2">
               <div className="col-6">
@@ -105,7 +131,7 @@ const Dashboard = ()=> {
                 <label htmlFor="imgInput">
                   Profile Picture
                   <span onClick={openWidget} className="btn-link btn-sm">
-                    Upload
+                    {uploadStatus=="has_img" ? "Change" : "Upload"}
                   </span>
                 </label>
                 <input
@@ -170,7 +196,10 @@ const Dashboard = ()=> {
             </div>
             <div className="row">
               <div className="col">
-                <button className="btn btn-secondary btn-block">
+                <button
+                  onClick={patchRequest}
+                  className="btn btn-secondary btn-block"
+                >
                   Update Profile
                 </button>
               </div>

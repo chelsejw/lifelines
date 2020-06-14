@@ -9,14 +9,18 @@ const AppealListing = (props) => {
   const [calculatedDistance, setCalculatedDistance] = useState("");
 
     useEffect(() => {
+    let destination = [props.appeal.clinic.address.split(" ").join("+")];
+    let origin = ""
 
-      if (props.geolocation!==null && props.geolocation.long!==null){
-        let origin = [{lat: props.geolocation.lat, lng: props.geolocation.lng}]
-        let destination = [props.appeal.clinic.address.split(' ').join('+')]
-        if (origin!==[""]){
-          const matrix = new props.google.maps.DistanceMatrixService();
-
-          matrix.getDistanceMatrix(
+    if (props.geolocation!==null && props.geolocation.long!==null){
+      origin = [{lat: props.geolocation.lat, lng: props.geolocation.lng}]
+    }
+    if (props.postal!=="") {
+      origin = [props.postal]
+    }        
+    if (origin!==""){
+      const matrix = new props.google.maps.DistanceMatrixService();
+      matrix.getDistanceMatrix(
             {
               origins: origin,
               destinations: destination,
@@ -31,8 +35,7 @@ const AppealListing = (props) => {
             }
           );
         }
-      }
-    }, [props.geolocation]);
+      }, [props.geolocation, props.postal]);
 
 
     return (
