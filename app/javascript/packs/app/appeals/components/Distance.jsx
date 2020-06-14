@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
 
 const Distance = (props) => {
 
-    return <p>{props.distance}</p>
+    if (props.distance=="") {
+        return <div></div>
+    }
+
+    return <div>{props.distance} away</div>
 }
 
 export default Distance
+

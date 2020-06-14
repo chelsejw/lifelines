@@ -2,31 +2,38 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { fetchOneAppeal } from '../actions'
 import { Link, NavLink } from 'react-router-dom';
-import axios from 'axios'
+import Distance from './Distance'
 
 const AppealListing = (props) => {
+  
+  const [calculatedDistance, setCalculatedDistance] = useState("");
 
-  const [distance, setDistance] = useState("")
+    useEffect(() => {
 
-  const fetchDistance = () => {
+      if (props.geolocation!==null && props.geolocation.long!==null){
+        let origin = [{lat: props.geolocation.lat, lng: props.geolocation.lng}]
+        let destination = [props.appeal.clinic.address.split(' ').join('+')]
+        if (origin!==[""]){
+          const matrix = new props.google.maps.DistanceMatrixService();
 
-    let service = new google.maps.DistanceMatrixService;
-    service.getDistanceMatrix({
-      origin: `${props.geolocation.lat}|${props.geolocation.long}`,
-      destination: `${props.appeal.clinic.address.split(' ').join('+')}`,
-      travelMode: 'DRIVING',
-      unitSytem: google.maps.UnitSystem.METRIC,
-    }, (res, status)=>{
-      console.log(`status is`, status)
-      console.log(res)
-    })
+          matrix.getDistanceMatrix(
+            {
+              origins: origin,
+              destinations: destination,
+              travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (res, status) => {
+              setCalculatedDistance(
+                status == "OK"
+                  ? `${res.rows[0].elements[0].distance.text} | ${res.rows[0].elements[0].duration.text}`
+                  : "Error in calculation"
+              );
+            }
+          );
+        }
+      }
+    }, [props.geolocation]);
 
-  };
-
-
-  useEffect(()=> {
-    props.geolocation!==null && fetchDistance();
-  }, [])
 
     return (
       <div className="media appeal-listing container shadow-sm my-2">
@@ -42,12 +49,12 @@ const AppealListing = (props) => {
             />
           </Link>
           <div className="media-body col-9">
-            <h5 className="mt-0">
+            <h5 className="mt-2">
               {props.appeal.species.name} donor needed at{" "}
               {props.appeal.clinic.name}
             </h5>
             <p>From: {props.appeal.user.profile.display_name}</p>
-            <p>Distance from you: {distance}</p>
+            <Distance distance={calculatedDistance}/>
             <div
               className={`btn btn-sm ${
                 props.appeal.status == "open" && "btn-success"
