@@ -8,7 +8,7 @@ module Api
             def isloggedin
                 if user_signed_in?
                   @user = current_user
-                    render json: {isloggedIn: true, user: @user}
+                    render json: {isloggedIn: true, user: @user, profile: @user.profile}
                 else
                     render json: {isLoggedIn: false}
                 end

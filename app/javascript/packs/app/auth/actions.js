@@ -39,7 +39,7 @@ export function checkAuth() {
                 return dispatch(setIsLoggedIn(false));
             }
             dispatch(setIsLoggedIn(true));
-            dispatch(setCurrentUser(res.data.user))
+            dispatch(setCurrentUser(res.data))
         })
         .catch(err => {
             dispatch(checkAuthError(true));

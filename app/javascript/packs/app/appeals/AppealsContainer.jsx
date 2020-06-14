@@ -13,12 +13,16 @@ const AppealsContainer = (props) => {
     const [userLoc, setUserLoc] = useState(null);
     const [locString, setLocString] = useState("Unavailable")
     const [loadingLoc, setLoadingLoc] = useState(false)
-
+    const [userPostal, setUserPostal] = useState("")
+ 
   useEffect(()=> {
     props.fetchInitialAppeals('/api/v1/appeals.json');
   }, [])
 
   const getMyLocation = () => {
+        if (userPostal !== "" || userPostal !== null) {
+          setUserPostal("");
+        }
     setLoadingLoc(true)
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
@@ -34,10 +38,18 @@ const AppealsContainer = (props) => {
                   setLoadingLoc(false)
               },
               (err) => {
-                  setUserLoc("Error getting your location. Set manually?");
+                  setUserLoc("Error getting your location.?");
               }
           );
       }
+  }
+
+  const useMyAddress = ()=> {
+    if (userLoc!=="" || userLoc!==null ) {
+      setUserLoc("")
+    }
+    setUserPostal(`Singapore+${props.auth.currentUser.profile.address}`);
+    setLocString(`Singapore ${props.auth.currentUser.profile.address}`);
   }
 
   const getLocationString = (latlngObj)=>{
@@ -58,7 +70,7 @@ const AppealsContainer = (props) => {
             <div className="row bg-light">
               <div className="col px-5 py-3">
                 Your Current Location: {locString}
-                <div>
+                <div className="mt-2">
                   {loadingLoc ? (
                     <div>
                       Getting your location...{" "}
@@ -72,6 +84,14 @@ const AppealsContainer = (props) => {
                       Get My Location
                     </button>
                   )}
+                  {props.auth.isLoggedIn && props.auth.currentUser.profile.address !== "" && (
+                    <button
+                      className="ml-1 btn btn-secondary btn-sm"
+                      onClick={useMyAddress}
+                    >
+                      Use My Postal Code
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -81,6 +101,7 @@ const AppealsContainer = (props) => {
                 <AppealResults
                   userLoc={locString}
                   geolocation={userLoc}
+                  postal={userPostal}
                   data={props.appeals.data}
                   hasError={props.appeals.hasErrored}
                   isLoading={props.appeals.isLoading}
@@ -110,6 +131,7 @@ const AppealsContainer = (props) => {
 const mapStateToProps = (state) => {
     return {
         appeals: state.appeals,
+        auth: state.auth
     };
   };
   const mapDispatchToProps = (dispatch) => {
