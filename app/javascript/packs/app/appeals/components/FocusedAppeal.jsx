@@ -21,7 +21,7 @@ const FocusedAppeal = (props) => {
     return (
       <div className="">
         <h3>
-          Needed: {props.appeal.species.name} donor needed to save{" "}
+          {props.appeal.species.name} donor needed to save{" "}
           {props.appeal.pet_name}!
         </h3>
         <img src={props.appeal.img_url} className="img-fluid" />

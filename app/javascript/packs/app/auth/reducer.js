@@ -2,6 +2,9 @@ const authReducer = (state = {
     currentUser: {
         profile: {
             address: ""
+        },
+        user: {
+            id: ""
         }
     },
     isLoggedIn: false,

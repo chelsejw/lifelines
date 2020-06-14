@@ -42,7 +42,7 @@ const AppealForm = (props) => {
     }
         const isEditForm = props.match.path!=="/new/appeal"
 
-        if (isEditForm && props.appealForm.formData.user_id!==props.auth.currentUser.id){
+        if (isEditForm && props.appealForm.formData.user_id!==props.auth.currentUser.user.id){
           return <ErrorPage message="You are not authorised to edit this appeal"/>
         }
 

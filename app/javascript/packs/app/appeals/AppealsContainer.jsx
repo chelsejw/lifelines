@@ -58,7 +58,7 @@ const AppealsContainer = (props) => {
       geocoder.geocode({
           location: latlngObj
       }, (res, status) => {
-          status !== "OK" ? console.log(`GOT A GEOCODE????`, res) : console.log(`error`, res);
+          status !== "OK" ? console.log(`GOT A GEOCODE????`, res) : console.log(`Geocode error`, res);
           setLocString(res[0].formatted_address)
       });
   }
