@@ -1,12 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AppealListing from './AppealListing'
 import MoonLoad from "react-spinners/MoonLoader";
 
 
 const AppealResults = (props) => {
 
+  const [userLoc, setUserLoc] = useState(null)
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(`position`, position);
+          let lat = position.coords.latitude
+          let long = position.coords.longitude;
+          setUserLoc({lat, long})
+        },
+        (err) => {
+          console.log(`Err in geolocation`);
+          console.log(err);
+        }
+      );
+    }
+  });
+
         let results = props.data.map((appeal) => {
-                  return <AppealListing key={appeal.id} appeal={appeal}/>
+                  return (
+                    <AppealListing
+                      key={appeal.id}
+                      appeal={appeal}
+                      geolocation={userLoc}
+                    />
+                  );
         })
 
         return (
