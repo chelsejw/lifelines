@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "devise": "^1.0.9",
+    "google-maps-react": "^2.0.6",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
