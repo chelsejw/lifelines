@@ -1,5 +1,6 @@
 import React from 'react'
 import ProfileForm from './ProfileForm'
+import VerificationForm from './VerificationForm'
 import {Link, Route, useRouteMatch} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -20,7 +21,7 @@ const Dashboard = (props)=> {
         <Route
           path={`${url}/verification`}
           exact
-          render={() => <h1>Verifications</h1>}
+          component={VerificationForm}
         />
         <Route
           path={path}
