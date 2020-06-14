@@ -10,6 +10,7 @@
     "@thrash-industries/react-actioncable-provider": "^2.0.5",
     "axios": "^0.19.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "cloudinary-react": "^1.5.0",
     "devise": "^1.0.9",
     "google-distance-matrix": "^1.1.1",
     "google-maps-react": "^2.0.6",

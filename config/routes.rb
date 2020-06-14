@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       resources :clinics
       resources :species
       resources :users
+      get '/auth/user-profile', to: "users#get_profile"
+
       get '/auth/check-login', to: "users#isloggedin"
       get '/auth/logout', to: "users#logout"
     end

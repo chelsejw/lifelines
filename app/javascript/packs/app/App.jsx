@@ -4,6 +4,7 @@ import AppealsContainer from './appeals/AppealsContainer'
 import AppealForm from './forms/AppealForm/AppealForm'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import Chat from './chat/Chat'
+import Dashboard from './dashboard/Dashboard'
 
 class App extends React.Component {
   render(){
@@ -13,7 +14,7 @@ class App extends React.Component {
             <Route path="/appeals/new" exact component = {AppealForm}/>
             <Route path="/appeals/:id/edit" exact component = {AppealForm}/>
             <Route path="/appeals" component = {AppealsContainer}/>
-            <Route path="/profile" exact render={()=> <h1>My Profile</h1>} />
+            <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/chats" exact component = {Chat}/>
         </Router>
     )

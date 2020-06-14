@@ -14,6 +14,25 @@ module Api
                 end
             end
 
+            def get_profile
+              if user_signed_in?
+                @profile = current_user.profile
+                render json: {profile: @profile}
+              else
+                redirect_to new_user_session_path
+              end
+            end
+            
+            def update_profile
+              @profile = current_user.profile
+              @profile.update(profile_params)
+              if @profile.save
+                render json: {status: "OK", profile: @profile}
+              else
+                render json: {status: "ERROR",}, status: 422
+              end
+            end
+
             def logout
               if user_signed_in?
                 @user = current_user
@@ -33,6 +52,10 @@ module Api
               # Only allow a list of trusted parameters through.
               def user_params
                 params.require(:user).permit(:email)
+              end
+
+              def profile_params
+                params.require(:profile).permit(:user_id, :display_name, :img_url, :address, :account_type, :verified, :bio, :username)
               end
           end
     end
