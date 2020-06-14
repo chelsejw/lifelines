@@ -1,46 +1,47 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import AppealResults from './components/AppealResults'
 import FocusedAppeal from './components/FocusedAppeal'
 import { connect } from 'react-redux';
 import { fetchAllAppeals } from '../../app/appeals/actions'
 import ClipLoader from "react-spinners/ClipLoader";
+import {Switch, Route, useRouteMatch} from 'react-router-dom'
 
-class AppealsContainer extends React.Component {
-    
-    componentDidMount = () => {
-      //Only run if there is no data / initial data hasn't been fetched so that it won't run every re-render.
-        this.props.fetchInitialAppeals('/api/v1/appeals.json');
-      }
+const AppealsContainer = (props) => {
 
-      render(){
+  useEffect(()=> {
+    props.fetchInitialAppeals('/api/v1/appeals.json');
+  }, [])
+      
+      let {path, url} = useRouteMatch();
+
+      console.log(`MY PATH IS.. ${path}`)
+      console.log(path + "/appealId")
         return (
           <div className="container-fluid">
-              <div className="row">
+            <div className="row">
+              <AppealResults
+                data={props.appeals.data}
+                hasError={props.appeals.hasErrored}
+                isLoading={props.appeals.isLoading}
+              />
 
-                <AppealResults data={this.props.appeals.data} hasError={this.props.appeals.hasErrored} isLoading={this.props.appeals.isLoading}/>
+              <div className="col-7 mt-2">
+                {props.appeals.focusedIsLoading && (
+                  <ClipLoader
+                    size={150}
+                    color={"#123abc"}
+                    loading={props.appeals.focusedIsLoading}
+                  />
+                )}
+                {props.appeals.focusedHasErrored &&
+                  "There was an error getting the appeal"}
 
-                <div className="col-7 mt-2">
-
-                  {this.props.appeals.focusedIsLoading && <ClipLoader
-          size={150}
-          color={"#123abc"}
-          loading={this.props.appeals.focusedIsLoading}
-        />}
-
-                  {this.props.appeals.focusedHasErrored && "There was an error getting the appeal"}
-
-                  {this.props.appeals.focusedData && <FocusedAppeal data={this.props.appeals.focusedData}/>}
-
-                </div>
-
-    
-              
-
+                  <Route path={`${path}/:appealId`} component={FocusedAppeal}/>
               </div>
             </div>
-        )
+          </div>
+        );
       }
-}
 
 
 const mapStateToProps = (state) => {

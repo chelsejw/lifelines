@@ -2,7 +2,14 @@ const appealsReducer = (state = {
     data: [],
     isLoading: false,
     hasErrored: false,
-    focusedData: null,
+    focusedData: {
+        id: "",
+        species: "",
+        clinic: "",
+        species:"",
+        pet_name: "",
+        user: ""
+    },
     focusedIsLoading: false,
     focusedHasErrored: false,
     focusedLifeline: {
