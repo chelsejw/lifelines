@@ -59,18 +59,15 @@ module Api
                 render json: {error: "You must be signed in to create an appeal."}, status: 403
               end
               @appeal = Appeal.new(appeal_params)
-          
+              @appeal.user = current_user
+              byebug
               if @appeal.save
-                # UserNotifierMailer.send_appeal_notice(@appeal).deliver_later
-                
-                
-              Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API_KEY']) do |bot|
-
-                Bot.all.each do |u|
-                  bot.api.send_message(chat_id: u.chat_id, text: "#{@appeal.species.name} donor needed at #{@appeal.clinic.name}! Go to http://lifelines.herokuapp.com/appeals/#{@appeal.id} to help.")
+                # UserNotifierMailer.send_appeal_notice(@appeal).deliver_later 
+                Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API_KEY']) do |bot|
+                  Bot.all.each do |u|
+                    bot.api.send_message(chat_id: u.chat_id, text: "#{@appeal.species.name} donor needed at #{@appeal.clinic.name}! Go to http://lifelines.herokuapp.com/appeals/#{@appeal.id} to help.")
+                  end
                 end
-              end
-
                 render json: @appeal
               else
                 render json: { error: @appeal.errors.messages }, status: 422

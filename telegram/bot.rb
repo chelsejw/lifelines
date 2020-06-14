@@ -21,7 +21,6 @@ Telegram::Bot::Client.run(token) do |bot|
         else
             bot.api.send_message(chat_id: message.chat.id, text: "You are not currently subscribed.")
         end
-    end
     when '/latest'
         appeals = Appeal.last(5).reverse
         messages = appeals.map {|appeal| "\n A #{appeal.species.name} donor is needed at #{appeal.clinic.name}. Go to http://lifelines.herokuapp.com/appeals/#{appeal.id} to help! \n"}

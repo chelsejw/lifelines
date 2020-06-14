@@ -66,7 +66,7 @@ const AppealListing = (props) => {
               {props.appeal.status == "open" ? "Open" : "Closed"}
             </div>
 
-            {props.auth.currentUser.id == props.appeal.user.id && (
+            {props.auth.currentUser.user.id == props.appeal.user.id && (
               <NavLink
                 className="btn btn-sm btn-dark"
                 to={`/edit/appeal/${props.appeal.id}`}
