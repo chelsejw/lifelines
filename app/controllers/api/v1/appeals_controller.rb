@@ -60,7 +60,6 @@ module Api
               end
               @appeal = Appeal.new(appeal_params)
               @appeal.user = current_user
-              byebug
               if @appeal.save
                 # UserNotifierMailer.send_appeal_notice(@appeal).deliver_later 
                 Telegram::Bot::Client.run(ENV['TELEGRAM_BOT_API_KEY']) do |bot|
