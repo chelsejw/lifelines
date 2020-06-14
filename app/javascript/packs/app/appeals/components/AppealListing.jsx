@@ -12,10 +12,10 @@ const AppealListing = (props) => {
     let destination = [props.appeal.clinic.address.split(" ").join("+")];
     let origin = ""
 
-    if (props.geolocation!==null && props.geolocation.long!==null){
+    if (props.geolocation!==null && props.geolocation!==""){
       origin = [{lat: props.geolocation.lat, lng: props.geolocation.lng}]
     }
-    if (props.postal!=="") {
+    if (props.postal!=="" && props.postal!==null) {
       origin = [props.postal]
     }        
     if (origin!==""){
