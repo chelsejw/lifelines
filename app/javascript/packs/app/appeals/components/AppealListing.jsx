@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { fetchOneAppeal } from '../actions'
 import { Link, NavLink } from 'react-router-dom';
+import Distance from './Distance'
 
 const AppealListing = (props) => {
+  
+  const [calculatedDistance, setCalculatedDistance] = useState("");
+
+    useEffect(() => {
+
+      if (props.geolocation!==null && props.geolocation.long!==null){
+        let origin = [{lat: props.geolocation.lat, lng: props.geolocation.lng}]
+        let destination = [props.appeal.clinic.address.split(' ').join('+')]
+        if (origin!==[""]){
+          const matrix = new props.google.maps.DistanceMatrixService();
+
+          matrix.getDistanceMatrix(
+            {
+              origins: origin,
+              destinations: destination,
+              travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (res, status) => {
+              setCalculatedDistance(
+                status == "OK"
+                  ? `${res.rows[0].elements[0].distance.text} | ${res.rows[0].elements[0].duration.text}`
+                  : "Error in calculation"
+              );
+            }
+          );
+        }
+      }
+    }, [props.geolocation]);
+
 
     return (
       <div className="media appeal-listing container shadow-sm my-2">
@@ -19,11 +49,12 @@ const AppealListing = (props) => {
             />
           </Link>
           <div className="media-body col-9">
-            <h5 className="mt-0">
+            <h5 className="mt-2">
               {props.appeal.species.name} donor needed at{" "}
               {props.appeal.clinic.name}
             </h5>
             <p>From: {props.appeal.user.profile.display_name}</p>
+            <Distance distance={calculatedDistance}/>
             <div
               className={`btn btn-sm ${
                 props.appeal.status == "open" && "btn-success"

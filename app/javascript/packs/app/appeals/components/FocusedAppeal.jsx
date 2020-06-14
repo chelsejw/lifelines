@@ -15,11 +15,11 @@ const FocusedAppeal = (props) => {
     useEffect(()=> {
       console.log(`Lifeline useeffect`)
       props.fetchLifelineData(appealId);
-    }, [props.throwLifelineData])
+    }, [props.throwLifelineData, props.appeal])
 
     
     return (
-      <div>
+      <div className="">
         <h3>
           Needed: {props.appeal.species.name} donor needed to save{" "}
           {props.appeal.pet_name}!
