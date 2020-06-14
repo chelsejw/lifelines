@@ -1,33 +1,39 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {fetchLifelineData, throwLifeline} from '../actions'
+import {fetchOneAppeal, fetchLifelineData, throwLifeline} from '../actions'
 import { setActiveConversation } from "../../auth/actions";
 import axios from 'axios'
-import {NavLink} from 'react-router-dom'
+import {useParams, NavLink} from 'react-router-dom'
 
 const FocusedAppeal = (props) => {
-
+  let {appealId} = useParams();
     useEffect(()=> {
         console.log(`use effect triggered`)
-        props.fetchLifelineData(props.data.id);
-    }, [props.appeal.id, props.throwLifelineData])
+        props.fetchOneAppeal(appealId)
+    }, [])
 
+    useEffect(()=> {
+      console.log(`Lifeline useeffect`)
+      props.fetchLifelineData(appealId);
+    }, [props.throwLifelineData])
+
+    
     return (
       <div>
         <h3>
-          Needed: {props.data.species.name} donor needed to save{" "}
-          {props.data.pet_name}!
+          Needed: {props.appeal.species.name} donor needed to save{" "}
+          {props.appeal.pet_name}!
         </h3>
-        <img src={props.data.img_url} className="img-fluid" />
-        <p>{props.data.description}</p>
+        <img src={props.appeal.img_url} className="img-fluid" />
+        <p>{props.appeal.description}</p>
 
         {props.auth.isLoggedIn && !props.lifelines.isUserConnected && (
           <button
             onClick={() => {
               props.throwLifeline(
                 props.auth.currentUser,
-                props.data.user,
-                props.data.id
+                props.appeal.user,
+                props.appeal.id
               );
             }}
             className="btn btn-warning"
@@ -38,9 +44,8 @@ const FocusedAppeal = (props) => {
 
         {props.auth.isLoggedIn && props.lifelines.isUserConnected && (
           <NavLink
-            onClick={()=> {props.setActiveConversation(
-              props.lifelines.conversation_id
-            )
+            onClick={() => {
+              props.setActiveConversation(props.lifelines.conversation_id);
             }}
             className="btn btn-danger"
             to="/chats"
@@ -84,6 +89,9 @@ const mapStateToProps = (state) => {
       setActiveConversation: (convoId) => {
         dispatch(setActiveConversation(convoId));
       },
+      fetchOneAppeal: (appealId) => {
+        dispatch(fetchOneAppeal(appealId))
+      }
     };
   };
   

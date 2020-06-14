@@ -1,21 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { fetchOneAppeal } from '../actions'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const AppealListing = (props) => {
 
     return (
       <div className="media appeal-listing container shadow-sm my-2">
         <div className="row">
-          <img
-            onClick={() => {
-              props.fetchOneAppeal(props.appeal.id);
-            }}
-            src={props.appeal.img_url}
-            className="mr-3 result-thumbnail"
-            alt="..."
-          />
+          <Link to={`/appeals/${props.appeal.id}`}>
+            <img
+              onClick={() => {
+                props.fetchOneAppeal(props.appeal.id);
+              }}
+              src={props.appeal.img_url}
+              className="mr-3 result-thumbnail"
+              alt="..."
+            />
+          </Link>
           <div className="media-body col-9">
             <h5 className="mt-0">
               {props.appeal.species.name} donor needed at{" "}

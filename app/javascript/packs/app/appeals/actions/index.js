@@ -84,8 +84,7 @@ export function fetchLifelineData(appealId) {
         console.log(`in fetch lifelines`)
         axios.get(`/api/v1/appeals/${appealId}/get-lifelines`)
             .then((response) => {
-                console.log(`got response for lifelines`)
-                console.log(response.data)
+
                 dispatch(lifelinesFetchDataSuccess(response.data))
             })
             .catch((err) => {
