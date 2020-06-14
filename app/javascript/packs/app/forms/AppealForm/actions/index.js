@@ -130,6 +130,9 @@ export function getEditFormData(appealId){
         .then(response => {
             dispatch(getEditFormDataIsLoading(false))
             dispatch(getEditFormDataSuccess(response.data))
+            console.log(`get edit form`)
+            console.log(response.data)
+            dispatch(formDataFetchSuccess(response.data.user.id, "user_id"))
         })
         .catch(err => {
             console.log(err.response)
@@ -163,7 +166,7 @@ export function appealPatchRequestSuccess(data) {
   };
 }
 
-export function sendPatchAppealRequest(data){
+export function sendPatchAppealRequest(data, appealId){
     return (dispatch) => {
       dispatch(appealPatchRequestIsLoading(true));
       dispatch(appealPostRequestHasError(false));
@@ -172,9 +175,6 @@ export function sendPatchAppealRequest(data){
 
       const token = document.querySelector("[name=csrf-token]").content;
       axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
-
-      let appealId = data.id
-
       let cleanData = (object)=> {
         delete data["species"];
         delete data["clinic"];

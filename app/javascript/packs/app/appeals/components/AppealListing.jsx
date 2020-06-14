@@ -66,7 +66,7 @@ const AppealListing = (props) => {
             {props.auth.currentUser.id == props.appeal.user.id && (
               <NavLink
                 className="btn btn-sm btn-dark"
-                to={`/appeals/${props.appeal.id}/edit`}
+                to={`/edit/appeal/${props.appeal.id}`}
                 exact
               >
                 Edit Appeal

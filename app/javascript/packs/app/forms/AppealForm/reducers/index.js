@@ -12,7 +12,8 @@ const appealsFormReducer = (state = {
     inputData: {},
     formData: {
         clinics: [],
-        species: []
+        species: [],
+        user_id: ""
     },
     isEditing: false,
     edit: {
@@ -88,6 +89,17 @@ const appealsFormReducer = (state = {
             };
         case 'GET_FORM_FIELD_DATA':
             let inputKey = 'species'
+
+            if (action.field=='user_id'){
+                return {
+                    ...state,
+                    formData: {
+                        ...state.formData,
+                        user_id: action.data
+                    }
+                }
+            }
+
             if (action.field=='clinics'){
                 inputKey = 'clinic'
             } 

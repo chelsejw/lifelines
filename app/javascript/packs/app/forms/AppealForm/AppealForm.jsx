@@ -10,16 +10,16 @@ class AppealForm extends React.Component {
         this.props.getFormData();
         
         //If this isn't the new appeal form, we want to get the original of the appeal we want to edit.
-        if ( this.props.match.path!=="/appeals/new") {
+        if ( this.props.match.path!=="/new/appeal") {
             this.props.getEditFormData(this.props.match.params.id)
         }
 
     }
       render(){
 
-        const isEditForm = this.props.match.path!=="/appeals/new"
+        const isEditForm = this.props.match.path!=="/new/appeal"
 
-        if (isEditForm && this.props.appealForm.edit.editInput.user.id!==this.props.auth.currentUser.id){
+        if (isEditForm && this.props.appealForm.formData.user_id!==this.props.auth.currentUser.id){
           return <ErrorPage message="You are not authorised to edit this appeal"/>
         }
 
@@ -51,8 +51,8 @@ class AppealForm extends React.Component {
         
         
         return (
-          <div className="container-fluid">
-            <div className="jumbotron bg-light">
+          <div className="jumbotron bg-light">
+            <div className="container w-50">
               {this.props.appealForm.isLoading && (
                 <ClipLoader
                   size={150}
@@ -228,8 +228,14 @@ class AppealForm extends React.Component {
                       e.preventDefault();
                       console.log(`clicked submit button`);
                       isEditForm
-                        ? this.props.patch(this.props.appealForm.edit.editInput)
-                        : this.props.post(this.props.appealForm.inputData, this.props.auth.currentUser.id);
+                        ? this.props.patch(
+                            this.props.appealForm.edit.editInput,
+                            this.props.appealForm.edit.editInput.id
+                          )
+                        : this.props.post(
+                            this.props.appealForm.inputData,
+                            this.props.auth.currentUser.id
+                          );
                     }}
                   >
                     Submit
@@ -264,9 +270,10 @@ const mapStateToProps = (state) => {
             console.log(`payload`, payload)
             dispatch(postAppealForm(payload, userId))
         },
-        patch: (payload) => {
+        patch: (payload, id) => {
           console.log(`in patch function`)
-            dispatch(sendPatchAppealRequest(payload))
+          console.log(`initial payload is ${payload}`)
+            dispatch(sendPatchAppealRequest(payload, id))
         },
         getFormData: ()=> {
             dispatch(getFormRenderData())
