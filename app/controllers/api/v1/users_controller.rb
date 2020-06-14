@@ -24,12 +24,16 @@ module Api
             end
             
             def update_profile
+              if !user_signed_in?
+                render json: {status: "ERROR"}, status: 403
+              end
+
               @profile = current_user.profile
               @profile.update(profile_params)
               if @profile.save
                 render json: {status: "OK", profile: @profile}
               else
-                render json: {status: "ERROR",}, status: 422
+                render json: {status: "ERROR"}, status: 422
               end
             end
 

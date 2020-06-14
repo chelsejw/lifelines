@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :species
       resources :users
       get '/auth/user-profile', to: "users#get_profile"
+      patch '/auth/user-profile', to: "users#update_profile"
 
       get '/auth/check-login', to: "users#isloggedin"
       get '/auth/logout', to: "users#logout"
