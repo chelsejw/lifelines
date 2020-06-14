@@ -1,30 +1,53 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { trackInputData, postAppealForm, getFormRenderData, getEditFormData, trackEditFormInput, sendPatchAppealRequest } from './actions'
 import ClipLoader from "react-spinners/ClipLoader";
 import ErrorPage from '../../layouts/ErrorPage'
 
-class AppealForm extends React.Component {
+const AppealForm = (props) => {
 
-    componentDidMount(){
-        this.props.getFormData();
+  useEffect(()=> {
+        props.getFormData();
         
         //If this isn't the new appeal form, we want to get the original of the appeal we want to edit.
-        if ( this.props.match.path!=="/new/appeal") {
-            this.props.getEditFormData(this.props.match.params.id)
+        if ( props.match.path!=="/new/appeal") {
+            props.getEditFormData(props.match.params.id)
         }
 
+  }, [])
+
+  const [imgUrl, setImgUrl] = useState("")
+  const [uploadStatus, setUploadStatus] = useState("")
+
+  const openWidget = () => {
+
+        cloudinary.openUploadWidget({
+                cloudName: "dwbuqa4dx",
+                uploadPreset: "m7t9mejb",
+                sources: ["local", "url"],
+            },
+            (error, result) => {
+                if (error) {
+                    console.log(`Err,`, error)
+                    return setUploadStatus('failed');
+                }
+                if (result.event == "success") {
+                    console.log(`Result,`, result);
+                    setImgUrl(result.info.url);
+                    props.trackInput(result.info.url, 'img_url')
+                    setUploadStatus('success')
+                }
+            }
+        );
     }
-      render(){
+        const isEditForm = props.match.path!=="/new/appeal"
 
-        const isEditForm = this.props.match.path!=="/new/appeal"
-
-        if (isEditForm && this.props.appealForm.formData.user_id!==this.props.auth.currentUser.id){
+        if (isEditForm && props.appealForm.formData.user_id!==props.auth.currentUser.id){
           return <ErrorPage message="You are not authorised to edit this appeal"/>
         }
 
-        const clinicOptions = this.props.appealForm.formData.clinics.map((clinic,index)=> {
-            if (isEditForm && clinic.id==this.props.appealForm.edit.defaultSelect.clinic.id) {
+        const clinicOptions = props.appealForm.formData.clinics.map((clinic,index)=> {
+            if (isEditForm && clinic.id==props.appealForm.edit.defaultSelect.clinic.id) {
             return <option selected="selected" key={clinic.id} value={clinic.id}>{clinic.name}</option>;
             }
             else if (index==0) {
@@ -37,8 +60,8 @@ class AppealForm extends React.Component {
             return <option key={clinic.id} value={clinic.id}>{clinic.name}</option>
         })
 
-        const speciesOptions = this.props.appealForm.formData.species.map((species, index)=> {
-            if (isEditForm && species.id==this.props.appealForm.edit.defaultSelect.species.id) {
+        const speciesOptions = props.appealForm.formData.species.map((species, index)=> {
+            if (isEditForm && species.id==props.appealForm.edit.defaultSelect.species.id) {
                 return (
                   <option selected="selected" key={species.id} value={species.id}>{species.name}</option>
                 );
@@ -53,19 +76,19 @@ class AppealForm extends React.Component {
         return (
           <div className="jumbotron bg-light">
             <div className="container w-50">
-              {this.props.appealForm.isLoading && (
+              {props.appealForm.isLoading && (
                 <ClipLoader
                   size={150}
                   color={"#123abc"}
-                  loading={this.props.appealForm.isLoading}
+                  loading={props.appealForm.isLoading}
                 />
               )}
-              {this.props.appealForm.patch.submitted && "Successfully updated!"}
+              {props.appealForm.patch.submitted && "Successfully updated!"}
 
-              {this.props.appealForm.hasErrored && "Sorry there was an error!!"}
+              {props.appealForm.hasErrored && "Sorry there was an error!!"}
 
-              {this.props.appealForm.edit.hasErrored &&
-                `Sorry, an error has occured. Error (${this.props.appealForm.edit.errorDetails.statusCode}): ${this.props.appealForm.edit.errorDetails.statusText}`}
+              {props.appealForm.edit.hasErrored &&
+                `Sorry, an error has occured. Error (${props.appealForm.edit.errorDetails.statusCode}): ${props.appealForm.edit.errorDetails.statusText}`}
               <form>
                 <div className="row my-4">
                   <div className="col">
@@ -74,50 +97,24 @@ class AppealForm extends React.Component {
                       className="form-control"
                       defaultValue={
                         isEditForm
-                          ? this.props.appealForm.edit.editInput.pet_name
+                          ? props.appealForm.edit.editInput.pet_name
                           : ""
                       }
                       id="inputPet"
                       placeholder="Pet's Name"
                       onChange={(e) => {
                         isEditForm
-                          ? this.props.trackEditInput(
+                          ? props.trackEditInput(
                               e.target.value,
                               e.target.name
                             )
-                          : this.props.trackInput(
+                          : props.trackInput(
                               e.target.value,
                               e.target.name
                             );
                       }}
                       required
                       name="pet_name"
-                    />
-                  </div>
-                  <div className="col">
-                    <label for="inputImg">Image URL</label>
-                    <input
-                      id="inputImg"
-                      required
-                      className="form-control"
-                      defaultValue={
-                        isEditForm
-                          ? this.props.appealForm.edit.editInput.img_url
-                          : ""
-                      }
-                      placeholder="Image URL"
-                      onChange={(e) => {
-                        isEditForm
-                          ? this.props.trackEditInput(
-                              e.target.value,
-                              e.target.name
-                            )
-                          : this.props.trackInput(
-                              e.target.value,
-                              e.target.name
-                            );
-                      }}
-                      name="img_url"
                     />
                   </div>
                 </div>
@@ -132,12 +129,12 @@ class AppealForm extends React.Component {
                       className="form-control"
                       defaultValue={
                         isEditForm
-                          ? this.props.appealForm.edit.editInput.description
+                          ? props.appealForm.edit.editInput.description
                           : ""
                       }
                       placeholder="Description"
                       onChange={(e) => {
-                        this.props.trackInput(e.target.value, e.target.name);
+                        props.trackInput(e.target.value, e.target.name);
                       }}
                       name="description"
                     />
@@ -152,11 +149,11 @@ class AppealForm extends React.Component {
                       className="form-control"
                       onChange={(e) => {
                         isEditForm
-                          ? this.props.trackEditInput(
+                          ? props.trackEditInput(
                               e.target.value,
                               e.target.name
                             )
-                          : this.props.trackInput(
+                          : props.trackInput(
                               e.target.value,
                               e.target.name
                             );
@@ -175,11 +172,11 @@ class AppealForm extends React.Component {
                       className="form-control"
                       onChange={(e) => {
                         isEditForm
-                          ? this.props.trackEditInput(
+                          ? props.trackEditInput(
                               e.target.value,
                               e.target.name
                             )
-                          : this.props.trackInput(
+                          : props.trackInput(
                               e.target.value,
                               e.target.name
                             );
@@ -191,34 +188,75 @@ class AppealForm extends React.Component {
                   </div>
                 </div>
 
-                {isEditForm &&
                 <div className="row">
-                  <div className="col-4">
-                    <label for="status">Status</label>
-
-                    <select
-                      id="status"
+                  <div className="col">
+                    <label htmlFor="imgInput">
+                      Image
+                      <span
+                        onClick={openWidget}
+                        className="btn-link btn-sm"
+                      >
+                        Upload
+                      </span>
+                    </label>
+                    <input
                       className="form-control"
-                      onChange={(e) => {
-                        isEditForm
-                          ? this.props.trackEditInput(
-                              e.target.value,
-                              e.target.name
-                            )
-                          : this.props.trackInput(
-                              e.target.value,
-                              e.target.name
-                            );
-                      }}
-                      name="status"
-                    >
-                      <option value="open" selected={this.props.appealForm.edit.editInput.status=="open" ? "selected" : "" }>Open</option>
-                      <option value="closed" selected={this.props.appealForm.edit.editInput.status=="closed" ? "selected" : ""} >Closed</option>
-                    </select>
-                </div>
+                      name="img_url"
+                      disabled="disabled"
+                      id="imgInput"
+                      value={imgUrl}
+                      placeholder="Use the upload button!"
+                    />
+                  </div>
                 </div>
 
-                }
+                {isEditForm && (
+                  <div className="row">
+                    <div className="col-4">
+                      <label for="status">Status</label>
+
+                      <select
+                        id="status"
+                        className="form-control"
+                        onChange={(e) => {
+                          isEditForm
+                            ? props.trackEditInput(
+                                e.target.value,
+                                e.target.name
+                              )
+                            : props.trackInput(
+                                e.target.value,
+                                e.target.name
+                              );
+                        }}
+                        name="status"
+                      >
+                        <option
+                          value="open"
+                          selected={
+                            props.appealForm.edit.editInput.status ==
+                            "open"
+                              ? "selected"
+                              : ""
+                          }
+                        >
+                          Open
+                        </option>
+                        <option
+                          value="closed"
+                          selected={
+                            props.appealForm.edit.editInput.status ==
+                            "closed"
+                              ? "selected"
+                              : ""
+                          }
+                        >
+                          Closed
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                )}
 
                 <div className="row my-4">
                   <button
@@ -228,13 +266,13 @@ class AppealForm extends React.Component {
                       e.preventDefault();
                       console.log(`clicked submit button`);
                       isEditForm
-                        ? this.props.patch(
-                            this.props.appealForm.edit.editInput,
-                            this.props.appealForm.edit.editInput.id
+                        ? props.patch(
+                            props.appealForm.edit.editInput,
+                            props.appealForm.edit.editInput.id
                           )
-                        : this.props.post(
-                            this.props.appealForm.inputData,
-                            this.props.auth.currentUser.id
+                        : props.post(
+                            props.appealForm.inputData,
+                            props.auth.currentUser.id
                           );
                     }}
                   >
@@ -246,7 +284,7 @@ class AppealForm extends React.Component {
           </div>
         );
       }
-}
+
 
 
 

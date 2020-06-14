@@ -13,7 +13,7 @@ class App extends React.Component {
             <Nav/>
             <Route path="/new/appeal" exact component = {AppealForm}/>
             <Route path="/edit/appeal/:id" exact component = {AppealForm}/>
-            <Route path="/appeals" exact component = {AppealsContainer}/>
+            <Route path="/appeals" component = {AppealsContainer}/>
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/chats" exact component = {Chat}/>
         </Router>
