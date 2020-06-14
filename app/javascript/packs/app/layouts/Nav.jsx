@@ -33,7 +33,7 @@ const Nav = (props) => {
       <NavLink exact className="nav-link" to="/appeals/new">New Appeal</NavLink>
       </li>
       <li className="nav-item">
-      <NavLink exact className="nav-link" to="/profile">My Profile</NavLink>
+      <NavLink exact className="nav-link" to="/dashboard">Dashboard</NavLink>
       </li>
       {!props.auth.isLoggedIn && <li className="nav-item">
         <a className="nav-link" href="/users/sign_in">Sign In</a>
