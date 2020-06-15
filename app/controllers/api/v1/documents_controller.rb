@@ -1,6 +1,6 @@
 module Api 
     module V1
-        class DocumentController < ApplicationController
+        class DocumentsController < ApplicationController
             # GET /appeals
             # GET /appeals.json
             def index
@@ -21,7 +21,7 @@ module Api
 
               # Only allow a list of trusted parameters through.
               def document_params
-                params.require(:document).permit(:url, :type)
+                params.require(:document).permit(:verification_id, :url, :type)
               end
           end 
     end

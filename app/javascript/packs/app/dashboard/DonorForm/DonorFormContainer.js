@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import DonorFormViaAdmin from './DonorFormViaAdmin'
 import DonorFormViaClinic from './DonorFormViaClinic'
 import axios from 'axios'
+const token = document.querySelector("[name=csrf-token]").content;
+axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+
 
 const DonorForm = (props)=> {
 
@@ -27,7 +30,7 @@ const DonorForm = (props)=> {
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState("")
 
-    const submitHandler = (e) => {
+    const submitHandler = (e, urls) => {
 
       e.preventDefault();
       setError(false)
@@ -37,6 +40,40 @@ const DonorForm = (props)=> {
           setSuccess(false)
           return setErrorMessage("Sorry, you may not submit another request until your current one is reviewed.")
       }
+
+      if (verificationType=="admin") {
+
+            if (urls.length < 1 || urls[0]=="") {
+                setError(true)
+                return setErrorMessage("You need to submit at least one document in the Document 1 field.")
+            }
+
+            setLoading(true);
+
+            axios
+            .post("/api/v1/verifications", {verification: input})
+            .then(res => {
+                return res.data.verification
+            })
+            .then(verification => {
+                uploadDocuments(urls, verification.id)
+            }).then( res => {
+                                                setLoading(false);
+                                                setSuccess(true);
+                                                setSubmitted(true);
+                                                setSuccessMessage(
+                                                  "Your verification request has been received. Please allow the team up to 7 working days to get back to you."
+                                                );
+            })
+            .catch(err => {
+                console.log(`There was an error in posting`)
+                console.log(err)
+                setError(true)
+                setLoading(false)
+                setErrorMessage('Sorry, there was an error processing your form. Please try again, or contact us @ lifelines.team@gmail.com for additional support.')
+            })
+        }
+
 
       if (verificationType=="clinic") {
           if (!input.owner_name || input.owner_name.length < 5) {
@@ -52,10 +89,7 @@ const DonorForm = (props)=> {
             setError(true);
             return setErrorMessage("Please select a clinic.");         
           }
-
-        const token = document.querySelector("[name=csrf-token]").content;
-        axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
-                setLoading(true);
+        setLoading(true);
 
         axios
         .post("/api/v1/verifications", {verification: input})
@@ -74,6 +108,32 @@ const DonorForm = (props)=> {
         })
         }
     }
+        
+
+
+    const uploadDocuments = (arrOfUrls, verificationId) => {
+        arrOfUrls.forEach(url => {
+            if (url=="") {
+                return
+            }
+
+            let documentObj = {
+                verification_id: verificationId,
+                url: url
+            }
+
+            axios.post('/api/v1/documents', documentObj)
+            .then( res => {
+                console.log(`Created the document`)
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+                setError(true)
+                setErrorMessage("Error when creating the documents.")
+            })
+        })
+    }
 
     useEffect(()=> {
         console.log(input)
@@ -85,7 +145,7 @@ const DonorForm = (props)=> {
     }, [error])
 
     return (
-      <div className="container w-75">
+      <div className="container">
         <div className="mb-3">
           <h2>Is my pet eligible to be a blood donor?</h2>
         </div>
@@ -120,20 +180,30 @@ const DonorForm = (props)=> {
           </div>
         </div>
 
-        <div className="mb-3">
+        <div className="mb-5">
           <h2>What details do I need to give?</h2>
-          <p>
-            If you have visited a veterinary clinic that is partnered with us in
-            the last year, you may apply by indicating 'clinic' and providing
-            your full name, mobile and pet's name. Do ensure it correlates with
-            the details your vet has, or your verification might be rejected.
-          </p>
-          <p>
-            If you have not visited a veterinary clinic in the past year, or the
-            clinic you have visited is not on our list of partners, you may
-            submit documents like medical records and ownership proof of your
-            pet. Do ensure you attach at least one document.
-          </p>
+          <br/>
+            If you <span className="font-weight-bold">
+              you have visited a veterinary clinic that is partnered with us in
+              the last year
+            </span>
+            , we will need:
+            <ul>
+              <li>Your full name</li>
+              <li>Contact number</li>
+              <li>Eligible pet's name</li>
+            </ul>
+          <br/>
+            If you{" "}
+            <span className="font-weight-bold">
+              have not visited a veterinary clinic in the past year, or the
+              clinic you have visited is not on our list of partners
+            </span>
+            , you may submit documents like:
+            <ul>
+              <li>Medical records</li>
+              <li>Proof of ownership (e.g. license from AVA)</li>
+            </ul>
         </div>
 
         <div className="row mb-3">

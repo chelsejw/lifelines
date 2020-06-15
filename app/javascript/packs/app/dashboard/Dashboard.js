@@ -32,7 +32,7 @@ const Dashboard = (props)=> {
           path={path}
           exact
           render={() => (
-            <div className="container w-75">
+            <div className="container">
               <h1>Pick an option above to get started.</h1>
             </div>
           )}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import BarLoader from "react-spinners/BarLoader";
 
 const DonorFormViaAdmin = (props) => {
 
-    const [imgUrls, setImgUrls] = useState(Array(5).fill(""))
+    const [urls, setUrls] = useState(Array(5).fill(""))
 
      const openWidget = (documentNumber) => {
        cloudinary.openUploadWidget(
@@ -14,11 +15,10 @@ const DonorFormViaAdmin = (props) => {
          (error, result) => {
            if (error) {
              console.log(`Err,`, error);
-             return setUploadStatus("failed");
            }
            if (result.event == "success") {
              console.log(`Result,`, result);
-             setImgUrls((prevState) => {
+             setUrls((prevState) => {
                let updatedArr = [...prevState];
                updatedArr[documentNumber] = result.info.url;
                return updatedArr;
@@ -37,13 +37,13 @@ const DonorFormViaAdmin = (props) => {
             <label htmlFor="doc1">
               Document 1 <span className="text-danger">*</span>
               <span onClick={() => openWidget(0)} className="ml-2 btn-link">
-                {imgUrls[0] !== "" ? "Change" : "Upload"}
+                {urls[0] !== "" ? "Change" : "Upload"}
               </span>
             </label>
             <input
               disabled="disabled"
               placeholder=""
-              value={imgUrls[0]}
+              value={urls[0]}
               className="form-control"
               id="doc1"
               name="url"
@@ -55,13 +55,13 @@ const DonorFormViaAdmin = (props) => {
             <label htmlFor="doc1">
               Document 2
               <span onClick={() => openWidget(1)} className="ml-2 btn-link">
-                {imgUrls[1] !== "" ? "Change" : "Upload"}
+                {urls[1] !== "" ? "Change" : "Upload"}
               </span>
             </label>
             <input
               disabled="disabled"
               placeholder=""
-              value={imgUrls[1]}
+              value={urls[1]}
               className="form-control"
               id="doc2"
               name="url"
@@ -73,13 +73,13 @@ const DonorFormViaAdmin = (props) => {
             <label htmlFor="doc3">
               Document 3
               <span onClick={() => openWidget(2)} className="ml-2 btn-link">
-                {imgUrls[2] !== "" ? "Change" : "Upload"}
+                {urls[2] !== "" ? "Change" : "Upload"}
               </span>
             </label>
             <input
               disabled="disabled"
               placeholder=""
-              value={imgUrls[2]}
+              value={urls[2]}
               className="form-control"
               id="doc3"
               name="url"
@@ -91,13 +91,13 @@ const DonorFormViaAdmin = (props) => {
             <label htmlFor="doc4">
               Document 4
               <span onClick={() => openWidget(3)} className="ml-2 btn-link">
-                {imgUrls[3] !== "" ? "Change" : "Upload"}
+                {urls[3] !== "" ? "Change" : "Upload"}
               </span>
             </label>
             <input
               disabled="disabled"
               placeholder=""
-              value={imgUrls[3]}
+              value={urls[3]}
               className="form-control"
               id="doc4"
               name="url"
@@ -109,13 +109,13 @@ const DonorFormViaAdmin = (props) => {
             <label htmlFor="doc5">
               Document 5
               <span onClick={() => openWidget(4)} className="ml-2 btn-link">
-                {imgUrls[4] !== "" ? "Change" : "Upload"}
+                {urls[4] !== "" ? "Change" : "Upload"}
               </span>
             </label>
             <input
               disabled="disabled"
               placeholder=""
-              value={imgUrls[4]}
+              value={urls[4]}
               className="form-control"
               id="doc5"
               name="url"
@@ -125,8 +125,28 @@ const DonorFormViaAdmin = (props) => {
 
         <p className="text-danger">* Required Fields</p>
 
+        {props.error && (
+          <p className="mt-3 text-danger">{props.errorMessage}</p>
+        )}
+
+        {props.loading && (
+          <div>
+            <BarLoader color={"#F5A623"} height={4} width={100} />
+            <p className="mt-3 text-warning">{props.loadingMessage}</p>
+          </div>
+        )}
+
+        {props.success && (
+          <p className="mt-3 text-success">{props.successMessage}</p>
+        )}
+
         <div>
-            <button className="btn btn-lg btn-dark btn-block">Submit</button>
+          <button
+            onClick={(e) => props.submit(e, urls)}
+            className="btn btn-lg btn-dark btn-block"
+          >
+            Submit
+          </button>
         </div>
       </div>
     );
