@@ -18,7 +18,7 @@ module Api
                 end
             end
 
-            def get_verification
+            def show
                 @verification = Verification.find(params[:id])
                 render json: {verification: @verification}
             end

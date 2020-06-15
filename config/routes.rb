@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get '/appeals/:id/get-lifelines', to: "appeals#get_lifelines"
         post '/appeals/:id/throw-lifeline', to: "appeals#throw_lifeline"
       resources :verifications
+      get '/verifications/:id/approve', to: "verifications#approve_verification"
       resources :documents
       resources :clinics
       resources :species

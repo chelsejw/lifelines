@@ -15,7 +15,7 @@ module Api
                 else
                   render json: {errors: @document.errors}, status: 422
                 end
-              end
+            end
 
             private
 
