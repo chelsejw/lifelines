@@ -31,9 +31,14 @@ const AppealOptions = (props)=> {
           </div>
         </div>
         <div className="col x-5 py-3">
+            
+            {props.sortErrors && <p className="text-danger">{props.sortErrorMessage}</p>}
+            
             <select onChange={(e) => props.sort(e.target.value)}>
                 <option value="newest">By newest</option>
                 <option value="oldest">By oldest</option>
+                <option value="closest">Closest to me</option>
+
             </select>
         </div>
       </div>

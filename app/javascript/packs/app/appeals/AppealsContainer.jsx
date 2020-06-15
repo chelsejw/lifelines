@@ -16,6 +16,9 @@ const AppealsContainer = (props) => {
     const [userPostal, setUserPostal] = useState("")
     const [appeals, setAppeals] = useState([])
 
+    const [sortErrors, setSortErrors] = useState(false)
+    const [sortErrorMessage, setSortErrorMessage] = useState("")
+
   useEffect(()=> {
     props.fetchInitialAppeals('/api/v1/appeals.json');
     
@@ -49,6 +52,8 @@ const AppealsContainer = (props) => {
 
   const sort = (option)=> {
 
+    setSortErrors(false)
+
     let newAppeals = [...appeals]
 
     if (option=="oldest"){
@@ -57,6 +62,13 @@ const AppealsContainer = (props) => {
       if (option=="newest"){
         newAppeals.sort((a, b) => (new Date(a.created_at) > new Date(b.created_at) ) ? -1 : 1)
         }
+      if (option=="closest"){
+        if (!newAppeals[0].distance) {
+          setSortErrors(true)
+          return setSortErrorMessage("Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code.")
+        }
+        newAppeals.sort((a,b)=> a.distance > b.distance ? 1 : -1 )
+      }
 
         return setAppeals([...newAppeals])
     }
@@ -79,16 +91,29 @@ const AppealsContainer = (props) => {
           setLocString(res[0].formatted_address)
       });
   }
+
+  const setDistance = (index, distance) => {
+
+    console.log(`setDistance for appeal at index ${index} for ${distance}`)
+    const newArr = [...appeals]
+    newArr[index].distance = distance
+    return setAppeals(newArr)
+  }
+  
+  useEffect(()=> {
+    appeals.forEach(appeal => console.log(appeal))
+  }, [appeals])
       
       let {path, url} = useRouteMatch();
 
         return (
           <div className="container-fluid">
-              <AppealOptions appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
+              <AppealOptions sortErrors={sortErrors} sortErrorMessage={sortErrorMessage} appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
 
             <div className="row">
               <div className="col-5 px-5">
                 <AppealResults
+                  setDist={setDistance}
                   userLoc={locString}
                   geolocation={userLoc}
                   postal={userPostal}

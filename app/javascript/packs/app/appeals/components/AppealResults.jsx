@@ -3,14 +3,16 @@ import AppealListing from './AppealListing'
 import MoonLoad from "react-spinners/MoonLoader";
 
 const AppealResults = (props) => {
-        let results = props.data.map((appeal) => {
+        let results = props.data.map((appeal, index) => {
                   return (
                     <AppealListing
+                    index={index}
                       key={appeal.id}
                       appeal={appeal}
                       geolocation={props.geolocation}
                       postal={props.postal}
                       google={props.google}
+                      setDist={props.setDist}
                     />
                   );
         })
