@@ -8,7 +8,13 @@ module Api
             def isloggedin
                 if user_signed_in?
                   @user = current_user
-                    render json: {isloggedIn: true, user: @user, profile: @user.profile}
+                  if @user.verifications.where(status: "pending").count < 1
+                    has_verifications_pending = false
+                  else
+                    has_verifications_pending = true
+                  end
+                  render json: {isloggedIn: true, user: @user, profile: @user.profile, pendingVerifications: has_verifications_pending}
+                
                 else
                     render json: {isLoggedIn: false}
                 end

@@ -8,9 +8,18 @@ import {connect} from 'react-redux'
 const Dashboard = (props)=> {
     let { path, url } = useRouteMatch();
 
+    if (!props.auth.isLoggedIn) {
+
+      return (
+        <div className="py-4 container">
+          <h3>You have to be logged in to view this page.</h3>
+        </div>
+      )
+    }
+
     return (
       <div className="py-4 container">
-        <div className="row mb-3 w-75 mx-auto">
+        <div className="row mb-3 mx-auto">
           <Link to={`${url}/profile`}>Profile</Link>
 
           {props.auth.currentUser.profile.account_type !== "admin" && (

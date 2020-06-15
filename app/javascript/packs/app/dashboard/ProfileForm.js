@@ -110,7 +110,7 @@ const ProfileForm = () => {
   return (
     <div>
       <div className="row">
-        <div className="container w-75">
+        <div className="container">
           <h2> Edit Your Profile</h2>
 
           {editStatus !== "" && (
