@@ -14,7 +14,10 @@ const AppealsContainer = (props) => {
     const [locString, setLocString] = useState("Unavailable")
     const [loadingLoc, setLoadingLoc] = useState(false)
     const [userPostal, setUserPostal] = useState("")
- 
+
+    console.log(`Process env`, process.env.MAPS_API_KEY)
+    console.log(`Process env`, process.env)
+
   useEffect(()=> {
     props.fetchInitialAppeals('/api/v1/appeals.json');
   }, [])
@@ -84,7 +87,7 @@ const AppealsContainer = (props) => {
                       Get My Location
                     </button>
                   )}
-                  {props.auth.isLoggedIn && props.auth.currentUser.profile.address !== "" && (
+                  {props.auth.isLoggedIn && props.auth.currentUser.profile.address !== null &&  props.auth.currentUser.profile.address!=="" && (
                     <button
                       className="ml-1 btn btn-secondary btn-sm"
                       onClick={useMyAddress}

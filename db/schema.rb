@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_200438) do
+ActiveRecord::Schema.define(version: 2020_06_15_102001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 2020_06_13_200438) do
     t.index ["user_id"], name: "index_conversations_users_on_user_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.bigint "verification_id", null: false
+    t.string "url"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["verification_id"], name: "index_documents_on_verification_id"
+  end
+
   create_table "lifelines", force: :cascade do |t|
     t.bigint "appeal_id", null: false
     t.bigint "user_id", null: false
@@ -117,15 +126,33 @@ ActiveRecord::Schema.define(version: 2020_06_13_200438) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "verifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "authorizer_id"
+    t.string "verification_for"
+    t.string "status"
+    t.text "details"
+    t.string "owner_name"
+    t.string "mobile"
+    t.string "pet_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["authorizer_id"], name: "index_verifications_on_authorizer_id"
+    t.index ["user_id"], name: "index_verifications_on_user_id"
+  end
+
   add_foreign_key "appeals", "clinics"
   add_foreign_key "appeals", "species"
   add_foreign_key "appeals", "users"
   add_foreign_key "conversations", "lifelines"
   add_foreign_key "conversations_users", "conversations"
   add_foreign_key "conversations_users", "users"
+  add_foreign_key "documents", "verifications"
   add_foreign_key "lifelines", "appeals"
   add_foreign_key "lifelines", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "verifications", "users"
+  add_foreign_key "verifications", "users", column: "authorizer_id"
 end

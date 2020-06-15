@@ -1,213 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import ProfileForm from './ProfileForm'
+import VerificationForm from './VerificationForm'
+import {Link, Route, useRouteMatch} from 'react-router-dom'
 import {connect} from 'react-redux'
-import axios from 'axios'
-const Dashboard = ()=> {
-    const [imgUrl, setImgUrl] = useState("")
-    const [imgInputText, setImgInputText] = useState("")
-    const [uploadStatus, setUploadStatus] = useState("Click the button to upload!")
-    const [profile, setProfile] = useState("")
-    const [formInput, setFormInput] = useState({})
-    const [editSuccess, setEditSuccess] = useState(false)
-    const [editStatus, setEditStatus] = useState("")
 
-    useEffect(()=> {
-        axios.get(`/api/v1/auth/user-profile`)
-        .then(res => {
-            console.log(res.data.profile)
-            setProfile(res.data.profile)
-            setFormInput(res.data.profile);
 
-            res.data.img_url!=="" ? setUploadStatus("has_img") : setUploadStatus("no_img")
-        })
-        .catch(err => {
-            console.log(`erroorrrrrrr`)
-            console.log(err)
-        })
-    }, [])
-
-    const trackInputs = (input, field) => {
-        console.log(`Input for ${field} is ${input}`)
-        setFormInput(currentInput => {
-            return {...currentInput, [field]: input}
-        })
-    }
-
-    useEffect(()=> {
-        console.log(formInput)
-    },
-    [formInput])
-
-    const openWidget = () => {
-
-        cloudinary.openUploadWidget({
-                cloudName: "dwbuqa4dx",
-                uploadPreset: "m7t9mejb",
-                sources: ["local", "url"],
-            },
-            (error, result) => {
-                if (error) {
-                    console.log(`Err,`, error)
-                    return setUploadStatus('failed');
-                }
-                if (result.event == "success") {
-                    console.log(`Result,`, result);
-                    setImgUrl(result.info.url);
-                    setUploadStatus('success')
-                    setFormInput((currentInput) => {
-                    return { ...currentInput, img_url: result.info.url };
-                            });
-                }
-            }
-        );
-    }
-
-    useEffect(()=> {
-        switch (uploadStatus) {
-            case 'success':
-                setImgInputText(imgUrl)
-                break;
-            case 'failed':
-                setImgInputText('FAILED UPLOAD')
-                break;
-            case 'no_img':
-                setImgInputText('Click the button to upload!')
-                break;
-            case 'has_img':
-                setImgInputText(profile.img_url);
-                break;
-            default:
-                setImgInputText("Click the button to upload!");
-                break;
-        }
-    }, [uploadStatus])
-
-    const patchRequest = ()=> {
-      const token = document.querySelector("[name=csrf-token]").content;
-      axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
-          setEditStatus("");
-
-      axios.patch(`/api/v1/auth/user-profile`, {profile: formInput})
-      .then(res => {
-          console.log(res.data.status)
-          console.log(res.data)
-          
-          setEditStatus('Updated successfully')
-          setEditSuccess(true)
-      })
-      .catch(err=> {
-          console.log(err)
-          setEditStatus('Error updating.')
-                    setEditSuccess(false)
-
-      })
-
-    }
+const Dashboard = (props)=> {
+    let { path, url } = useRouteMatch();
 
     return (
-      <div>
-        <div className="jumbotron bg-light">
-          <div className="row text-center"></div>
-          <div className="container w-50">
-            <h2> Edit Your Profile</h2>
+      <div className="py-4 container">
+        <div className="row mb-3 w-75 mx-auto">
+          <Link to={`${url}/profile`}>Profile</Link>
 
-            {editStatus !== "" && (
-              <div className={`alert alert-${editSuccess ? "success" : "danger"}`} role="alert">
-                {editStatus}
-              </div>
-            )}
-
-            <div className="row my-2">
-              <div className="col-6">
-                <label htmlFor="displayName">Display Name</label>
-                <input
-                  onChange={(e) => trackInputs(e.target.value, e.target.name)}
-                  defaultValue={profile.display_name}
-                  className="form-control"
-                  id="displayName"
-                  name="display_name"
-                />
-              </div>
-              <div className="col-6">
-                <label htmlFor="imgInput">
-                  Profile Picture
-                  <span onClick={openWidget} className="btn-link btn-sm">
-                    {uploadStatus=="has_img" ? "Change" : "Upload"}
-                  </span>
-                </label>
-                <input
-                  className="form-control"
-                  name="img_url"
-                  disabled="disabled"
-                  id="imgInput"
-                  placeholder={imgInputText}
-                />
-              </div>
-            </div>
-
-            <div className="row mb-2">
-              <div className="col-2">
-                <label htmlFor="verified">Verified</label>
-                <input
-                  className="form-control"
-                  id="verified"
-                  disabled="disabled"
-                  name="verified"
-                  placeholder={profile.verified ? "Verified" : "Not verified"}
-                />
-              </div>
-              <div className="col-4">
-                <label htmlFor="accountType">Account Type</label>
-                <input
-                  className="form-control"
-                  id="accountType"
-                  name="account_type"
-                  disabled="disabled"
-                  placeholder={
-                    profile.account_type == "user" ? "Regular User" : "Clinic"
-                  }
-                />
-              </div>
-              <div className="col-6">
-                <label htmlFor="postalCode">Postal Code</label>
-                <input
-                  className="form-control"
-                  onChange={(e) => trackInputs(e.target.value, e.target.name)}
-                  placeholder="This will help improve your website experience."
-                  id="postalCode"
-                  name="address"
-                  defaultValue={profile.address}
-                />
-              </div>
-            </div>
-
-            <div className="row mb-5">
-              <div className="col">
-                <label htmlFor="bio">About Me</label>
-
-                <input
-                  onChange={(e) => trackInputs(e.target.value, e.target.name)}
-                  className="form-control"
-                  name="bio"
-                  id="bio"
-                  defaultValue={profile.bio}
-                  placeholder="Tell us about yourself."
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <button
-                  onClick={patchRequest}
-                  className="btn btn-secondary btn-block"
-                >
-                  Update Profile
-                </button>
-              </div>
-            </div>
-          </div>
+          {props.auth.currentUser.profile.account_type !== "admin" && (
+            <Link to={`${url}/verification`}>Verification</Link>
+          )}
+          {props.auth.currentUser.profile.account_type !== "user" && (
+            <Link to={`${url}/manage_requests`}>Manage Requests</Link>
+          )}
         </div>
+
+        <Route path="/dashboard/profile" exact component={ProfileForm} />
+
+        <Route
+          path={`${url}/verification`}
+          exact
+          component={VerificationForm}
+        />
+        <Route
+          path={path}
+          exact
+          render={() => (
+            <div className="container w-75">
+              <h1>Pick an option above to get started.</h1>
+            </div>
+          )}
+        />
       </div>
     );
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+export default connect(mapStateToProps)(Dashboard);
