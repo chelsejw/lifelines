@@ -11,13 +11,13 @@ const VerificationForm = (props) => {
     return(
         <div>
             <div className="container">
-            <div className="row w-75 mx-auto my-4">
+            <div className="row mx-auto my-4">
                 <div className="col">
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col">
                     <button onClick={()=> setRequestType("donor")} className="w-90 btn btn-lg btn-danger">Donor Verification</button>
                     </div>
-                    <div className="col-6">
+                    <div className="col">
                     <button onClick={()=> setRequestType('clinic')}className="btn-lg btn w-90 btn-success">Clinic Verification</button>
                     </div>
                 </div>
