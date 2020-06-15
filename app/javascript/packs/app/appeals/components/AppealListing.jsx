@@ -60,6 +60,8 @@ const AppealListing = (props) => {
               {props.appeal.clinic.name}
             </h5>
             <p>From: {props.appeal.user.profile.display_name}</p>
+            <p>{props.appeal.lifelines.length} lifelines</p>
+
             <p>Added: {moment(props.appeal.created_at).format("MMM Do YYYY, h:mm:ss a")}</p>
             <Distance distance={calculatedDistance}/>
             <div

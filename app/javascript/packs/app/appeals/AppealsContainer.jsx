@@ -54,6 +54,8 @@ const AppealsContainer = (props) => {
 
     setSortErrors(false)
 
+    console.log(`Trying to set by ${option}`)
+
     let newAppeals = [...appeals]
 
     if (option=="oldest"){
@@ -68,6 +70,12 @@ const AppealsContainer = (props) => {
           return setSortErrorMessage("Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code.")
         }
         newAppeals.sort((a,b)=> a.distance > b.distance ? 1 : -1 )
+      }
+      if (option=="popular"){
+        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? -1 : 1 )
+      }
+      if (option=="least_popular"){
+        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? 1 : -1 )
       }
 
         return setAppeals([...newAppeals])
