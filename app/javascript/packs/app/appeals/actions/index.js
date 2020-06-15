@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 
 export function appealsHasError(bool) {
     return {
@@ -101,7 +102,6 @@ export function throwLifelineSuccess(data){
     }
 }
 
-
 export function throwLifeline(user, appealOwner, appealId){
     return (dispatch)=>{
         const token = document.querySelector("[name=csrf-token]").content;
@@ -135,3 +135,4 @@ export function throwLifeline(user, appealOwner, appealId){
         .catch(err=>console.log(err))
     }
 }
+

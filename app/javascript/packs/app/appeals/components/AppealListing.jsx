@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchOneAppeal } from '../actions'
 import { Link, NavLink } from 'react-router-dom';
 import Distance from './Distance'
+import moment from 'moment'
 
 const AppealListing = (props) => {
   
@@ -57,6 +58,7 @@ const AppealListing = (props) => {
               {props.appeal.clinic.name}
             </h5>
             <p>From: {props.appeal.user.profile.display_name}</p>
+            <p>Added: {moment(props.appeal.created_at).format("MMM Do YYYY, h:mm:ss a")}</p>
             <Distance distance={calculatedDistance}/>
             <div
               className={`btn btn-sm ${
