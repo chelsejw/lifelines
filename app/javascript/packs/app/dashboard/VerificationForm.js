@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import DonorForm from "./DonorForm"
+import DonorForm from "./DonorForm/DonorFormContainer"
 import ClinicForm from './ClinicForm'
 
 const VerificationForm = (props) => {
