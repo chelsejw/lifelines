@@ -7,7 +7,14 @@ const VerificationForm = (props) => {
     const [input, setInput] = useState("")
 
     const [requestType, setRequestType] = useState("donor")
-
+      if (props.auth.currentUser.profile.verified) {
+        return (
+          <div className="py-3 container">
+            <h3>You are already verified.</h3>
+            <p>Good job!</p>
+          </div>
+        );
+      }
     if (props.auth.currentUser.pendingVerifications) {
         return (
             <div className="py-3 container">
@@ -15,15 +22,6 @@ const VerificationForm = (props) => {
             <p>Kindly wait for us to process that before submitting another request.</p>
             </div>
         )
-    } else if (props.auth.currentUser.profile.verified) {
-        return (
-          <div className="py-3 container">
-            <h3>You already verified.</h3>
-            <p>
-              Good job!
-            </p>
-          </div>
-        );
     }
              return (
                <div>
