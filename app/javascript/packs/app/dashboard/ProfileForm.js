@@ -109,9 +109,8 @@ const ProfileForm = () => {
 
   return (
     <div>
-      <div className="jumbotron bg-light">
-        <div className="row text-center"></div>
-        <div className="container w-50">
+      <div className="row">
+        <div className="container w-75">
           <h2> Edit Your Profile</h2>
 
           {editStatus !== "" && (

@@ -9,16 +9,25 @@ const Dashboard = (props)=> {
     let { path, url } = useRouteMatch();
 
     return (
-      <div>
+      <div className="py-2 container">
+
+        <div className="row w-75 mx-auto">
         <Link to={`${url}/profile`}>Profile</Link>
 
-        {props.auth.currentUser.account_type !== "admin" && (
+        {props.auth.currentUser.profile.account_type !== "admin" && (
           <Link to={`${url}/verification`}>Verification</Link>
         )}
+        {props.auth.currentUser.profile.account_type !== "user" && (
+          <Link to={`${url}/manage_requests`}>Manage Requests</Link>
+        )}
+
+
+        </div>
+      
 
         <Route path="/dashboard/profile" exact component={ProfileForm} />
 
-        <Route
+            <Route
           path={`${url}/verification`}
           exact
           component={VerificationForm}
@@ -28,6 +37,7 @@ const Dashboard = (props)=> {
           exact
           render={() => <h1>Pick an option above to get started.</h1>}
         />
+
       </div>
     );
 }
