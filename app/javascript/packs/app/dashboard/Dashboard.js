@@ -3,7 +3,7 @@ import ProfileForm from './ProfileForm'
 import VerificationForm from './VerificationForm'
 import {Link, Route, useRouteMatch} from 'react-router-dom'
 import {connect} from 'react-redux'
-
+import ConsoleContainer from './Console/ConsoleContainer'
 
 const Dashboard = (props)=> {
     let { path, url } = useRouteMatch();
@@ -46,6 +46,8 @@ const Dashboard = (props)=> {
             </div>
           )}
         />
+
+        <Route path="/dashboard/manage_requests" exact component={ConsoleContainer} />
       </div>
     );
 }

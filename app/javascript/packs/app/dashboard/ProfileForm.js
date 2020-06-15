@@ -169,7 +169,7 @@ const ProfileForm = () => {
                 name="account_type"
                 disabled="disabled"
                 placeholder={
-                  profile.account_type == "user" ? "Regular User" : "Clinic"
+                  profile.account_type
                 }
               />
             </div>

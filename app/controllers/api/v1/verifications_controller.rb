@@ -4,8 +4,10 @@ module Api
             # GET /appeals
             # GET /appeals.json
             def index
-              @species = Species.all
-              render json: @species
+
+                    @verifications = Verification.where(authorizer_id: current_user.id)
+                    render json: @verifications, each_serializer: Serializers::VerificationSerializer
+        
             end
 
             def create
