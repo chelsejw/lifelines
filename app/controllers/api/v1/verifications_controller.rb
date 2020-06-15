@@ -4,8 +4,10 @@ module Api
             # GET /appeals
             # GET /appeals.json
             def index
-              @species = Species.all
-              render json: @species
+
+                    @verifications = Verification.where(authorizer_id: current_user.id, status: "pending")
+                    render json: @verifications, each_serializer: Serializers::VerificationSerializer
+        
             end
 
             def create
@@ -25,15 +27,23 @@ module Api
                 render json: {verification: @verification}
             end
 
-            def approve_verification
+            def approve
                 @verification = Verification.find(params[:id])
                 @verification.update(status: "approve")
                 @verification.save
-                if @verification.type=="donor"
-                    @verification.user.update(verified: true)
-                elsif @verification.type=='clinic'
-                    @verification.user.update(account_type: 'clinic', verified: true)
+                if @verification.verification_for=="donor"
+                    @verification.user.profile.update(verified: true)
+                elsif @verification.verification_for=='clinic'
+                    @verification.user.profile.update(account_type: 'clinic', verified: true)
                 end
+                render json: @verification
+            end
+
+            def reject
+                @verification = Verification.find(params[:id])
+                @verification.update(status: "reject")
+                @verification.save
+                render json: @verification
             end
 
             private

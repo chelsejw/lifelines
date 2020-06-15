@@ -3,14 +3,23 @@ import ProfileForm from './ProfileForm'
 import VerificationForm from './VerificationForm'
 import {Link, Route, useRouteMatch} from 'react-router-dom'
 import {connect} from 'react-redux'
-
+import ConsoleContainer from './Console/ConsoleContainer'
 
 const Dashboard = (props)=> {
     let { path, url } = useRouteMatch();
 
+    if (!props.auth.isLoggedIn) {
+
+      return (
+        <div className="py-4 container">
+          <h3>You have to be logged in to view this page.</h3>
+        </div>
+      )
+    }
+
     return (
       <div className="py-4 container">
-        <div className="row mb-3 w-75 mx-auto">
+        <div className="row mb-3 mx-auto">
           <Link to={`${url}/profile`}>Profile</Link>
 
           {props.auth.currentUser.profile.account_type !== "admin" && (
@@ -37,6 +46,8 @@ const Dashboard = (props)=> {
             </div>
           )}
         />
+
+        <Route path="/dashboard/manage_requests" exact component={ConsoleContainer} />
       </div>
     );
 }

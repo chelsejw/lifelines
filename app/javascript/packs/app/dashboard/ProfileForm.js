@@ -110,7 +110,7 @@ const ProfileForm = () => {
   return (
     <div>
       <div className="row">
-        <div className="container w-75">
+        <div className="container">
           <h2> Edit Your Profile</h2>
 
           {editStatus !== "" && (
@@ -169,7 +169,7 @@ const ProfileForm = () => {
                 name="account_type"
                 disabled="disabled"
                 placeholder={
-                  profile.account_type == "user" ? "Regular User" : "Clinic"
+                  profile.account_type
                 }
               />
             </div>
