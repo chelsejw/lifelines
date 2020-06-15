@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchOneAppeal } from '../actions'
 import { Link, NavLink } from 'react-router-dom';
 import Distance from './Distance'
+import moment from 'moment'
 
 const AppealListing = (props) => {
   
@@ -32,6 +33,8 @@ const AppealListing = (props) => {
                   ? `${res.rows[0].elements[0].distance.text} | ${res.rows[0].elements[0].duration.text}`
                   : "Error in calculation"
               );
+
+              props.setDist(props.index, res.rows[0].elements[0].distance.text)
             }
           );
         }
@@ -57,6 +60,9 @@ const AppealListing = (props) => {
               {props.appeal.clinic.name}
             </h5>
             <p>From: {props.appeal.user.profile.display_name}</p>
+            <p>{props.appeal.lifelines.length} lifelines</p>
+
+            <p>Added: {moment(props.appeal.created_at).format("MMM Do YYYY, h:mm:ss a")}</p>
             <Distance distance={calculatedDistance}/>
             <div
               className={`btn btn-sm ${

@@ -4,22 +4,25 @@ import FocusedAppeal from './components/FocusedAppeal'
 import { connect } from 'react-redux';
 import { fetchAllAppeals } from '../../app/appeals/actions'
 import ClipLoader from "react-spinners/ClipLoader";
-import GridLoader from 'react-spinners/GridLoader'
-import {Switch, Route, useRouteMatch} from 'react-router-dom'
+import { Route, useRouteMatch} from 'react-router-dom'
 import { GoogleApiWrapper } from "google-maps-react";
+import AppealOptions from './components/AppealOptions'
+import axios from 'axios'
 
 const AppealsContainer = (props) => {
-
     const [userLoc, setUserLoc] = useState(null);
     const [locString, setLocString] = useState("Unavailable")
     const [loadingLoc, setLoadingLoc] = useState(false)
     const [userPostal, setUserPostal] = useState("")
+    const [appeals, setAppeals] = useState([])
 
-    console.log(`Process env`, process.env.MAPS_API_KEY)
-    console.log(`Process env`, process.env)
+    const [sortErrors, setSortErrors] = useState(false)
+    const [sortErrorMessage, setSortErrorMessage] = useState("")
 
   useEffect(()=> {
     props.fetchInitialAppeals('/api/v1/appeals.json');
+    
+    axios.get('/api/v1/appeals.json').then(res => setAppeals(res.data)).catch(err => console.log(err))
   }, [])
 
   const getMyLocation = () => {
@@ -47,6 +50,37 @@ const AppealsContainer = (props) => {
       }
   }
 
+  const sort = (option)=> {
+
+    setSortErrors(false)
+
+    console.log(`Trying to set by ${option}`)
+
+    let newAppeals = [...appeals]
+
+    if (option=="oldest"){
+      newAppeals.sort((a, b) => (new Date(a.created_at) > new Date(b.created_at) ) ? 1 : -1)
+      }
+      if (option=="newest"){
+        newAppeals.sort((a, b) => (new Date(a.created_at) > new Date(b.created_at) ) ? -1 : 1)
+        }
+      if (option=="closest"){
+        if (!newAppeals[0].distance) {
+          setSortErrors(true)
+          return setSortErrorMessage("Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code.")
+        }
+        newAppeals.sort((a,b)=> a.distance > b.distance ? 1 : -1 )
+      }
+      if (option=="popular"){
+        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? -1 : 1 )
+      }
+      if (option=="least_popular"){
+        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? 1 : -1 )
+      }
+
+        return setAppeals([...newAppeals])
+    }
+
   const useMyAddress = ()=> {
     if (userLoc!=="" || userLoc!==null ) {
       setUserLoc("")
@@ -65,47 +99,33 @@ const AppealsContainer = (props) => {
           setLocString(res[0].formatted_address)
       });
   }
+
+  const setDistance = (index, distance) => {
+
+    console.log(`setDistance for appeal at index ${index} for ${distance}`)
+    const newArr = [...appeals]
+    newArr[index].distance = distance
+    return setAppeals(newArr)
+  }
+  
+  useEffect(()=> {
+    appeals.forEach(appeal => console.log(appeal))
+  }, [appeals])
       
       let {path, url} = useRouteMatch();
 
         return (
           <div className="container-fluid">
-            <div className="row bg-light">
-              <div className="col px-5 py-3">
-                Your Current Location: {locString}
-                <div className="mt-2">
-                  {loadingLoc ? (
-                    <div>
-                      Getting your location...{" "}
-                      <GridLoader size={3} color="gray" />
-                    </div>
-                  ) : (
-                    <button
-                      className="btn btn-dark btn-sm"
-                      onClick={getMyLocation}
-                    >
-                      Get My Location
-                    </button>
-                  )}
-                  {props.auth.isLoggedIn && props.auth.currentUser.profile.address !== null &&  props.auth.currentUser.profile.address!=="" && (
-                    <button
-                      className="ml-1 btn btn-secondary btn-sm"
-                      onClick={useMyAddress}
-                    >
-                      Use My Postal Code
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
+              <AppealOptions sortErrors={sortErrors} sortErrorMessage={sortErrorMessage} appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
 
             <div className="row">
               <div className="col-5 px-5">
                 <AppealResults
+                  setDist={setDistance}
                   userLoc={locString}
                   geolocation={userLoc}
                   postal={userPostal}
-                  data={props.appeals.data}
+                  data={appeals}
                   hasError={props.appeals.hasErrored}
                   isLoading={props.appeals.isLoading}
                   google={props.google}
@@ -145,7 +165,7 @@ const mapStateToProps = (state) => {
         },
         fetchOneAppeal: url => {
           dispatch(fetchOneAppeal(url))
-        }
+        },
     };
   };
   
