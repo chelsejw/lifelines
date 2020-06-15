@@ -1,6 +1,6 @@
 module Api 
     module V1
-        class VerificationController < ApplicationController
+        class VerificationsController < ApplicationController
             # GET /appeals
             # GET /appeals.json
             def index
@@ -11,6 +11,8 @@ module Api
             def create
                 @verification = Verification.new(verification_params)
                 @verification.user = current_user
+                @verification.status = "pending"
+                byebug
                 if @verification.save
                     render json: {verification: @verification}
                 else
@@ -38,7 +40,7 @@ module Api
 
               # Only allow a list of trusted parameters through.
               def verification_params
-                params.require(:verification).permit(:user_id, :admin_id, :type, :status, :details:, :owner_name, :mobile, :pet_name)
+                params.require(:verification).permit(:user_id, :authorizer_id, :verification_for, :status, :details, :owner_name, :mobile, :pet_name)
               end
           end 
     end

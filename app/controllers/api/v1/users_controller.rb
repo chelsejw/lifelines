@@ -14,6 +14,11 @@ module Api
                 end
             end
 
+            def get_clinic_accounts
+              @accounts = Profile.joins(:user).where(account_type: 'clinic')
+              render json: {clinics: @accounts}
+            end
+
             def get_profile
               if user_signed_in?
                 @profile = current_user.profile

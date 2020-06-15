@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import DonorFormViaAdmin from './DonorFormViaAdmin'
 import DonorFormViaClinic from './DonorFormViaClinic'
+import axios from 'axios'
 
 const DonorForm = (props)=> {
 
@@ -20,24 +21,52 @@ const DonorForm = (props)=> {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
+    const [loading, setLoading] = useState(false)
+    const [loadingMessage, setloadingMessage] = useState("Everything looks good! Processing your form...")
+
+    const [success, setSuccess] = useState(false)
+    const [successMessage, setSuccessMessage] = useState("")
+
     const submitHandler = (e) => {
+
       e.preventDefault();
       setError(false)
 
       if (verificationType=="clinic") {
           if (!input.owner_name || input.owner_name.length < 5) {
             setError(true);
-            setErrorMessage("Owner's name is too short.");
+            return setErrorMessage("Owner's name is too short. (Minimum 5 character)");
           } else if (!input.pet_name || input.pet_name.length < 1) {
             setError(true);
-            setErrorMessage("Pet's name is too short.");
+            return setErrorMessage("Pet's name is too short. (Minimum 1 character.)");
           } else if (!input.mobile || input.mobile.length < 8) {
             setError(true);
-            setErrorMessage("Please double check your mobile number.");              
+            return setErrorMessage("Please double check your mobile number.");              
           } else if (!input.authorizer_id) {
             setError(true);
-            setErrorMessage("Please select a clinic.");         
+            return setErrorMessage("Please select a clinic.");         
           }
+
+        const token = document.querySelector("[name=csrf-token]").content;
+        axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+                setLoading(true);
+
+        axios
+        .post("/api/v1/verifications", {verification: input})
+        .then(res => {
+            console.log(res)
+            console.log(`my response`, res.data)
+            setLoading(false)
+            setSuccess(true)
+            setSuccessMessage("Your verification request has been received. Please allow the team up to 7 working days to get back to you.")
+        })
+        .catch(err => {
+            console.log(`There was an error in posting`)
+            console.log(err)
+            setError(true)
+            setLoading(false)
+            setErrorMessage('Sorry, there was an error processing your form. Please try again, or contact us @ lifelines.team@gmail.com for additional support.')
+        })
         }
     }
 
@@ -107,7 +136,7 @@ const DonorForm = (props)=> {
             <button
               onClick={() => {
                 setInput((prevInput) => {
-                  return { ...prevInput, authorizer_id: null };
+                  return { ...prevInput, authorizer_id: null, verification_for: "donor"};
                 });
                 setVerificationType("clinic");
               }}
@@ -120,7 +149,11 @@ const DonorForm = (props)=> {
             <button
               onClick={() => {
                 setInput((prevInput) => {
-                  return { ...prevInput, authorizer_id: 27 };
+                  return {
+                    ...prevInput,
+                    authorizer_id: 27,
+                    verification_for: "donor",
+                  };
                 });
                 setVerificationType("admin");
               }}
@@ -136,6 +169,10 @@ const DonorForm = (props)=> {
             errorMessage={errorMessage}
             tracker={trackInput}
             submit={submitHandler}
+            loading={loading}
+            loadingMessage={loadingMessage}
+            success={success}
+            succesMessage={successMessage}
           />
         )}
         {verificationType == "admin" && (
@@ -144,6 +181,10 @@ const DonorForm = (props)=> {
             error={error}
             errorMessage={errorMessage}
             tracker={trackInput}
+            loading={loading}
+            loadingMessage={loadingMessage}
+            success={success}
+            succesMessage={successMessage}
           />
         )}
       </div>

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       resources :documents
       resources :clinics
       resources :species
+            get '/users/clinics', to: "users#get_clinic_accounts"
+
       resources :users
       get '/auth/user-profile', to: "users#get_profile"
       patch '/auth/user-profile', to: "users#update_profile"

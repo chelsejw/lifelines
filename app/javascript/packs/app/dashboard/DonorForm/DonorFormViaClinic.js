@@ -1,6 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import BarLoader from 'react-spinners/BarLoader'
 
 const DonorFormViaClinic = (props) => {
+
+    const [clinics, setClinics] = useState([])
+
+    useEffect(()=> {
+        axios.get(`/api/v1/users/clinics`)
+        .then(res=> {
+            setClinics(res.data.clinics)
+        })
+        .catch(err => console.log(err))
+    }, [])
+
+    const clinicOptions = clinics.map(clinic => <option key={clinic.id} value={clinic.user_id}>{clinic.display_name}</option>)
+
     return (
       <div className="pt-3 pb-5">
         <h3>Verifying through Clinic</h3>
@@ -10,7 +25,6 @@ const DonorFormViaClinic = (props) => {
             <div className="col-8">
               <label htmlFor="fullName">Full Name</label>
               <input
-                required="required"
                 onChange={(e) => props.tracker(e.target.value, e.target.name)}
                 className="form-control"
                 id="fullName"
@@ -21,7 +35,6 @@ const DonorFormViaClinic = (props) => {
             <div className="col-4">
               <label htmlFor="mobile">Mobile Number</label>
               <input
-                required="required"
                 onChange={(e) => props.tracker(e.target.value, e.target.name)}
                 className="form-control"
                 id="mobile"
@@ -33,7 +46,6 @@ const DonorFormViaClinic = (props) => {
             <div className="col-4">
               <label htmlFor="petName">Donor Pet's Name</label>
               <input
-                required="required"
                 onChange={(e) => props.tracker(e.target.value, e.target.name)}
                 className="form-control"
                 id="petName"
@@ -43,13 +55,14 @@ const DonorFormViaClinic = (props) => {
 
             <div className="col-8">
               <label htmlFor="clinic">Clinic</label>
-              <input
-                required="required"
-                onChange={(e) => props.tracker(e.target.value, e.target.name)}
+              <select
                 className="form-control"
-                id="clinic"
+                onChange={(e) => props.tracker(e.target.value, e.target.name)}
                 name="authorizer_id"
-              />
+              >
+                <option value="">Select a partner clinic...</option>
+                {clinicOptions}
+              </select>
             </div>
           </div>
 
@@ -60,16 +73,28 @@ const DonorFormViaClinic = (props) => {
                 onChange={(e) => props.tracker(e.target.value, e.target.name)}
                 className="form-control"
                 id="text"
-                name="text"
+                name="details"
               />
             </div>
           </div>
 
-          {props.error && <p className="mt-3 text-danger">{props.errorMessage}</p>}
+          {props.error && (
+            <p className="mt-3 text-danger">{props.errorMessage}</p>
+          )}
+
+          {props.loading && (
+            <div>
+              <BarLoader color={"#F5A623"} height={4} width={100} />
+              <p className="mt-3 text-warning">{props.loadingMessage}</p>
+            </div>
+          )}
+
+          {props.success && (
+            <p className="mt-3 text-success">{props.successMessage}</p>
+          )}
 
           <button
-
-            onClick={(e)=> props.submit(e)}
+            onClick={(e) => props.submit(e)}
             className="mt-3 btn btn-lg btn-danger"
           >
             Request Verification

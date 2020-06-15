@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_174009) do
+ActiveRecord::Schema.define(version: 2020_06_15_102001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_174009) do
   create_table "verifications", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "authorizer_id"
-    t.string "type"
+    t.string "verification_for"
     t.string "status"
     t.text "details"
     t.string "owner_name"
