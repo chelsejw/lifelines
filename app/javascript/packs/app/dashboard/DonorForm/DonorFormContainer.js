@@ -23,7 +23,7 @@ const DonorForm = (props)=> {
 
     const [loading, setLoading] = useState(false)
     const [loadingMessage, setloadingMessage] = useState("Everything looks good! Processing your form...")
-
+    const [submitted, setSubmitted] = useState(false)
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState("")
 
@@ -31,6 +31,12 @@ const DonorForm = (props)=> {
 
       e.preventDefault();
       setError(false)
+
+      if (submitted) {
+          setError(true)
+          setSuccess(false)
+          return setErrorMessage("Sorry, you may not submit another request until your current one is reviewed.")
+      }
 
       if (verificationType=="clinic") {
           if (!input.owner_name || input.owner_name.length < 5) {
@@ -54,10 +60,9 @@ const DonorForm = (props)=> {
         axios
         .post("/api/v1/verifications", {verification: input})
         .then(res => {
-            console.log(res)
-            console.log(`my response`, res.data)
             setLoading(false)
             setSuccess(true)
+            setSubmitted(true)
             setSuccessMessage("Your verification request has been received. Please allow the team up to 7 working days to get back to you.")
         })
         .catch(err => {
@@ -136,7 +141,11 @@ const DonorForm = (props)=> {
             <button
               onClick={() => {
                 setInput((prevInput) => {
-                  return { ...prevInput, authorizer_id: null, verification_for: "donor"};
+                  return {
+                    ...prevInput,
+                    authorizer_id: null,
+                    verification_for: "donor",
+                  };
                 });
                 setVerificationType("clinic");
               }}
@@ -172,7 +181,8 @@ const DonorForm = (props)=> {
             loading={loading}
             loadingMessage={loadingMessage}
             success={success}
-            succesMessage={successMessage}
+            submitted={submitted}
+            successMessage={successMessage}
           />
         )}
         {verificationType == "admin" && (
@@ -182,9 +192,10 @@ const DonorForm = (props)=> {
             errorMessage={errorMessage}
             tracker={trackInput}
             loading={loading}
+            submitted={submitted}
             loadingMessage={loadingMessage}
             success={success}
-            succesMessage={successMessage}
+            successMessage={successMessage}
           />
         )}
       </div>

@@ -12,10 +12,10 @@ module Api
                 @verification = Verification.new(verification_params)
                 @verification.user = current_user
                 @verification.status = "pending"
-                byebug
                 if @verification.save
                     render json: {verification: @verification}
                 else
+                    byebug
                     render json: {errors: @verification.errors}, status: 422
                 end
             end
