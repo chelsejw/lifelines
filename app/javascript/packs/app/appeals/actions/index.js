@@ -82,10 +82,8 @@ export function lifelinesFetchDataSuccess(data) {
 
 export function fetchLifelineData(appealId) {
     return (dispatch) => {
-        console.log(`in fetch lifelines`)
         axios.get(`/api/v1/appeals/${appealId}/get-lifelines`)
             .then((response) => {
-
                 dispatch(lifelinesFetchDataSuccess(response.data))
             })
             .catch((err) => {
@@ -109,13 +107,10 @@ export function throwLifeline(user, appealOwner, appealId){
         axios
         .post(`/api/v1/appeals/${appealId}/throw-lifeline`)
         .then(res => {
-            console.log(`response received`);
             dispatch(throwLifelineSuccess(res.data))
             return res.data
         })
         .then((res)=>{
-            console.log(`in axios convo part of lifeline`)
-            console.log(`res data after lifeline`, res)
             axios.
             post(`/conversations`, {
                 conversation: {

@@ -21,7 +21,6 @@ const FocusedAppeal = (props) => {
   });
 
   useEffect(()=> {
-    console.log(`triggered location useEffect, params: ${appealIdParams}`)
     setAppealId(appealIdParams)
   }, [location])
 
@@ -30,9 +29,6 @@ const FocusedAppeal = (props) => {
        .then(res => {
          setAppeal(res.data)
          setAppealId(res.data.id)
-         console.log(`MADE REQUEST`)
-                  console.log(res.data);
-
        })
        .catch(err => {
          console.log(err)
@@ -57,7 +53,7 @@ const FocusedAppeal = (props) => {
           <button
             onClick={() => {
               props.throwLifeline(
-                props.auth.currentUser,
+                props.auth.currentUser.user,
                 appeal.user,
                 appeal.id
               );
