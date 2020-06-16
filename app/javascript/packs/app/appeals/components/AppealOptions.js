@@ -4,7 +4,7 @@ const AppealOptions = (props)=> {
 
     return (
         <div className="row bg-light">
-        <div className="col px-1 py-3">
+        <div className="col ml-4 py-3">
           Your Current Location: {props.locString}
           <div className="mt-2">
             {props.loadingLoc ? (
