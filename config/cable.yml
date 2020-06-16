@@ -1,6 +1,6 @@
 development:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://redistogo:cbbd5ea67b0533eb92d1994b5c542c91@pike.redistogo.com:11426/
 
 test:
   adapter: redis
