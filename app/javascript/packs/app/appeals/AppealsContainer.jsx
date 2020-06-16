@@ -175,10 +175,21 @@ const AppealsContainer = (props) => {
 
         return (
           <div className="container-fluid">
-              <AppealOptions filter={filter} sortErrors={sortErrors} sortErrorMessage={sortErrorMessage} appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
-
             <div className="row">
-              <div className="col-5 px-5">
+              <div className="col-5 shadow-sm">
+                <AppealOptions
+                  filter={filter}
+                  sortErrors={sortErrors}
+                  sortErrorMessage={sortErrorMessage}
+                  appeals={appeals}
+                  sort={sort}
+                  loadingLoc={loadingLoc}
+                  auth={props.auth}
+                  getMyLocation={getMyLocation}
+                  locString={locString}
+                  useMyAddress={useMyAddress}
+                />
+
                 <AppealResults
                   setDist={setDistance}
                   userLoc={locString}
@@ -191,7 +202,7 @@ const AppealsContainer = (props) => {
                 />
               </div>
 
-              <div className="col-7 px-5">
+              <div className="col-7 py-5 sticky-div">
                 {props.appeals.focusedIsLoading && (
                   <BarLoader
                     width={100}

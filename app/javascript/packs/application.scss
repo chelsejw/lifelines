@@ -4,15 +4,38 @@
 
 .appeal-listing {
     box-sizing: border-box;
+    font-size: 0.8rem;
+    height: 150px;
+}
+
+.listing-header {
+    font-size:1rem;
+    font-weight: bold;
+}
+
+.sticky-div {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 7% 4%
 }
 
 .appeal-listing:hover {
-    background-color: lightgrey;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.options-div {
+    font-size: 0.8rem;
+    padding: 5%
 }
 
 .result-thumbnail {
-    width: 150px;
-    height: 150px;
+    padding: 0;
+}
+
+.result-thumbnail img {
+    width: 100%;
     object-fit: cover;
     cursor: pointer
 }
@@ -82,4 +105,10 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.share-link {
+    border: 1px solid lightgray;
+    padding: 3px 10px;
+    border-radius: 3px;
 }
