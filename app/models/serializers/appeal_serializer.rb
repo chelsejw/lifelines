@@ -1,4 +1,4 @@
-class AppealSerializer < ActiveModel::Serializer
+class Serializers::AppealSerializer < ActiveModel::Serializer
   belongs_to :user
   has_many :lifelines
 
