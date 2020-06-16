@@ -41,7 +41,7 @@ const FocusedAppeal = (props) => {
 
     
     return (
-      <div className="">
+      <div className="w-75 mx-auto">
         <h3>
           {" "}
           {appeal.pet_name} the {appeal.species.name} needs a blood donor
@@ -49,21 +49,24 @@ const FocusedAppeal = (props) => {
         <img src={appeal.img_url} className="img-fluid" />
 
         <div className="my-3">
-        <h5>Description</h5>
+          <h5>Description</h5>
           {appeal.description
             ? appeal.description
             : "This user did not include a description."}
         </div>
+        <hr />
 
         <div>
           <h5> Clinic Details </h5>
-          <span className="font-weight-bold">Name:</span> {appeal.clinic.name}
+          <span className="font-weight-bold">{appeal.clinic.name}</span>
           <br />
-          <span className="font-weight-bold">Address:</span>{" "}
+          <i className="fas fa-clinic-medical mr-2 text-secondary"></i>
           {appeal.clinic.address}
           <br />
-          <span className="font-weight-bold">Phone:</span> {appeal.clinic.phone}
+          <i class="fas fa-phone mr-2 text-secondary"></i>
+          {appeal.clinic.phone}
         </div>
+        <hr />
 
         <div className="my-4 share-link-footer">
           <h5>Can't help? Share the appeal!</h5>
@@ -96,21 +99,23 @@ const FocusedAppeal = (props) => {
           appeal.status !== "closed" &&
           props.auth.currentUser.user.id !== appeal.user.id && (
             <div className="text-center">
-            <p>If you have an eligible pet, click "Throw A Lifeline" to start a conversation!</p>
-            <button
-              onClick={() => {
-                props.throwLifeline(
-                  props.auth.currentUser.user,
-                  appeal.user,
-                  appeal.id
-                );
-              }}
-              className="btn btn-block btn-danger my-2"
-            >
-              Throw A Lifeline!
-            </button>
+              <p>
+                If you have an eligible pet, click "Throw A Lifeline" to start a
+                conversation!
+              </p>
+              <button
+                onClick={() => {
+                  props.throwLifeline(
+                    props.auth.currentUser.user,
+                    appeal.user,
+                    appeal.id
+                  );
+                }}
+                className="btn btn-block btn-danger my-2"
+              >
+                <i class="fas fa-heartbeat mr-1"></i> Throw A Lifeline!
+              </button>
             </div>
-            
           )}
 
         {appeal.status == "closed" && (
@@ -130,7 +135,9 @@ const FocusedAppeal = (props) => {
         )}
         {!props.auth.isLoggedIn && (
           <a href="/users/sign_in">
-            <button className="btn btn-dark btn-block">Login now to help!</button>
+            <button className="btn btn-dark btn-block">
+              Login now to help!
+            </button>
           </a>
         )}
 
