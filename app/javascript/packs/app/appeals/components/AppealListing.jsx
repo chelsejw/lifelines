@@ -42,7 +42,7 @@ const AppealListing = (props) => {
 
 
     return (
-      <div className="media appeal-listing container my-2 pb-2">
+      <div className="media appeal-listing container p-2">
         <div className="row">
           <div className="col-3 result-thumbnail">
             <Link to={`/appeals/${props.appeal.id}`}>
@@ -67,7 +67,7 @@ const AppealListing = (props) => {
             </div>
             <div>
               From:{" "}
-              <Link to={`/users/${props.appeal.user.id}`}>
+              <Link className="text-secondary" to={`/users/${props.appeal.user.id}`}>
                 {props.appeal.user.profile.display_name}
               </Link>
               <br />

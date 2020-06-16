@@ -41,12 +41,13 @@ const FocusedAppeal = (props) => {
 
     
     return (
-      <div className="w-75 mx-auto">
-        <h3>
-          {" "}
-          {appeal.pet_name} the {appeal.species.name} needs a blood donor
-        </h3>
-        <img src={appeal.img_url} className="img-fluid" />
+      <div className="w-75 mx-auto pb-4">
+        <div className="text-center mb-4">
+          <h3>
+            Appeal for: {appeal.pet_name} the {appeal.species.name}
+          </h3>
+          <img src={appeal.img_url} className="img-fluid" />
+        </div>
 
         <div className="my-3">
           <h5>Description</h5>

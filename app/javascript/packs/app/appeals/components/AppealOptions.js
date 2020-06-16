@@ -3,17 +3,17 @@ import GridLoader from 'react-spinners/GridLoader'
 const AppealOptions = (props)=> {
 
     return (
-      <div className="options-div row bg-light">
+      <div className="options-div row bg-light text-center">
         <div className="col">
-          <div className="pt-3 pb-1">
-            <div className="font-weight-bold mb-1">Sort By</div>
-
+          <div className="pb-1">
+          <div>
+            <h4 className="mb-3">Search Options</h4>
             {props.sortErrors && (
               <p className="text-danger">{props.sortErrorMessage}</p>
             )}
 
             <select
-              className="w-75 form-control mb-3"
+              className="sort-select mb-3"
               onChange={(e) => props.sort(e.target.value)}
             >
               <option value="newest">Newest First</option>
@@ -22,6 +22,7 @@ const AppealOptions = (props)=> {
               <option value="oldest">Oldest First</option>
               <option value="popular">Most Popular First</option>
             </select>
+            </div>
 
             <label className="switch mr-2">
               <input
@@ -49,7 +50,7 @@ const AppealOptions = (props)=> {
           <div className="mt-2">
             {props.loadingLoc ? (
               <div>
-                Getting your location... <GridLoader size={3} color="gray" />
+                Getting your location... <GridLoader className="inline-block mx-auto" size={3} color="gray" />
               </div>
             ) : (
               <button

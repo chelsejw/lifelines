@@ -89,7 +89,7 @@ const AppealsContainer = (props) => {
       if (!newAppeals[0].distance) {
         setSortErrors(true);
         return setSortErrorMessage(
-          "Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code."
+          "Sorry, please ensure you've clicked 'Get My Location'. If you have given a postal code, you can use 'Use My Postal Code' for more accurate results."
         );
       }
       newAppeals.sort((a, b) => {
@@ -175,7 +175,7 @@ const AppealsContainer = (props) => {
 
         return (
             <div className="row">
-              <div className="col-5 p-0 shadow-sm">
+              <div className="col-xl-4 col-md-6 col-6 p-0 shadow-sm">
                 <AppealOptions
                   filter={filter}
                   sortErrors={sortErrors}
@@ -201,7 +201,7 @@ const AppealsContainer = (props) => {
                 />
               </div>
 
-              <div className="col-7 py-5 sticky-div">
+              <div className="col-xl-8 col-md-6 col-6 py-5 sticky-div">
                 {props.appeals.focusedIsLoading && (
                   <BarLoader
                     width={100}
@@ -213,6 +213,18 @@ const AppealsContainer = (props) => {
                 {props.appeals.focusedHasErrored &&
                   "There was an error getting the appeal"}
 
+                  <Route path={`${path}`} exact render={()=> {
+                    return (
+                      <div className="w-75 text-center get-started">
+                        <div className="center-element">
+                          <h1 className="text-danger fas fa-heartbeat"></h1>
+                          <h1 className="display-3 text-secondary">
+                            Click on an appeal to get more details!
+                          </h1>
+                        </div>
+                      </div>
+                    );
+                  }}/>
                 <Route path={`${path}/:appealId`} component={FocusedAppeal} />
               </div>
             </div>

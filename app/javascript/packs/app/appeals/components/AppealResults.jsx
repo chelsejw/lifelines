@@ -29,7 +29,7 @@ const AppealResults = (props) => {
               </div>
             )}
             {props.hasErrored && "Error occured"}
-            <div className="pl-4">{results}</div>
+            <div className="">{results}</div>
           </div>
         );
 }

@@ -22,7 +22,9 @@
       position: -webkit-sticky;
       position: sticky;
       top: 0;
-      height: 100%;
+        bottom: 0;
+        height: 100vh;
+        overflow-y: auto;
 }
 
 .appeal-listing:hover {
@@ -30,9 +32,30 @@
 }
 
 .options-div {
-    font-size: 0.8rem;
     padding: 5%
 }
+
+.sort-select {
+    display: inline-block;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 3px 10px;
+    width: 250px;
+}
+
+.get-started {
+      width: 100%;
+      height: 100%;
+      overflow-y: hidden;
+}
+
+.center-element {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+}
+
 
 .result-thumbnail {
     padding: 0;
