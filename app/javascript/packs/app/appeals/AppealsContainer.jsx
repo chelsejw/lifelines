@@ -3,7 +3,7 @@ import AppealResults from './components/AppealResults'
 import FocusedAppeal from './components/FocusedAppeal'
 import { connect } from 'react-redux';
 import { fetchAllAppeals } from '../../app/appeals/actions'
-import ClipLoader from "react-spinners/ClipLoader";
+import BarLoader from "react-spinners/BarLoader";
 import { Route, useRouteMatch} from 'react-router-dom'
 import { GoogleApiWrapper } from "google-maps-react";
 import AppealOptions from './components/AppealOptions'
@@ -179,8 +179,9 @@ const AppealsContainer = (props) => {
 
               <div className="col-7 px-5">
                 {props.appeals.focusedIsLoading && (
-                  <ClipLoader
-                    size={150}
+                  <BarLoader
+                    width={100}
+                    height={4}
                     color={"#123abc"}
                     loading={props.appeals.focusedIsLoading}
                   />

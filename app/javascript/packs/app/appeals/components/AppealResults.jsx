@@ -1,6 +1,6 @@
 import React from 'react'
 import AppealListing from './AppealListing'
-import MoonLoad from "react-spinners/MoonLoader";
+import BarLoader from "react-spinners/BarLoader";
 
 const AppealResults = (props) => {
         let results = props.data.map((appeal, index) => {
@@ -19,18 +19,19 @@ const AppealResults = (props) => {
 
         return (
           <div>
-            {props.isLoading &&  <div className="mx-auto w-50"><MoonLoad
-          size={150}
-          color={"red"}
-          loading={props.isLoading}
-        /></div>}
+            {props.isLoading && (
+              <div className="mx-auto w-50">
+                <BarLoader
+                  width={300}
+                  height={4}
+                  color={"#123abc"}
+                />
+              </div>
+            )}
             {props.hasErrored && "Error occured"}
-            <div className="appeal-results-column">
-            {results}
-
-            </div>
-        </div>
-        )
+            <div className="appeal-results-column">{results}</div>
+          </div>
+        );
 }
 
 export default AppealResults
