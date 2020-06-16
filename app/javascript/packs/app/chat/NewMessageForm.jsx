@@ -31,21 +31,32 @@ class NewMessageForm extends React.Component {
       console.log(`ERRROORRRRRRRRR`)
     })
     this.setState({ text: "" });
+           var elem = document.querySelector(".messages");
+           console.log(elem);
+           elem.scrollTop = elem.scrollHeight;
   };
 
   render = () => {
     return (
-      <div className="newMessageForm">
-        <form onSubmit={this.handleSubmit}>
-          <label>New Message:</label>
-          <br />
-          <input
-            type="text"
-            value={this.state.text}
-            onChange={this.handleChange}
-          />
-          <input type="submit" />
-        </form>
+      <div className="newMessageForm container-fluid p-4 bg-light">
+        <div className="row">
+          <div className="col-10">
+            <input
+              className="message-input w-100"
+              type="text"
+              value={this.state.text}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="col-2">
+            <button
+              onClick={this.handleSubmit}
+              className="send-btn bg-danger text-white"
+            >
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
       </div>
     );
   };
