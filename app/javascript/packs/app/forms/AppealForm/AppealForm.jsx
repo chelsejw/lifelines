@@ -21,6 +21,7 @@ const AppealForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("")
   const [imgUrl, setImgUrl] = useState("")
   const [uploadStatus, setUploadStatus] = useState("")
+  const isEditForm = props.match.path !== "/new/appeal";
 
   const openWidget = () => {
 
@@ -37,13 +38,16 @@ const AppealForm = (props) => {
                 if (result.event == "success") {
                     console.log(`Result,`, result);
                     setImgUrl(result.info.url);
-                    props.trackInput(result.info.url, 'img_url')
+                    !isEditForm
+                      ? props.trackInput(result.info.url, "img_url")
+                      : props.trackEditInput(result.info.url, "img_url");
                     setUploadStatus('success')
+
+
                 }
             }
         );
     }
-        const isEditForm = props.match.path!=="/new/appeal"
 
         if (isEditForm && props.appealForm.formData.user_id!==props.auth.currentUser.user.id){
           return <ErrorPage message="You are not authorised to edit this appeal"/>

@@ -109,6 +109,7 @@ const AppealsContainer = (props) => {
         } else {
           return 0
         }
+
       })
     }
     if (currentSort == "popular") {

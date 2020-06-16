@@ -24,7 +24,7 @@ class NewMessageForm extends React.Component {
     post(`${API_ROOT}/messages`, {text: this.state.text, conversation_id: this.state.conversation_id})
     .then(res => {
       console.log(`response from post message`)
-      console.log(res.data)
+      console.log(res)
     })
     .catch(err => {
       console.log(err)

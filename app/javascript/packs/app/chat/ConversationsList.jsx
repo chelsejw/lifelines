@@ -28,16 +28,22 @@ class ConversationsList extends React.Component {
   };
 
   handleReceivedMessage = (response) => {
-
-    console.log(`Handle received message triggered`)
-    console.log(`Reponse data is`, response)
     const { message } = response;
     const conversations = [...this.state.conversations];
     const conversation = conversations.find(
       (conversation) => conversation.id === message.conversation_id
     );
-    conversation.messages = [...conversation.messages, message];
-    this.setState({ conversations });
+
+    let duplicateMessages = conversation.messages.filter(
+      (msg) => msg.id == message.id
+    );
+
+    if (duplicateMessages.length !== 0) {
+      return;
+    } else {
+      conversation.messages = [...conversation.messages, message];
+      this.setState({ conversations });
+    }
   };
 
   render = () => {
