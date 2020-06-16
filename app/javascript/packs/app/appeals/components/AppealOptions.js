@@ -5,7 +5,7 @@ const AppealOptions = (props)=> {
     return (
       <div className="options-div row bg-light">
         <div className="col">
-          <div className="font-weight-bold">Filters</div>
+          <div className="font-weight-bold mb-1">Filters</div>
           <label className="switch mr-2">
             <input
               id="includeClosed"
@@ -27,7 +27,7 @@ const AppealOptions = (props)=> {
           </label>
           <label htmlFor="onlyVerified">Only verified appeals</label>
           <div className="col px-1 py-3">
-            <div className="font-weight-bold">Sort By</div>
+            <div className="font-weight-bold mb-1">Sort By</div>
             {props.sortErrors && (
               <p className="text-danger">{props.sortErrorMessage}</p>
             )}

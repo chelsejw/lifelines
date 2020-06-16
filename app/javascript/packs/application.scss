@@ -1,11 +1,10 @@
-.container-fluid{
-    padding: 0;
+.container-fluid {
+    padding:0
 }
 
 .appeal-listing {
     box-sizing: border-box;
     font-size: 0.8rem;
-    height: 150px;
 }
 
 .listing-header {
@@ -13,12 +12,15 @@
     font-weight: bold;
 }
 
+.dashboard-appeal {
+}
+
 .sticky-div {
       position: -webkit-sticky;
       position: sticky;
       top: 0;
       height: 100vh;
-      padding: 7% 4%
+        padding: 7% 4%
 }
 
 .appeal-listing:hover {
