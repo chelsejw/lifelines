@@ -16,9 +16,13 @@ const AppealsContainer = (props) => {
     const [userPostal, setUserPostal] = useState("")
     const [appeals, setAppeals] = useState([])
     const [sortErrors, setSortErrors] = useState(false)
+    const [currentSort, setCurrentSort] = useState("newest")
     const [sortErrorMessage, setSortErrorMessage] = useState("")
     const [originalData, setOriginalData] = useState([])
-    const [currentSort, setCurrentSort] = useState("newest")
+    const [filters, setFilters] = useState({
+      includeClosed: false,
+      onlyVerified: false
+    })
 
   useEffect(()=> {
     props.fetchInitialAppeals('/api/v1/appeals.json');
@@ -56,63 +60,71 @@ const AppealsContainer = (props) => {
       }
   }
 
-  const filter = (option, checked) => {
+  useEffect(()=> {
+    console.log(`Filters:`, filters)
+    console.log(`Current sort`, currentSort)
+        setSortErrors(false);
 
-      if (option == "includeClosed") {
-          if (checked) {
-              setAppeals([...originalData])
-          } else if (!checked) {
-              setAppeals(prevData => {
-                  const filtered = prevData.filter(appeal => appeal.status !== "closed")
-                  return filtered
-              })
-          }
+    let newAppeals = [...originalData]
+
+    //exclude closed
+    if (!filters.includeClosed) {
+      newAppeals = newAppeals.filter(appeal => appeal.status!=="closed")
+    }
+
+    if (filters.onlyVerified) {
+      newAppeals = newAppeals.filter(appeal => appeal.user.profile.verified)
+    }
+
+
+    if (currentSort == "oldest") {
+      newAppeals.sort((a, b) =>
+        new Date(a.created_at) > new Date(b.created_at) ? 1 : -1
+      );
+    }
+    if (currentSort == "newest") {
+      newAppeals.sort((a, b) =>
+        new Date(a.created_at) > new Date(b.created_at) ? -1 : 1
+      );
+    }
+    if (currentSort == "closest") {
+      if (!newAppeals[0].distance) {
+        setSortErrors(true);
+        return setSortErrorMessage(
+          "Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code."
+        );
       }
-      if (option == "Only verified appeals") {
+      newAppeals.sort((a, b) => (parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1));
+    }
+    if (currentSort == "popular") {
+      newAppeals.sort((a, b) =>
+        parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? -1 : 1
+      );
+    }
+    if (currentSort == "least_popular") {
+      newAppeals.sort((a, b) =>
+        parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? 1 : -1
+      );
+    }
 
-        if (checked) {
-          setAppeals(prevData => {
-            let onlyVerified = prevData.filter(appeal => appeal.user.profile.verified)
-            return onlyVerified
-          })
-        } else if (!checked) {
+    return setAppeals([...newAppeals]);
+  }, [currentSort, filters])
 
-          
-        }
-      }
+
+  const sort = (option)=> {
+    setCurrentSort(option)
   }
 
-  const sort = (option, arr)=> {
+  const filter = (option, bool) => {
 
-    setSortErrors(false)
-    setCurrentSort(option)
-
-    console.log(`Trying to set by ${option}`)
-
-    let newAppeals = [...appeals]
-
-    if (option=="oldest"){
-      newAppeals.sort((a, b) => (new Date(a.created_at) > new Date(b.created_at) ) ? 1 : -1)
+    setFilters( prevOptions => {
+      return {
+        ...prevOptions,
+        [option]: bool
       }
-      if (option=="newest"){
-        newAppeals.sort((a, b) => (new Date(a.created_at) > new Date(b.created_at) ) ? -1 : 1)
-        }
-      if (option=="closest"){
-        if (!newAppeals[0].distance) {
-          setSortErrors(true)
-          return setSortErrorMessage("Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code.")
-        }
-        newAppeals.sort((a,b)=> a.distance > b.distance ? 1 : -1 )
-      }
-      if (option=="popular"){
-        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? -1 : 1 )
-      }
-      if (option=="least_popular"){
-        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? 1 : -1 )
-      }
+    })
 
-        return setAppeals([...newAppeals])
-    }
+  }
 
   const useMyAddress = ()=> {
     if (userLoc!=="" || userLoc!==null ) {
@@ -136,9 +148,9 @@ const AppealsContainer = (props) => {
   const setDistance = (index, distance) => {
 
     console.log(`setDistance for appeal at index ${index} for ${distance}`)
-    const newArr = [...appeals]
+    const newArr = [...originalData]
     newArr[index].distance = distance
-    return setAppeals(newArr)
+    return setOriginalData(newArr)
   }
   
   useEffect(()=> {
