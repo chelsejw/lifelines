@@ -15,14 +15,20 @@ const AppealsContainer = (props) => {
     const [loadingLoc, setLoadingLoc] = useState(false)
     const [userPostal, setUserPostal] = useState("")
     const [appeals, setAppeals] = useState([])
-
     const [sortErrors, setSortErrors] = useState(false)
     const [sortErrorMessage, setSortErrorMessage] = useState("")
+    const [originalData, setOriginalData] = useState([])
+    const [currentSort, setCurrentSort] = useState("newest")
 
   useEffect(()=> {
     props.fetchInitialAppeals('/api/v1/appeals.json');
     
-    axios.get('/api/v1/appeals.json').then(res => setAppeals(res.data)).catch(err => console.log(err))
+    axios.get('/api/v1/appeals.json').then(res => {
+      setOriginalData(res.data)
+
+      const openAppeals = res.data.filter(appeals => appeals.status!=="closed")
+      setAppeals(openAppeals)
+    }).catch(err => console.log(err))
   }, [])
 
   const getMyLocation = () => {
@@ -50,9 +56,36 @@ const AppealsContainer = (props) => {
       }
   }
 
-  const sort = (option)=> {
+  const filter = (option, checked) => {
+
+      if (option == "includeClosed") {
+          if (checked) {
+              setAppeals([...originalData])
+          } else if (!checked) {
+              setAppeals(prevData => {
+                  const filtered = prevData.filter(appeal => appeal.status !== "closed")
+                  return filtered
+              })
+          }
+      }
+      if (option == "Only verified appeals") {
+
+        if (checked) {
+          setAppeals(prevData => {
+            let onlyVerified = prevData.filter(appeal => appeal.user.profile.verified)
+            return onlyVerified
+          })
+        } else if (!checked) {
+
+          
+        }
+      }
+  }
+
+  const sort = (option, arr)=> {
 
     setSortErrors(false)
+    setCurrentSort(option)
 
     console.log(`Trying to set by ${option}`)
 
@@ -116,7 +149,7 @@ const AppealsContainer = (props) => {
 
         return (
           <div className="container-fluid">
-              <AppealOptions sortErrors={sortErrors} sortErrorMessage={sortErrorMessage} appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
+              <AppealOptions filter={filter} sortErrors={sortErrors} sortErrorMessage={sortErrorMessage} appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
 
             <div className="row">
               <div className="col-5 px-5">

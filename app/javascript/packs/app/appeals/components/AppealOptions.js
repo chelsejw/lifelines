@@ -4,7 +4,7 @@ const AppealOptions = (props)=> {
 
     return (
         <div className="row bg-light">
-        <div className="col px-5 py-3">
+        <div className="col px-1 py-3">
           Your Current Location: {props.locString}
           <div className="mt-2">
             {props.loadingLoc ? (
@@ -30,7 +30,7 @@ const AppealOptions = (props)=> {
             )}
           </div>
         </div>
-        <div className="col x-5 py-3">
+        <div className="col px-1 py-3">
             
             {props.sortErrors && <p className="text-danger">{props.sortErrorMessage}</p>}
             
@@ -41,6 +41,13 @@ const AppealOptions = (props)=> {
                 <option value="oldest">Oldest First</option>
                 <option value="popular">Most Popular First</option>
             </select>
+        </div>
+        <div className="col px-1 py-3">
+            <h4>Filters</h4>
+            <input id="includeClosed" onChange={(e)=>props.filter(e.target.name, e.target.checked)} name="includeClosed" type="checkbox"/>
+            <label htmlFor="includeClosed">Include closed appeals</label>
+            <input id="onlyVerified" onChange={(e)=>props.filter(e.target.name, e.target.checked)} name="onlyVerified" type="checkbox"/>
+            <label htmlFor="onlyVerified">Only verified appeals</label>
         </div>
       </div>
     )
