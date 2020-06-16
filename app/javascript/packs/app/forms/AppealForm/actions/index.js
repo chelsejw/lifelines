@@ -75,6 +75,12 @@ export function getFormRenderData(){
 
 }
 
+export function clearForm(){
+    return {
+        type: 'CLEAR_FORM'
+    }
+}
+
 export function postAppealForm(payload, userId) {
     return (dispatch) => {
         dispatch(appealPostRequestHasError(false));
@@ -95,6 +101,7 @@ export function postAppealForm(payload, userId) {
           console.log(`got response`);
           console.log(response.data)
           dispatch(appealPostRequestSuccess(response.data));
+          dispatch(clearForm());
         })
         .catch((err) => {
           console.log(err.response);

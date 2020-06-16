@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom'
 import { trackInputData, postAppealForm, getFormRenderData, getEditFormData, trackEditFormInput, sendPatchAppealRequest } from './actions'
-import ClipLoader from "react-spinners/ClipLoader";
+import BarLoader from "react-spinners/BarLoader";
 import ErrorPage from '../../layouts/ErrorPage'
 
 const AppealForm = (props) => {
@@ -15,7 +16,9 @@ const AppealForm = (props) => {
         }
 
   }, [])
-
+ 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("")
   const [imgUrl, setImgUrl] = useState("")
   const [uploadStatus, setUploadStatus] = useState("")
 
@@ -76,23 +79,16 @@ const AppealForm = (props) => {
         return (
           <div className="jumbotron bg-light">
             <div className="container w-50">
-              {props.appealForm.isLoading && (
-                <ClipLoader
-                  size={150}
-                  color={"#123abc"}
-                  loading={props.appealForm.isLoading}
-                />
-              )}
               {props.appealForm.patch.submitted && "Successfully updated!"}
 
-              {props.appealForm.hasErrored && "Sorry there was an error!!"}
+              {props.appealForm.hasErrored && "Sorry, an error has occured."}
 
               {props.appealForm.edit.hasErrored &&
                 `Sorry, an error has occured. Error (${props.appealForm.edit.errorDetails.statusCode}): ${props.appealForm.edit.errorDetails.statusText}`}
               <form>
                 <div className="row my-4">
                   <div className="col">
-                    <label for="inputPet">Pet's Name</label>
+                    <label htmlFor="inputPet">Pet's Name</label>
                     <input
                       className="form-control"
                       defaultValue={
@@ -104,15 +100,14 @@ const AppealForm = (props) => {
                       placeholder="Pet's Name"
                       onChange={(e) => {
                         isEditForm
-                          ? props.trackEditInput(
-                              e.target.value,
-                              e.target.name
-                            )
-                          : props.trackInput(
-                              e.target.value,
-                              e.target.name
-                            );
+                          ? props.trackEditInput(e.target.value, e.target.name)
+                          : props.trackInput(e.target.value, e.target.name);
                       }}
+                      value={
+                        isEditForm
+                          ? props.appealForm.edit.editInput.pet_name
+                          : props.appealForm.inputData.pet_name
+                      }
                       required
                       name="pet_name"
                     />
@@ -127,10 +122,10 @@ const AppealForm = (props) => {
                       required
                       id="description"
                       className="form-control"
-                      defaultValue={
+                      value={
                         isEditForm
                           ? props.appealForm.edit.editInput.description
-                          : ""
+                          : props.appealForm.inputData.description
                       }
                       placeholder="Description"
                       onChange={(e) => {
@@ -143,20 +138,14 @@ const AppealForm = (props) => {
 
                 <div className="row my-4">
                   <div className="col">
-                    <label for="clinic">Clinic</label>
+                    <label htmlFor="clinic">Clinic</label>
                     <select
                       id="clinic"
                       className="form-control"
                       onChange={(e) => {
                         isEditForm
-                          ? props.trackEditInput(
-                              e.target.value,
-                              e.target.name
-                            )
-                          : props.trackInput(
-                              e.target.value,
-                              e.target.name
-                            );
+                          ? props.trackEditInput(e.target.value, e.target.name)
+                          : props.trackInput(e.target.value, e.target.name);
                       }}
                       defaultValue={{ value: 338, label: "Clinic" }}
                       name="clinic_id"
@@ -165,21 +154,15 @@ const AppealForm = (props) => {
                     </select>
                   </div>
                   <div className="col">
-                    <label for="species">Species</label>
+                    <label htmlFor="species">Species</label>
 
                     <select
                       id="species"
                       className="form-control"
                       onChange={(e) => {
                         isEditForm
-                          ? props.trackEditInput(
-                              e.target.value,
-                              e.target.name
-                            )
-                          : props.trackInput(
-                              e.target.value,
-                              e.target.name
-                            );
+                          ? props.trackEditInput(e.target.value, e.target.name)
+                          : props.trackInput(e.target.value, e.target.name);
                       }}
                       name="species_id"
                     >
@@ -188,14 +171,11 @@ const AppealForm = (props) => {
                   </div>
                 </div>
 
-                <div className="row">
+                <div className="row my-4">
                   <div className="col">
                     <label htmlFor="imgInput">
                       Image
-                      <span
-                        onClick={openWidget}
-                        className="btn-link btn-sm"
-                      >
+                      <span onClick={openWidget} className="btn-link btn-sm">
                         Upload
                       </span>
                     </label>
@@ -211,7 +191,7 @@ const AppealForm = (props) => {
                 </div>
 
                 {isEditForm && (
-                  <div className="row">
+                  <div className="row my-4">
                     <div className="col-4">
                       <label for="status">Status</label>
 
@@ -224,18 +204,14 @@ const AppealForm = (props) => {
                                 e.target.value,
                                 e.target.name
                               )
-                            : props.trackInput(
-                                e.target.value,
-                                e.target.name
-                              );
+                            : props.trackInput(e.target.value, e.target.name);
                         }}
                         name="status"
                       >
                         <option
                           value="open"
                           selected={
-                            props.appealForm.edit.editInput.status ==
-                            "open"
+                            props.appealForm.edit.editInput.status == "open"
                               ? "selected"
                               : ""
                           }
@@ -245,8 +221,7 @@ const AppealForm = (props) => {
                         <option
                           value="closed"
                           selected={
-                            props.appealForm.edit.editInput.status ==
-                            "closed"
+                            props.appealForm.edit.editInput.status == "closed"
                               ? "selected"
                               : ""
                           }
@@ -257,6 +232,31 @@ const AppealForm = (props) => {
                     </div>
                   </div>
                 )}
+                  {props.appealForm.isLoading && (
+                    <div className="w-100">
+                    <BarLoader
+                      width={100}
+                      color={"#123abc"}
+                      height={8}
+                      loading={props.appealForm.isLoading}
+                    />
+                    </div>
+                  )}
+
+                {error && <p className="text-danger py-3">{errorMessage}</p>}
+                {props.appealForm.postSuccess && !isEditForm && (
+                  <p className="text-success py-3">
+                    We have successfully posted your appeal for{" "}
+                    {props.appealForm.data.pet_name}! Check it out at{" "}
+                    <Link
+                      className="btn-link"
+                      to={`/appeals/${props.appealForm.data.id}`}
+                    >
+                      this link
+                    </Link>
+                    .
+                  </p>
+                )}
 
                 <div className="row my-4">
                   <button
@@ -264,16 +264,35 @@ const AppealForm = (props) => {
                     className="btn btn-lg btn-danger btn-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log(`clicked submit button`);
-                      isEditForm
-                        ? props.patch(
-                            props.appealForm.edit.editInput,
-                            props.appealForm.edit.editInput.id
-                          )
-                        : props.post(
-                            props.appealForm.inputData,
-                            props.auth.currentUser.id
+                      setError(false);
+                      if (isEditForm) {
+                        if (
+                          !props.appealForm.edit.editInput.pet_name ||
+                          props.appealForm.edit.editInput.pet_name.length < 2
+                        ) {
+                          setError(true);
+                          return setErrorMessage(
+                            "Pet's name is blank or too short (minimum 2 characters long)."
                           );
+                        }
+                        return props.patch(
+                          props.appealForm.edit.editInput,
+                          props.appealForm.edit.editInput.id
+                        );
+                      }
+                      if (
+                        !props.appealForm.inputData.pet_name ||
+                        props.appealForm.inputData.pet_name.length < 2
+                      ) {
+                        setError(true);
+                        return setErrorMessage(
+                          "Pet's name is blank or too short (minimum 2 characters long)."
+                        );
+                      }
+                      return props.post(
+                        props.appealForm.inputData,
+                        props.auth.currentUser.id
+                      );
                     }}
                   >
                     Submit
