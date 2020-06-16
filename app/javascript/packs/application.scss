@@ -30,6 +30,50 @@ a:hover {
         overflow-y: auto;
 }
 
+.conversationsList {
+    min-height: calc(100vh - 56px)
+}
+
+.newMessageForm {
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    height: 100px;
+}
+
+.messages {
+    height: calc(100vh - 56px - 100px);
+    overflow-y: scroll;
+}
+
+.chat-left {
+    border-right: 1px solid lightgray
+}
+
+.message-input {
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: 1px solid grey
+}
+
+.send-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.convo-item{
+    transition-duration: 0.2s;
+    border-bottom: 1px solid lightgrey;
+}
+
+.convo-item:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+
 .appeal-listing:hover {
     background-color: rgba(0,0,0,0.1);
 }
@@ -37,6 +81,25 @@ a:hover {
 .options-div {
     padding: 5%
 }
+.sent-message .text-body {
+	color: white
+}
+
+.received-message .text-body {
+    background-color: lightgray;
+}
+
+.text-bod {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 10px;
+    color: white;
+}
+
+.font-sm {
+    font-size: 0.8rem;
+}
+
 
 .dashboard-path a {
     font-size: 1.4rem;
@@ -104,6 +167,13 @@ a:hover {
   width: 0;
   height: 0;
 }
+
+.convo-item-pic img {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+}
+
 
 /* The slider */
 .slider {

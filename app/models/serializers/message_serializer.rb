@@ -1,4 +1,8 @@
 class Serializers::MessageSerializer < ActiveModel::Serializer
-  attributes :id, :text, :conversation_id, :user_id, :created_at 
-
+  belongs_to :user
+  belongs_to :conversation
+  def profile
+   object.profile # or whatever methood
+  end
+  attributes :id, :text, :conversation_id, :user, :created_at, :profile
 end
