@@ -34,7 +34,7 @@ const AppealListing = (props) => {
                   : "Error in calculation"
               );
 
-              props.setDist(props.index, res.rows[0].elements[0].distance.text)
+              props.setDist(props.appeal.id, res.rows[0].elements[0].distance.text)
             }
           );
         }

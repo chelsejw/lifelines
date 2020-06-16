@@ -61,8 +61,6 @@ const AppealsContainer = (props) => {
   }
 
   useEffect(()=> {
-    console.log(`Filters:`, filters)
-    console.log(`Current sort`, currentSort)
         setSortErrors(false);
 
     let newAppeals = [...originalData]
@@ -94,7 +92,24 @@ const AppealsContainer = (props) => {
           "Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code."
         );
       }
-      newAppeals.sort((a, b) => (parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1));
+      newAppeals.sort((a, b) => {
+        let distA = parseFloat(a.distance)
+        let distB = parseFloat(b.distance)
+        console.log(`distA ${distA} > distB ${distB} is ${distA > distB}`)
+
+        if (isNaN(distA)) {
+          console.log(`is not a number detected!!`)
+          console.log(a)
+        }
+
+        if (distA > distB) {
+          return 1
+        } else if (distA < distB) {
+          return -1
+        } else {
+          return 0
+        }
+      })
     }
     if (currentSort == "popular") {
       newAppeals.sort((a, b) =>
@@ -145,16 +160,15 @@ const AppealsContainer = (props) => {
       });
   }
 
-  const setDistance = (index, distance) => {
-
-    console.log(`setDistance for appeal at index ${index} for ${distance}`)
+  const setDistance = (id, distance) => {
     const newArr = [...originalData]
-    newArr[index].distance = distance
-    return setOriginalData(newArr)
+    let indexOfElement = newArr.findIndex(appeal => appeal.id==id)
+    newArr[indexOfElement].distance = distance
+    setOriginalData([...newArr])
   }
   
   useEffect(()=> {
-    appeals.forEach(appeal => console.log(appeal))
+    console.log(appeals)
   }, [appeals])
       
       let {path, url} = useRouteMatch();
