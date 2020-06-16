@@ -5,11 +5,9 @@ const MessagesArea = (props) => {
 
   return (
     <div className="messagesArea">
-      <h2>Conversation {props.conversation.id}</h2>
+      {orderedMessages(props.conversation.messages)}
 
-      <NewMessageForm conversation_id={props.conversation.id}/>
-
-      <ul>{orderedMessages(props.conversation.messages)}</ul>
+      <NewMessageForm conversation_id={props.conversation.id} />
     </div>
   );
 };
@@ -20,9 +18,15 @@ export default MessagesArea;
 
 const orderedMessages = (messages) => {
   const sortedMessages = messages.sort((a, b) =>
-    new Date(a.created_at) > new Date(b.created_at) ? -1 : 1
+    new Date(a.created_at) > new Date(b.created_at) ? 1 : -1
   );
   return sortedMessages.map((message) => {
-    return <li key={message.id}>{message.user.email} says: {message.text}</li>;
+    console.log(message)
+    return (
+      <div key={message.id}>
+        <div>{message.id}</div>
+        <div className="">{message.text}</div>
+      </div>
+    );
   });
 };

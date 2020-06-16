@@ -30,6 +30,29 @@ a:hover {
         overflow-y: auto;
 }
 
+.conversationsList {
+    min-height: calc(100vh - 56px)
+}
+
+.newMessageForm {
+    position: absolute;
+    bottom: 0;
+}
+
+.chat-left {
+    border-right: 1px solid lightgray
+}
+
+.convo-item{
+    transition-duration: 0.2s;
+    border-bottom: 1px solid lightgrey;
+}
+
+.convo-item:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+
 .appeal-listing:hover {
     background-color: rgba(0,0,0,0.1);
 }
@@ -104,6 +127,13 @@ a:hover {
   width: 0;
   height: 0;
 }
+
+.convo-item-pic img {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+}
+
 
 /* The slider */
 .slider {

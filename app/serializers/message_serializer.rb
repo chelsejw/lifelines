@@ -2,8 +2,10 @@
 # app/serializers/message_serializer.rb
 
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :conversation_id, :text, :created_at, :user
-
-  belongs_to :conversation
   belongs_to :user
+  belongs_to :conversation
+  def profile
+   object.user.profile # or whatever methood
+  end
+  attributes :id, :text, :conversation_id, :user, :created_at, :profile
 end
