@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+            get '/appeals/user', to: "appeals#user_appeals"
+
       resources :appeals
         get '/appeals/:id/get-lifelines', to: "appeals#get_lifelines"
         post '/appeals/:id/throw-lifeline', to: "appeals#throw_lifeline"

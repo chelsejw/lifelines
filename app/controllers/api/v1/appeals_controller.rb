@@ -20,6 +20,12 @@ module Api
             render json: @appeal
             end
 
+
+            def user_appeals
+              @appeals = Appeal.where(user_id: current_user.id)
+              render json: @appeals
+            end
+            
             def get_lifelines
               @lifelines = @appeal.lifelines
               puts current_user.id
