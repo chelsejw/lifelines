@@ -9,7 +9,7 @@ module Api
             # GET /appeals
             # GET /appeals.json
             def index
-              @appeals = Appeal.all.order('id DESC').first(10)
+              @appeals = Appeal.all.order('id DESC')
               render json: @appeals
             end
             

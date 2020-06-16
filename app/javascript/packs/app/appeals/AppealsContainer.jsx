@@ -94,7 +94,11 @@ const AppealsContainer = (props) => {
           "Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code."
         );
       }
-      newAppeals.sort((a, b) => (parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1));
+      newAppeals.sort((a, b) => {
+        let distA = parseFloat(a.distance)
+        let distB = parseFloat(b.distance)                
+        distA > distB ? 1 : -1
+      })
     }
     if (currentSort == "popular") {
       newAppeals.sort((a, b) =>
