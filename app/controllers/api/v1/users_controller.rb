@@ -20,6 +20,11 @@ module Api
                 end
             end
 
+            def show
+              @user = User.find(params[:id])
+              render json: @user
+            end
+
             def get_clinic_accounts
               @accounts = Profile.joins(:user).where(account_type: 'clinic')
               render json: {clinics: @accounts}
