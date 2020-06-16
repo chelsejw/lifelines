@@ -4,7 +4,7 @@ import VerificationForm from './VerificationForm'
 import {Link, Route, useRouteMatch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import ConsoleContainer from './Console/ConsoleContainer'
-
+import AppealsSummary from './AppealsSummary'
 const Dashboard = (props)=> {
     let { path, url } = useRouteMatch();
 
@@ -21,6 +21,7 @@ const Dashboard = (props)=> {
       <div className="py-4 container">
         <div className="row mb-3 mx-auto">
           <Link to={`${url}/profile`}>Profile</Link>
+          <Link to={`${url}/appeals`}>Appeals</Link>
 
           {props.auth.currentUser.profile.account_type !== "admin" && (
             <Link to={`${url}/verification`}>Verification</Link>
@@ -47,7 +48,16 @@ const Dashboard = (props)=> {
           )}
         />
 
-        <Route path="/dashboard/manage_requests" exact component={ConsoleContainer} />
+        <Route
+          path="/dashboard/appeals"
+          exact
+          component={AppealsSummary}
+        />
+        <Route
+          path="/dashboard/manage_requests"
+          exact
+          component={ConsoleContainer}
+        />
       </div>
     );
 }
