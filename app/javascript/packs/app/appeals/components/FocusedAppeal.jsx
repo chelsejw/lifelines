@@ -1,39 +1,65 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import {fetchOneAppeal, fetchLifelineData, throwLifeline} from '../actions'
 import { setActiveConversation } from "../../auth/actions";
 import axios from 'axios'
-import {useParams, NavLink} from 'react-router-dom'
+import {useParams, NavLink, useLocation} from 'react-router-dom'
 
 const FocusedAppeal = (props) => {
-  let {appealId} = useParams();
-    useEffect(()=> {
-        console.log(`use effect triggered`)
-        props.fetchOneAppeal(appealId)
-    }, [])
 
-    useEffect(()=> {
-      console.log(`Lifeline useeffect`)
+  let location = useLocation();
+  let appealIdParams = location.pathname.slice(9);
+  const [appealId, setAppealId] = useState(appealIdParams);
+  const [appeal, setAppeal] = useState({
+    id: "",
+    species: "",
+    clinic: "",
+    species: "",
+    pet_name: "",
+    user: "",
+    img_url: ""
+  });
+
+  useEffect(()=> {
+    console.log(`triggered location useEffect, params: ${appealIdParams}`)
+    setAppealId(appealIdParams)
+  }, [location])
+
+    useEffect(() => {
+       axios.get(`/api/v1/appeals/${appealId}`)
+       .then(res => {
+         setAppeal(res.data)
+         setAppealId(res.data.id)
+         console.log(`MADE REQUEST`)
+                  console.log(res.data);
+
+       })
+       .catch(err => {
+         console.log(err)
+       })
+    }, [appealId]);
+
+    useEffect(() => {
       props.fetchLifelineData(appealId);
-    }, [props.throwLifelineData, props.appeal])
+    }, [props.throwLifelineData, appeal, location]);
 
     
     return (
       <div className="">
         <h3>
-          {props.appeal.species.name} donor needed to save{" "}
-          {props.appeal.pet_name}!
+          {appeal.species.name} donor needed to save{" "}
+          {appeal.pet_name}!
         </h3>
-        <img src={props.appeal.img_url} className="img-fluid" />
-        <p>{props.appeal.description}</p>
+        <img src={appeal.img_url} className="img-fluid" />
+        <p>{appeal.description}</p>
 
-        {props.auth.isLoggedIn && !props.lifelines.isUserConnected && (
+        {props.auth.isLoggedIn && !props.lifelines.isUserConnected && appeal.status!=="closed" && props.auth.currentUser.user.id!==appeal.user.id &&(
           <button
             onClick={() => {
               props.throwLifeline(
                 props.auth.currentUser,
-                props.appeal.user,
-                props.appeal.id
+                appeal.user,
+                appeal.id
               );
             }}
             className="btn btn-warning"
@@ -41,6 +67,8 @@ const FocusedAppeal = (props) => {
             Throw A Lifeline!
           </button>
         )}
+
+        {appeal.status=="closed" && <p className="text-danger my-4">This appeal is closed.</p>}
 
         {props.auth.isLoggedIn && props.lifelines.isUserConnected && (
           <NavLink
@@ -70,7 +98,6 @@ const FocusedAppeal = (props) => {
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
-        appeal: state.appeals.focusedData,
         lifelines: state.appeals.focusedLifeline,
         throwLifelineData: state.appeals.throwLifeline
     };

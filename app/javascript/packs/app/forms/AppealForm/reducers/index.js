@@ -7,6 +7,7 @@ const appealsFormReducer = (state = {
         img_url: ""
         }
     ],
+    postSuccess: false,
     isLoading: false,
     hasErrored: false,
     inputData: {},
@@ -199,6 +200,16 @@ const appealsFormReducer = (state = {
                         ...state.patch,
                         data: action.data,
                         submitted: true
+                    }
+                }
+            case 'CLEAR_FORM':
+                return {
+                    ...state,
+                    postSuccess: true,
+                    inputData: {
+                        pet_name: "",
+                        description: "",
+                        img_url: ""
                     }
                 }
         default:
