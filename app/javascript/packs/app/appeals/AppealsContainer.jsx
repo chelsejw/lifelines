@@ -174,9 +174,8 @@ const AppealsContainer = (props) => {
       let {path, url} = useRouteMatch();
 
         return (
-          <div className="container-fluid">
             <div className="row">
-              <div className="col-5 shadow-sm">
+              <div className="col-5 p-0 shadow-sm">
                 <AppealOptions
                   filter={filter}
                   sortErrors={sortErrors}
@@ -217,7 +216,6 @@ const AppealsContainer = (props) => {
                 <Route path={`${path}/:appealId`} component={FocusedAppeal} />
               </div>
             </div>
-          </div>
         );
       }
 

@@ -5,35 +5,15 @@ const AppealOptions = (props)=> {
     return (
       <div className="options-div row bg-light">
         <div className="col">
-          <div className="font-weight-bold mb-1">Filters</div>
-          <label className="switch mr-2">
-            <input
-              id="includeClosed"
-              onChange={(e) => props.filter(e.target.name, e.target.checked)}
-              name="includeClosed"
-              type="checkbox"
-            />
-            <span className="slider round"></span>
-          </label>
-          <label htmlFor="includeClosed">Include closed appeals</label>
-          <label className="switch mx-2">
-            <input
-              id="onlyVerified"
-              onChange={(e) => props.filter(e.target.name, e.target.checked)}
-              name="onlyVerified"
-              type="checkbox"
-            />{" "}
-            <span className="slider round"></span>
-          </label>
-          <label htmlFor="onlyVerified">Only verified appeals</label>
-          <div className="col px-1 py-3">
+          <div className="pt-3 pb-1">
             <div className="font-weight-bold mb-1">Sort By</div>
+
             {props.sortErrors && (
               <p className="text-danger">{props.sortErrorMessage}</p>
             )}
 
             <select
-              className="w-50 form-control"
+              className="w-75 form-control mb-3"
               onChange={(e) => props.sort(e.target.value)}
             >
               <option value="newest">Newest First</option>
@@ -42,7 +22,29 @@ const AppealOptions = (props)=> {
               <option value="oldest">Oldest First</option>
               <option value="popular">Most Popular First</option>
             </select>
+
+            <label className="switch mr-2">
+              <input
+                id="includeClosed"
+                onChange={(e) => props.filter(e.target.name, e.target.checked)}
+                name="includeClosed"
+                type="checkbox"
+              />
+              <span className="slider round"></span>
+            </label>
+            <label htmlFor="includeClosed">Include closed appeals</label>
+            <label className="switch mx-2">
+              <input
+                id="onlyVerified"
+                onChange={(e) => props.filter(e.target.name, e.target.checked)}
+                name="onlyVerified"
+                type="checkbox"
+              />{" "}
+              <span className="slider round"></span>
+            </label>
+            <label htmlFor="onlyVerified">Only verified appeals</label>
           </div>
+          <hr />
           Your Current Location: {props.locString}
           <div className="mt-2">
             {props.loadingLoc ? (
