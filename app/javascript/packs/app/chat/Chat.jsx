@@ -5,7 +5,7 @@ import ConversationsList from './ConversationsList'
 class Chat extends React.Component {
     render(){
         return (
-          <ActionCableProvider url={`ws://localhost:3000/cable`}>
+          <ActionCableProvider url={API_WS_ROOT}>
             <ConversationsList />
           </ActionCableProvider>
         );
