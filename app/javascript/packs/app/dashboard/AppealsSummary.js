@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import AppealElement from './AppealElement'
+import {Link} from 'react-router-dom'
 
 const AppealsSummary = (props) => {
 
@@ -18,8 +19,8 @@ const AppealsSummary = (props) => {
 
     return (
         <div>
-        <h1>Your Appeals</h1>
-            {appealElements}
+        <h2 className="mb-4" >Your Appeals</h2>
+            {userAppeals.length > 0 ? appealElements : <h4 className="text-secondary">You do not currently have any appeals. <Link to="/new/appeal">Make a new appeal?</Link></h4>}
         </div>
     )
 }

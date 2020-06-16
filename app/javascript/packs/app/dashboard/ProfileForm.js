@@ -111,7 +111,7 @@ const ProfileForm = () => {
     <div>
       <div className="row">
         <div className="container">
-          <h2> Edit Your Profile</h2>
+          <h2 className="mb-4"> Edit Your Profile</h2>
 
           {editStatus !== "" && (
             <div
@@ -123,7 +123,7 @@ const ProfileForm = () => {
           )}
 
           <div className="row my-2">
-            <div className="col-6">
+            <div className="col-6 pl-0">
               <label htmlFor="displayName">Display Name</label>
               <input
                 onChange={(e) => trackInputs(e.target.value, e.target.name)}
@@ -151,7 +151,7 @@ const ProfileForm = () => {
           </div>
 
           <div className="row mb-2">
-            <div className="col-2">
+            <div className="col-2 pl-0">
               <label htmlFor="verified">Verified</label>
               <input
                 className="form-control"
@@ -187,7 +187,7 @@ const ProfileForm = () => {
           </div>
 
           <div className="row mb-5">
-            <div className="col">
+            <div className="col pl-0">
               <label htmlFor="bio">About Me</label>
 
               <input
@@ -201,14 +201,12 @@ const ProfileForm = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col">
               <button
                 onClick={patchRequest}
                 className="btn btn-secondary btn-block"
               >
                 Update Profile
               </button>
-            </div>
           </div>
         </div>
       </div>

@@ -6,6 +6,9 @@
     margin: 0;
 }
 
+a:hover {
+    text-decoration: none;
+}
 
 .appeal-listing {
     box-sizing: border-box;
@@ -33,6 +36,22 @@
 
 .options-div {
     padding: 5%
+}
+
+.dashboard-path a {
+    font-size: 1.4rem;
+    padding: 10px;
+    color: white;
+    transition-duration: 0.2s;
+}
+
+.dashboard-path a:hover{
+    color: darkred;
+    text-decoration: none;
+}
+
+.dashboard-path .active{
+    border-bottom: 1px solid white
 }
 
 .sort-select {

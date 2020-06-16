@@ -83,13 +83,11 @@ const AppealForm = (props) => {
         return (
           <div className="jumbotron bg-white">
             <div className="container w-50">
-              <h2>{isEditForm ? "Editing Appeal" : "Post An Appeal"}</h2>
+              <h2 className="mb-4 text-center">{isEditForm ? "Editing Appeal" : "Post An Appeal"}</h2>
 
-              <p>
+              <p className="text-center">
                 A description and image is optional, but it can go a long way in
-                influencing people to help out, or spread the appeal!
-                <br />
-                Please be cautious about including personal details like your
+                influencing people to help out, or spread the appeal! Please be cautious about including personal details like your
                 mobile number in the description.
               </p>
 
@@ -101,7 +99,7 @@ const AppealForm = (props) => {
                 `Sorry, an error has occured. Error (${props.appealForm.edit.errorDetails.statusCode}): ${props.appealForm.edit.errorDetails.statusText}`}
               <form>
                 <div className="row my-4">
-                  <div className="col">
+                  <div className="col p-0">
                     <label htmlFor="inputPet">Pet's Name</label>
                     <input
                       className="form-control"
@@ -129,7 +127,7 @@ const AppealForm = (props) => {
                 </div>
 
                 <div className="row my-2">
-                  <div className="col">
+                  <div className="col p-0">
                     <label htmlFor="description">Description</label>
 
                     <input
@@ -151,7 +149,7 @@ const AppealForm = (props) => {
                 </div>
 
                 <div className="row my-4">
-                  <div className="col">
+                  <div className="col p-0">
                     <label htmlFor="clinic">Clinic</label>
                     <select
                       id="clinic"
@@ -186,7 +184,7 @@ const AppealForm = (props) => {
                 </div>
 
                 <div className="row my-4">
-                  <div className="col">
+                  <div className="col p-0">
                     <label htmlFor="imgInput">
                       Image
                       <span onClick={openWidget} className="btn-link btn-sm">
@@ -206,7 +204,7 @@ const AppealForm = (props) => {
 
                 {isEditForm && (
                   <div className="row my-4">
-                    <div className="col-4">
+                    <div className="col-4 p-0">
                       <label for="status">Status</label>
 
                       <select

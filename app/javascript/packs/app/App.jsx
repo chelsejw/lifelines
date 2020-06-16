@@ -3,7 +3,6 @@ import Nav from './layouts/Nav'
 import AppealsContainer from './appeals/AppealsContainer'
 import AppealForm from './forms/AppealForm/AppealForm'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import {BrowserHistory} from 'react-router-dom'
 import Chat from './chat/Chat'
 import Dashboard from './dashboard/Dashboard'
 import UserProfile from './profile/UserProfile'
@@ -11,7 +10,7 @@ import UserProfile from './profile/UserProfile'
 class App extends React.Component {
   render(){
     return (
-      <Router history={BrowserHistory}>
+      <Router>
         <Nav />
         <div className="container-fluid">
           <Route path="/new/appeal" exact component={AppealForm} />
