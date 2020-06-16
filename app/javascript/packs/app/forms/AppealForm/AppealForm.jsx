@@ -81,8 +81,18 @@ const AppealForm = (props) => {
         
         
         return (
-          <div className="jumbotron bg-light">
+          <div className="jumbotron bg-white">
             <div className="container w-50">
+              <h2>{isEditForm ? "Editing Appeal" : "Post An Appeal"}</h2>
+
+              <p>
+                A description and image is optional, but it can go a long way in
+                influencing people to help out, or spread the appeal!
+                <br />
+                Please be cautious about including personal details like your
+                mobile number in the description.
+              </p>
+
               {props.appealForm.patch.submitted && "Successfully updated!"}
 
               {props.appealForm.hasErrored && "Sorry, an error has occured."}
@@ -120,7 +130,7 @@ const AppealForm = (props) => {
 
                 <div className="row my-2">
                   <div className="col">
-                    <label for="description">Description</label>
+                    <label htmlFor="description">Description</label>
 
                     <input
                       required
@@ -236,16 +246,16 @@ const AppealForm = (props) => {
                     </div>
                   </div>
                 )}
-                  {props.appealForm.isLoading && (
-                    <div className="w-100">
+                {props.appealForm.isLoading && (
+                  <div className="w-100">
                     <BarLoader
                       width={100}
                       color={"#123abc"}
                       height={8}
                       loading={props.appealForm.isLoading}
                     />
-                    </div>
-                  )}
+                  </div>
+                )}
 
                 {error && <p className="text-danger py-3">{errorMessage}</p>}
                 {props.appealForm.postSuccess && !isEditForm && (

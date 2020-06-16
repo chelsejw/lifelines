@@ -34,7 +34,7 @@ const AppealListing = (props) => {
                   : "Error in calculation"
               );
 
-              props.setDist(props.index, res.rows[0].elements[0].distance.text)
+              props.setDist(props.appeal.id, res.rows[0].elements[0].distance.text)
             }
           );
         }
@@ -42,43 +42,56 @@ const AppealListing = (props) => {
 
 
     return (
-      <div className="media appeal-listing container shadow-sm my-2">
+      <div className="media appeal-listing container p-2">
         <div className="row">
-          <Link to={`/appeals/${props.appeal.id}`}>
-            <img
-              onClick={() => {
-                props.fetchOneAppeal(props.appeal.id);
-              }}
-              src={props.appeal.img_url}
-              className="mr-3 result-thumbnail"
-              alt="..."
-            />
-          </Link>
+          <div className="col-3 result-thumbnail">
+            <Link to={`/appeals/${props.appeal.id}`}>
+              <img
+                onClick={() => {
+                  props.fetchOneAppeal(props.appeal.id);
+                }}
+                src={
+                  props.appeal.img_url !== "" && props.appeal.img_url
+                    ? props.appeal.img_url
+                    : "https://res.cloudinary.com/dwbuqa4dx/image/upload/v1592316118/logo1_bf4f9f.png"
+                }
+                className="mr-3"
+                alt="..."
+              />
+            </Link>
+          </div>
           <div className="media-body col-9">
-            <h5 className="mt-2">
+            <div className="listing-header mt-2">
               {props.appeal.species.name} donor needed at{" "}
               {props.appeal.clinic.name}
-            </h5>
-            <p>From: {props.appeal.user.profile.display_name}</p>
-            <p>{props.appeal.lifelines.length} lifelines</p>
-
-            <p>Added: {moment(props.appeal.created_at).format("MMM Do YYYY, h:mm:ss a")}</p>
-            <Distance distance={calculatedDistance}/>
-            <div
-              className={`btn btn-sm ${
-                props.appeal.status == "open" && "btn-success"
-              } ${props.appeal.status == "closed" && "btn-danger"}`}
-            >
-              {props.appeal.status == "open" ? "Open" : "Closed"}
+            </div>
+            <div>
+              From:{" "}
+              <Link className="text-secondary" to={`/users/${props.appeal.user.id}`}>
+                {props.appeal.user.profile.display_name}
+              </Link>
+              <br />
+              Added {moment(props.appeal.created_at).fromNow()}
+              <br />
+              Status:{" "}
+              <span
+                className={
+                  props.appeal.status == "open" ? "text-success" : "text-danger"
+                }
+              >
+                {" "}
+                {props.appeal.status}
+              </span>
             </div>
 
+            <Distance distance={calculatedDistance} />
             {props.auth.currentUser.user.id == props.appeal.user.id && (
               <NavLink
-                className="btn btn-sm btn-dark"
+                className="btn btn-sm mt-1 btn-secondary"
                 to={`/edit/appeal/${props.appeal.id}`}
                 exact
               >
-                Edit Appeal
+                Edit Your Appeal
               </NavLink>
             )}
           </div>

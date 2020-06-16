@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import AppealElement from './AppealElement'
+
 const AppealsSummary = (props) => {
 
     const [userAppeals, setUserAppeals] = useState([])
@@ -11,15 +13,13 @@ const AppealsSummary = (props) => {
     }, [])
 
     const appealElements = userAppeals.map(appeal => {
-        return <li>{appeal.id} Your appeal for ${appeal.pet_name} </li>
+        return <AppealElement appeal={appeal}/>
     })
 
     return (
         <div>
         <h1>Your Appeals</h1>
-        <ul>
             {appealElements}
-        </ul>
         </div>
     )
 }
