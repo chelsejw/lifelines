@@ -15,14 +15,24 @@ const AppealsContainer = (props) => {
     const [loadingLoc, setLoadingLoc] = useState(false)
     const [userPostal, setUserPostal] = useState("")
     const [appeals, setAppeals] = useState([])
-
     const [sortErrors, setSortErrors] = useState(false)
+    const [currentSort, setCurrentSort] = useState("newest")
     const [sortErrorMessage, setSortErrorMessage] = useState("")
+    const [originalData, setOriginalData] = useState([])
+    const [filters, setFilters] = useState({
+      includeClosed: false,
+      onlyVerified: false
+    })
 
   useEffect(()=> {
     props.fetchInitialAppeals('/api/v1/appeals.json');
     
-    axios.get('/api/v1/appeals.json').then(res => setAppeals(res.data)).catch(err => console.log(err))
+    axios.get('/api/v1/appeals.json').then(res => {
+      setOriginalData(res.data)
+
+      const openAppeals = res.data.filter(appeals => appeals.status!=="closed")
+      setAppeals(openAppeals)
+    }).catch(err => console.log(err))
   }, [])
 
   const getMyLocation = () => {
@@ -50,36 +60,71 @@ const AppealsContainer = (props) => {
       }
   }
 
-  const sort = (option)=> {
+  useEffect(()=> {
+    console.log(`Filters:`, filters)
+    console.log(`Current sort`, currentSort)
+        setSortErrors(false);
 
-    setSortErrors(false)
+    let newAppeals = [...originalData]
 
-    console.log(`Trying to set by ${option}`)
-
-    let newAppeals = [...appeals]
-
-    if (option=="oldest"){
-      newAppeals.sort((a, b) => (new Date(a.created_at) > new Date(b.created_at) ) ? 1 : -1)
-      }
-      if (option=="newest"){
-        newAppeals.sort((a, b) => (new Date(a.created_at) > new Date(b.created_at) ) ? -1 : 1)
-        }
-      if (option=="closest"){
-        if (!newAppeals[0].distance) {
-          setSortErrors(true)
-          return setSortErrorMessage("Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code.")
-        }
-        newAppeals.sort((a,b)=> a.distance > b.distance ? 1 : -1 )
-      }
-      if (option=="popular"){
-        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? -1 : 1 )
-      }
-      if (option=="least_popular"){
-        newAppeals.sort((a,b)=> parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? 1 : -1 )
-      }
-
-        return setAppeals([...newAppeals])
+    //exclude closed
+    if (!filters.includeClosed) {
+      newAppeals = newAppeals.filter(appeal => appeal.status!=="closed")
     }
+
+    if (filters.onlyVerified) {
+      newAppeals = newAppeals.filter(appeal => appeal.user.profile.verified)
+    }
+
+
+    if (currentSort == "oldest") {
+      newAppeals.sort((a, b) =>
+        new Date(a.created_at) > new Date(b.created_at) ? 1 : -1
+      );
+    }
+    if (currentSort == "newest") {
+      newAppeals.sort((a, b) =>
+        new Date(a.created_at) > new Date(b.created_at) ? -1 : 1
+      );
+    }
+    if (currentSort == "closest") {
+      if (!newAppeals[0].distance) {
+        setSortErrors(true);
+        return setSortErrorMessage(
+          "Sorry, please make sure you have clicked on the Get My Location button, or if you have given a postal code, click Use My Postal Code."
+        );
+      }
+      newAppeals.sort((a, b) => (parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1));
+    }
+    if (currentSort == "popular") {
+      newAppeals.sort((a, b) =>
+        parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? -1 : 1
+      );
+    }
+    if (currentSort == "least_popular") {
+      newAppeals.sort((a, b) =>
+        parseInt(a.lifelines.length) > parseInt(b.lifelines.length) ? 1 : -1
+      );
+    }
+
+    return setAppeals([...newAppeals]);
+  }, [currentSort, filters])
+
+
+  const sort = (option)=> {
+    setCurrentSort(option)
+  }
+
+  const filter = (option, bool) => {
+
+    setFilters( prevOptions => {
+      return {
+        ...prevOptions,
+        [option]: bool
+      }
+    })
+
+  }
 
   const useMyAddress = ()=> {
     if (userLoc!=="" || userLoc!==null ) {
@@ -103,9 +148,9 @@ const AppealsContainer = (props) => {
   const setDistance = (index, distance) => {
 
     console.log(`setDistance for appeal at index ${index} for ${distance}`)
-    const newArr = [...appeals]
+    const newArr = [...originalData]
     newArr[index].distance = distance
-    return setAppeals(newArr)
+    return setOriginalData(newArr)
   }
   
   useEffect(()=> {
@@ -116,7 +161,7 @@ const AppealsContainer = (props) => {
 
         return (
           <div className="container-fluid">
-              <AppealOptions sortErrors={sortErrors} sortErrorMessage={sortErrorMessage} appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
+              <AppealOptions filter={filter} sortErrors={sortErrors} sortErrorMessage={sortErrorMessage} appeals={appeals} sort={sort} loadingLoc={loadingLoc} auth={props.auth} getMyLocation={getMyLocation} locString={locString} useMyAddress={useMyAddress}/>
 
             <div className="row">
               <div className="col-5 px-5">
