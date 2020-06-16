@@ -1,6 +1,6 @@
 import React from "react";
 import { ActionCableProvider } from "react-actioncable-provider";
-import { API_WS_ROOT } from "./constants";
+import { API_WS_ROOT } from './constants'
 import ConversationsList from './ConversationsList'
 class Chat extends React.Component {
     render(){
