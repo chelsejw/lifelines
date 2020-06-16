@@ -19,7 +19,11 @@ class ConversationsList extends React.Component {
   };
 
   handleClick = (id) => {
+    
     this.setState({ activeConversation: id });
+           var elem = document.querySelector(".messages");
+           console.log(elem);
+           elem.scrollTop = elem.scrollHeight;
   };
 
   handleReceivedConversation = (response) => {
@@ -104,7 +108,7 @@ class ConversationsList extends React.Component {
     const { conversations, activeConversation } = this.state;
     return (
       <div className="conversationsList row">
-        <div className="chat-left col-xl-3 col-md-5 col-6 p-0">
+        <div className="chat-left col-md-5 col-6 p-0">
           <h3 className="p-4">Conversations</h3>
 
           <div className="px-0">
@@ -122,9 +126,10 @@ class ConversationsList extends React.Component {
           </div>
         </div>
 
-        <div className=" col-xl-9 col-md-7 col-6 p-4">
+        <div className="col-md-7 col-6 p-0">
           {activeConversation ? (
             <MessagesArea
+            currentUser={this.props.currentUser}
               conversation={findActiveConversation(
                 conversations,
                 activeConversation
