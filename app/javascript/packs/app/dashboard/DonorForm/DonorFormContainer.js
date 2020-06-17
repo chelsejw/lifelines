@@ -230,7 +230,7 @@ const DonorForm = (props)=> {
                 setInput((prevInput) => {
                   return {
                     ...prevInput,
-                    authorizer_id: 27,
+                    authorizer_id: 30,
                     verification_for: "donor",
                   };
                 });

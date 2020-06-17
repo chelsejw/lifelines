@@ -16,7 +16,7 @@ const ClinicForm = (props)=> {
        const [success, setSuccess] = useState(false);
        const [successMessage, setSuccessMessage] = useState("");
     const [input, setInput] = useState({
-        authorizer_id: 27,
+        authorizer_id: 30,
         verification_for: 'clinic'
     })
 

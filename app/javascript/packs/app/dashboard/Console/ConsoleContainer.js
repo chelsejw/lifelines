@@ -47,12 +47,23 @@ const ConsoleContainer = (props) => {
     const requestElements = requests.map(request=> {
         return <Request approve={approveRequest} reject={rejectRequest} request={request}/>
     })
+    
 
     return (
-        <div>
-        {requestElements}
-        </div>
-    )
+      <div>
+        <h2 className="mb-4">Your Requests</h2>
+
+        {requests.length !== 0 ? (
+          requestElements
+        ) : (
+          <div>
+              <h4 className="text-secondary">
+                You do not currently have any requests to authorize.{" "}
+              </h4>
+          </div>
+        )}
+      </div>
+    );
 }
 
 export default ConsoleContainer
