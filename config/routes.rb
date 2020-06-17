@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  post '/webhooks/telegram_123' => 'webhooks#callback'
+  # post '/webhooks/telegram_123' => 'webhooks#callback'
 
 
   resources :conversations
