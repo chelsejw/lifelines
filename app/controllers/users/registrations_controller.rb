@@ -18,7 +18,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts @profile
     if @profile.save
       UserNotifierMailer.send_signup_email(@user).deliver_later
-      redirect_to '/appeals'
     end
   end
 
