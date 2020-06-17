@@ -122,7 +122,7 @@ class ConversationsList extends React.Component {
                 handleReceivedMessage={this.handleReceivedMessage}
               />
             ) : null}
-            {mapConversations(conversations, this.handleClick)}
+            {conversations.length > 0 ? mapConversations(conversations, this.handleClick) : <p className="ml-4">You do not have any conversations.</p>}
           </div>
         </div>
 

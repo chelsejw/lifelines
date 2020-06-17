@@ -31,7 +31,7 @@ const AppealElement = (props) => {
             <br />
             Added {moment(props.appeal.created_at).fromNow()}
             <br />
-            There are {props.appeal.lifelines.length} liflines for this appeal.
+            There are {props.appeal.lifelines.length} lifelines for this appeal.
             <br />
             Status:{" "}
             <span

@@ -18,6 +18,10 @@ a:hover {
 .listing-header {
     font-size:1rem;
     font-weight: bold;
+
+    .text-dark:hover{
+        text-decoration: underline;
+    }
 }
 
 
@@ -72,10 +76,6 @@ a:hover {
 .convo-item:hover{
     background-color: lightgray;
     cursor: pointer;
-}
-
-.appeal-listing:hover {
-    background-color: rgba(0,0,0,0.1);
 }
 
 .options-div {

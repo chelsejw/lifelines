@@ -24,16 +24,26 @@ const UserProfile = (props) => {
     }, [location])
 
     return (
-      <div className="container">
-        <div className="row">
-          <h3>{user.profile.display_name}</h3>
+      <div className="container w-75 mx-auto">
+        <div className="py-4 text-center">
           <div>
-              <img className="img-fluid" src={user.profile.img_url}/>
+            <img className="img-fluid" src={user.profile.img_url} />
           </div>
+
+          <h3 className="mt-4">
+            {user.profile.display_name}{" "}
+            {user.profile.verified && (
+              <i class="fas fa-user-check text-success"></i>
+            )}
+          </h3>
           <p>{user.profile.bio}</p>
-          <p>
-            {user.profile.account_type == "clinic" && user.profile.address}
-          </p>
+          {user.profile.account_type == "clinic" && (
+            <p>
+              <i className="fas fa-clinic-medical mr-2 text-secondary"></i>{" "}
+              {user.profile.address}
+            </p>
+          )}
+
         </div>
       </div>
     );

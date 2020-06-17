@@ -50,7 +50,7 @@ const AppealOptions = (props)=> {
           <div className="mt-2">
             {props.loadingLoc ? (
               <div>
-                Getting your location... <GridLoader className="inline-block mx-auto" size={3} color="gray" />
+                Getting your location... <GridLoader size={3} color="gray" />
               </div>
             ) : (
               <button

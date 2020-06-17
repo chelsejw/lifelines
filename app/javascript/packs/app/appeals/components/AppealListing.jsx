@@ -62,13 +62,21 @@ const AppealListing = (props) => {
           </div>
           <div className="media-body col-9">
             <div className="listing-header mt-2">
-              {props.appeal.species.name} donor needed at{" "}
-              {props.appeal.clinic.name}
+              <Link className="text-dark" to={`/appeals/${props.appeal.id}`}>
+                {props.appeal.species.name} donor needed at{" "}
+                {props.appeal.clinic.name}
+              </Link>
             </div>
             <div>
               From:{" "}
-              <Link className="text-secondary" to={`/users/${props.appeal.user.id}`}>
-                {props.appeal.user.profile.display_name}
+              <Link
+                className="text-secondary"
+                to={`/users/${props.appeal.user.id}`}
+              >
+                {props.appeal.user.profile.display_name}{" "}
+                {props.appeal.user.profile.verified && (
+                  <i class="fas fa-user-check text-success"></i>
+                )}
               </Link>
               <br />
               Added {moment(props.appeal.created_at).fromNow()}
