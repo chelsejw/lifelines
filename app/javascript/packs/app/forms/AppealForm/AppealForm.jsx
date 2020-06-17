@@ -83,15 +83,17 @@ const AppealForm = (props) => {
         return (
           <div className="jumbotron bg-white">
             <div className="container w-50">
-              <h2 className="mb-4 text-center">{isEditForm ? "Editing Appeal" : "Post An Appeal"}</h2>
+              <h2 className="mb-4 text-center">
+                {isEditForm ? "Editing Appeal" : "Post An Appeal"}
+              </h2>
 
               <p className="text-center">
                 A description and image is optional, but it can go a long way in
-                influencing people to help out, or spread the appeal! Please be cautious about including personal details like your
-                mobile number in the description.
+                influencing people to help out, or spread the appeal! Please be
+                cautious about including personal details like your mobile
+                number in the description.
               </p>
 
-        
               <form>
                 <div className="row my-4">
                   <div className="col p-0">
@@ -264,6 +266,12 @@ const AppealForm = (props) => {
                     .
                   </p>
                 )}
+                {props.appealForm.patch.submitted && "Successfully updated!"}
+
+                {props.appealForm.hasErrored && "Sorry, an error has occured."}
+
+                {props.appealForm.edit.hasErrored &&
+                  `Sorry, an error has occured. Error (${props.appealForm.edit.errorDetails.statusCode}): ${props.appealForm.edit.errorDetails.statusText}`}
 
                 <div className="row my-4">
                   <button
@@ -301,12 +309,6 @@ const AppealForm = (props) => {
                         props.auth.currentUser.id
                       );
                     }}
-                        {props.appealForm.patch.submitted && "Successfully updated!"}
-
-              {props.appealForm.hasErrored && "Sorry, an error has occured."}
-
-              {props.appealForm.edit.hasErrored &&
-                `Sorry, an error has occured. Error (${props.appealForm.edit.errorDetails.statusCode}): ${props.appealForm.edit.errorDetails.statusText}`}
                   >
                     Submit
                   </button>
