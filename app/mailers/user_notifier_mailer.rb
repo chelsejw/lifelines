@@ -11,7 +11,6 @@ class UserNotifierMailer < ApplicationMailer
 
   def send_appeal_notice(appeal)
         @appeal = appeal
-        
-        mail( :bcc=> User.pluck(:email), :subject => "#{@appeal.species.name} donor needed at #{@appeal.clinic.name}!" )
+        mail( :bcc=> ['chelsejw@gmail.com', 'chelseaejw@gmail.com'], :subject => "#{@appeal.species.name} donor needed at #{@appeal.clinic.name}!" )
   end
 end

@@ -91,12 +91,7 @@ const AppealForm = (props) => {
                 mobile number in the description.
               </p>
 
-              {props.appealForm.patch.submitted && "Successfully updated!"}
-
-              {props.appealForm.hasErrored && "Sorry, an error has occured."}
-
-              {props.appealForm.edit.hasErrored &&
-                `Sorry, an error has occured. Error (${props.appealForm.edit.errorDetails.statusCode}): ${props.appealForm.edit.errorDetails.statusText}`}
+        
               <form>
                 <div className="row my-4">
                   <div className="col p-0">
@@ -306,6 +301,12 @@ const AppealForm = (props) => {
                         props.auth.currentUser.id
                       );
                     }}
+                        {props.appealForm.patch.submitted && "Successfully updated!"}
+
+              {props.appealForm.hasErrored && "Sorry, an error has occured."}
+
+              {props.appealForm.edit.hasErrored &&
+                `Sorry, an error has occured. Error (${props.appealForm.edit.errorDetails.statusCode}): ${props.appealForm.edit.errorDetails.statusText}`}
                   >
                     Submit
                   </button>

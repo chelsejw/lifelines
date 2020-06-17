@@ -16,7 +16,7 @@ Telegram::Bot::Client.run(token) do |bot|
         end
     when '/unsubscribe'
         if Bot.exists?(chat_id: message.from.id)
-            Bot.where(chat_id: message.from.id).destroy
+            Bot.where(chat_id: message.from.id).destroy_all
             bot.api.send_message(chat_id: message.chat.id, text: "You have unsubscribed from Lifeline appeal updates.")
         else
             bot.api.send_message(chat_id: message.chat.id, text: "You are not currently subscribed.")
