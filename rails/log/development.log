@@ -1,0 +1,797 @@
+Started GET "/" for ::1 at 2020-11-16 20:14:27 +0800
+  
+PG::ConnectionBad (could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+):
+  
+pg (1.2.3) lib/pg.rb:58:in `initialize'
+pg (1.2.3) lib/pg.rb:58:in `new'
+pg (1.2.3) lib/pg.rb:58:in `connect'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/postgresql_adapter.rb:46:in `postgresql_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:887:in `new_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:931:in `checkout_new_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:910:in `try_to_checkout_new_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:871:in `acquire_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:593:in `checkout'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:437:in `connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:1119:in `retrieve_connection'
+activerecord (6.0.3.1) lib/active_record/connection_handling.rb:221:in `retrieve_connection'
+activerecord (6.0.3.1) lib/active_record/connection_handling.rb:189:in `connection'
+activerecord (6.0.3.1) lib/active_record/migration.rb:562:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.2) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.2) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.2) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.2) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.2.2) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-11-16 20:15:05 +0800
+  
+ActiveRecord::NoDatabaseError (FATAL:  database "lifelines_development" does not exist
+):
+  
+activerecord (6.0.3.1) lib/active_record/connection_adapters/postgresql_adapter.rb:50:in `rescue in postgresql_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/postgresql_adapter.rb:33:in `postgresql_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:887:in `new_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:931:in `checkout_new_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:910:in `try_to_checkout_new_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:871:in `acquire_connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:593:in `checkout'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:437:in `connection'
+activerecord (6.0.3.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:1119:in `retrieve_connection'
+activerecord (6.0.3.1) lib/active_record/connection_handling.rb:221:in `retrieve_connection'
+activerecord (6.0.3.1) lib/active_record/connection_handling.rb:189:in `connection'
+activerecord (6.0.3.1) lib/active_record/migration.rb:562:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.2) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.2) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.2) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.2) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.1) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.2.2) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+  [1m[35m (67.5ms)[0m  [1m[35mCREATE DATABASE "lifelines_development" ENCODING = 'unicode'[0m
+  [1m[35m (77.0ms)[0m  [1m[35mCREATE DATABASE "lifelines_test" ENCODING = 'unicode'[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3877362727196870415)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20200609063528)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[36mprimary::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609063528"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfiles (20200609072921)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" bigserial primary key, "user_id" bigint NOT NULL, "username" character varying, "display_name" character varying, "img_url" character varying, "address" character varying, "type" character varying, "verified" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_e424190865"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_profiles_on_user_id" ON "profiles"  ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609072921"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateClinics (20200609073210)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "clinics" ("id" bigserial primary key, "name" character varying, "email" character varying, "address" character varying, "phone" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609073210"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSpecies (20200609073259)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "species" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609073259"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAppeals (20200609073421)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "appeals" ("id" bigserial primary key, "user_id" bigint NOT NULL, "clinic_id" bigint NOT NULL, "species_id" bigint NOT NULL, "pet_name" character varying, "description" character varying, "status" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_21d4bc9ec3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_af4b02e00d"
+FOREIGN KEY ("clinic_id")
+  REFERENCES "clinics" ("id")
+, CONSTRAINT "fk_rails_8dfddbcf82"
+FOREIGN KEY ("species_id")
+  REFERENCES "species" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_appeals_on_user_id" ON "appeals"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_appeals_on_clinic_id" ON "appeals"  ("clinic_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_appeals_on_species_id" ON "appeals"  ("species_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609073421"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLifelines (20200609073508)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "lifelines" ("id" bigserial primary key, "appeal_id" bigint NOT NULL, "user_id" bigint NOT NULL, "status" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_01dc7f4561"
+FOREIGN KEY ("appeal_id")
+  REFERENCES "appeals" ("id")
+, CONSTRAINT "fk_rails_16077c8dd5"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_lifelines_on_appeal_id" ON "lifelines"  ("appeal_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_lifelines_on_user_id" ON "lifelines"  ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609073508"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserToClinics (20200609074532)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "clinics" ADD "user_id" bigint[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_clinics_on_user_id" ON "clinics"  ("user_id")[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "clinics" ADD CONSTRAINT "fk_rails_f0adc9d29e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609074532"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddBioToProfiles (20200609080408)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "profiles" ADD "bio" text[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609080408"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to MakeUsernameUnique (20200609080602)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "profiles" DROP COLUMN "username"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "profiles" ADD "username" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609080602"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DropSpeciesTable (20200609083122)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "species" DROP COLUMN "name"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "species" ADD "name" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609083122"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameUserTypeColumn (20200609083718)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "profiles" RENAME COLUMN "type" TO "user_type"[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609083718"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveUsersFromClinics (20200609094255)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "clinics" DROP COLUMN "user_id"[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609094255"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeUserTypeToAccountType (20200609094741)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "profiles" RENAME COLUMN "user_type" TO "account_type"[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609094741"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddImagesToAppeals (20200609171604)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "appeals" ADD "img_url" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200609171604"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeStatusToConfirmedForLifelines (20200611121031)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "lifelines" RENAME COLUMN "status" TO "confirmed"[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200611121031"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeConfirmedToBoolean (20200611121422)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[35mALTER TABLE "lifelines" ALTER COLUMN "confirmed" TYPE boolean USING CAST(confirmed AS boolean)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200611121422"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateConversations (20200612053132)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" bigserial primary key, "lifeline_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_5683b0631d"
+FOREIGN KEY ("lifeline_id")
+  REFERENCES "lifelines" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_conversations_on_lifeline_id" ON "conversations"  ("lifeline_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200612053132"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMessages (20200612053203)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "messages" ("id" bigserial primary key, "conversation_id" bigint NOT NULL, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7f927086d2"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "conversations" ("id")
+, CONSTRAINT "fk_rails_273a25a7a6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_conversation_id" ON "messages"  ("conversation_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_user_id" ON "messages"  ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200612053203"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTokenToConversations (20200612080121)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mALTER TABLE "conversations" ADD "token" text[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200612080121"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTextToMessages (20200612080839)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "messages" ADD "text" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200612080839"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ConversationsUsersTable (20200612083554)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "conversations_users" ("id" bigserial primary key, "conversation_id" bigint NOT NULL, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_fa156dfe4c"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "conversations" ("id")
+, CONSTRAINT "fk_rails_50022aa573"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_conversations_users_on_conversation_id" ON "conversations_users"  ("conversation_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_conversations_users_on_user_id" ON "conversations_users"  ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200612083554"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBots (20200613200438)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "bots" ("id" bigserial primary key, "chat_id" integer, "name" character varying, "started" boolean, "step" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200613200438"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateVerifications (20200614173259)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "verifications" ("id" bigserial primary key, "user_id" bigint, "authorizer_id" bigint, "type" character varying, "status" character varying, "details" text, "owner_name" character varying, "mobile" character varying, "pet_name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_verifications_on_user_id" ON "verifications"  ("user_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_verifications_on_authorizer_id" ON "verifications"  ("authorizer_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "verifications" ADD CONSTRAINT "fk_rails_f184078eb4"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "verifications" ADD CONSTRAINT "fk_rails_610203b369"
+FOREIGN KEY ("authorizer_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200614173259"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDocuments (20200614174009)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "documents" ("id" bigserial primary key, "verification_id" bigint NOT NULL, "url" character varying, "type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_027a096b41"
+FOREIGN KEY ("verification_id")
+  REFERENCES "verifications" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_documents_on_verification_id" ON "documents"  ("verification_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200614174009"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameVerificationTypeColumn (20200615102001)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "verifications" RENAME COLUMN "type" TO "verification_for"[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200615102001"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-11-16 12:16:13.538189"], ["updated_at", "2020-11-16 12:16:13.538189"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3877362727196870415)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-11-16 20:17:47 +0800
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /Users/chels/webdev/lifelines/public/packs
+[Webpacker] Hash: bca939797a1a9aedd0ec
+Version: webpack 4.43.0
+Time: 12772ms
+Built at: 11/16/2020 8:18:01 PM
+                                                                    Asset      Size                                      Chunks                         Chunk Names
+                                             css/application-2902a343.css  3.07 KiB                                 application  [emitted] [immutable]  application
+                                         css/application-2902a343.css.map  4.58 KiB                                 application  [emitted] [dev]        application
+                                       js/app/App-e728c8697bc21be9f2ac.js  2.73 MiB                                     app/App  [emitted] [immutable]  app/App
+                                   js/app/App-e728c8697bc21be9f2ac.js.map  2.81 MiB                                     app/App  [emitted] [dev]        app/App
+                  js/app/appeals/AppealsContainer-57bb1cc2b1cd4066b014.js  2.39 MiB                app/appeals/AppealsContainer  [emitted] [immutable]  app/appeals/AppealsContainer
+              js/app/appeals/AppealsContainer-57bb1cc2b1cd4066b014.js.map  2.56 MiB                app/appeals/AppealsContainer  [emitted] [dev]        app/appeals/AppealsContainer
+                     js/app/appeals/actions/index-a7a9b26480d85c4b1590.js   786 KiB                   app/appeals/actions/index  [emitted] [immutable]  app/appeals/actions/index
+                 js/app/appeals/actions/index-a7a9b26480d85c4b1590.js.map   801 KiB                   app/appeals/actions/index  [emitted] [dev]        app/appeals/actions/index
+          js/app/appeals/components/AppealListing-b61706603db19435b3e4.js  2.04 MiB        app/appeals/components/AppealListing  [emitted] [immutable]  app/appeals/components/AppealListing
+      js/app/appeals/components/AppealListing-b61706603db19435b3e4.js.map  2.19 MiB        app/appeals/components/AppealListing  [emitted] [dev]        app/appeals/components/AppealListing
+          js/app/appeals/components/AppealOptions-3955cca3d19c27fd7fb0.js   159 KiB        app/appeals/components/AppealOptions  [emitted] [immutable]  app/appeals/components/AppealOptions
+      js/app/appeals/components/AppealOptions-3955cca3d19c27fd7fb0.js.map   169 KiB        app/appeals/components/AppealOptions  [emitted] [dev]        app/appeals/components/AppealOptions
+          js/app/appeals/components/AppealResults-c6eda5a42f9eac9e5735.js  2.11 MiB        app/appeals/components/AppealResults  [emitted] [immutable]  app/appeals/components/AppealResults
+      js/app/appeals/components/AppealResults-c6eda5a42f9eac9e5735.js.map  2.26 MiB        app/appeals/components/AppealResults  [emitted] [dev]        app/appeals/components/AppealResults
+               js/app/appeals/components/Distance-c74ad170e693311f33cb.js  79.2 KiB             app/appeals/components/Distance  [emitted] [immutable]  app/appeals/components/Distance
+           js/app/appeals/components/Distance-c74ad170e693311f33cb.js.map  89.2 KiB             app/appeals/components/Distance  [emitted] [dev]        app/appeals/components/Distance
+          js/app/appeals/components/FocusedAppeal-860f95cc8eb7e39b8f60.js  2.04 MiB        app/appeals/components/FocusedAppeal  [emitted] [immutable]  app/appeals/components/FocusedAppeal
+      js/app/appeals/components/FocusedAppeal-860f95cc8eb7e39b8f60.js.map  2.19 MiB        app/appeals/components/FocusedAppeal  [emitted] [dev]        app/appeals/components/FocusedAppeal
+                    js/app/appeals/reducers/index-beba8602ea7adfa8dff9.js  7.13 KiB                  app/appeals/reducers/index  [emitted] [immutable]  app/appeals/reducers/index
+                js/app/appeals/reducers/index-beba8602ea7adfa8dff9.js.map  5.77 KiB                  app/appeals/reducers/index  [emitted] [dev]        app/appeals/reducers/index
+                              js/app/auth/actions-7f5d533df45d7f8526a7.js    62 KiB                            app/auth/actions  [emitted] [immutable]  app/auth/actions
+                          js/app/auth/actions-7f5d533df45d7f8526a7.js.map  61.2 KiB                            app/auth/actions  [emitted] [dev]        app/auth/actions
+                              js/app/auth/reducer-7c49e58595230fa478d5.js  6.13 KiB                            app/auth/reducer  [emitted] [immutable]  app/auth/reducer
+                          js/app/auth/reducer-7c49e58595230fa478d5.js.map  4.77 KiB                            app/auth/reducer  [emitted] [dev]        app/auth/reducer
+                                js/app/chat/Cable-6d08b1404ff3d604e820.js   228 KiB                              app/chat/Cable  [emitted] [immutable]  app/chat/Cable
+                            js/app/chat/Cable-6d08b1404ff3d604e820.js.map   258 KiB                              app/chat/Cable  [emitted] [dev]        app/chat/Cable
+                                 js/app/chat/Chat-6a4824bf429c23b6c175.js   2.2 MiB                               app/chat/Chat  [emitted] [immutable]  app/chat/Chat
+                             js/app/chat/Chat-6a4824bf429c23b6c175.js.map  2.35 MiB                               app/chat/Chat  [emitted] [dev]        app/chat/Chat
+                    js/app/chat/ConversationsList-42df2d6770571bb345ff.js  2.19 MiB                  app/chat/ConversationsList  [emitted] [immutable]  app/chat/ConversationsList
+                js/app/chat/ConversationsList-42df2d6770571bb345ff.js.map  2.35 MiB                  app/chat/ConversationsList  [emitted] [dev]        app/chat/ConversationsList
+                         js/app/chat/MessagesArea-f8963fc600e862e45712.js   927 KiB                       app/chat/MessagesArea  [emitted] [immutable]  app/chat/MessagesArea
+                     js/app/chat/MessagesArea-f8963fc600e862e45712.js.map   953 KiB                       app/chat/MessagesArea  [emitted] [dev]        app/chat/MessagesArea
+                  js/app/chat/NewConversationForm-b520cdf1c51136e4eb69.js  84.6 KiB                app/chat/NewConversationForm  [emitted] [immutable]  app/chat/NewConversationForm
+              js/app/chat/NewConversationForm-b520cdf1c51136e4eb69.js.map  90.6 KiB                app/chat/NewConversationForm  [emitted] [dev]        app/chat/NewConversationForm
+                       js/app/chat/NewMessageForm-7b96bdc481dec17636bf.js   142 KiB                     app/chat/NewMessageForm  [emitted] [immutable]  app/chat/NewMessageForm
+                   js/app/chat/NewMessageForm-7b96bdc481dec17636bf.js.map   148 KiB                     app/chat/NewMessageForm  [emitted] [dev]        app/chat/NewMessageForm
+                      js/app/chat/constants/index-40476201da379601f7c8.js  4.61 KiB                    app/chat/constants/index  [emitted] [immutable]  app/chat/constants/index
+                  js/app/chat/constants/index-40476201da379601f7c8.js.map   3.9 KiB                    app/chat/constants/index  [emitted] [dev]        app/chat/constants/index
+                   js/app/dashboard/AppealElement-1e1b25b4560057788ba3.js   948 KiB                 app/dashboard/AppealElement  [emitted] [immutable]  app/dashboard/AppealElement
+               js/app/dashboard/AppealElement-1e1b25b4560057788ba3.js.map   971 KiB                 app/dashboard/AppealElement  [emitted] [dev]        app/dashboard/AppealElement
+                  js/app/dashboard/AppealsSummary-3ae440a3fe08e684f17f.js  1010 KiB                app/dashboard/AppealsSummary  [emitted] [immutable]  app/dashboard/AppealsSummary
+              js/app/dashboard/AppealsSummary-3ae440a3fe08e684f17f.js.map     1 MiB                app/dashboard/AppealsSummary  [emitted] [dev]        app/dashboard/AppealsSummary
+                      js/app/dashboard/ClinicForm-487dcf3421c5bec696e8.js   222 KiB                    app/dashboard/ClinicForm  [emitted] [immutable]  app/dashboard/ClinicForm
+                  js/app/dashboard/ClinicForm-487dcf3421c5bec696e8.js.map   228 KiB                    app/dashboard/ClinicForm  [emitted] [dev]        app/dashboard/ClinicForm
+        js/app/dashboard/Console/ConsoleContainer-778c0dec5d4a9069730a.js   143 KiB      app/dashboard/Console/ConsoleContainer  [emitted] [immutable]  app/dashboard/Console/ConsoleContainer
+    js/app/dashboard/Console/ConsoleContainer-778c0dec5d4a9069730a.js.map   149 KiB      app/dashboard/Console/ConsoleContainer  [emitted] [dev]        app/dashboard/Console/ConsoleContainer
+                 js/app/dashboard/Console/Request-d29a2e95f8c1b67916af.js  81.2 KiB               app/dashboard/Console/Request  [emitted] [immutable]  app/dashboard/Console/Request
+             js/app/dashboard/Console/Request-d29a2e95f8c1b67916af.js.map  90.3 KiB               app/dashboard/Console/Request  [emitted] [dev]        app/dashboard/Console/Request
+                       js/app/dashboard/Dashboard-d177e4e8e93794d9ccb8.js   2.2 MiB                     app/dashboard/Dashboard  [emitted] [immutable]  app/dashboard/Dashboard
+                   js/app/dashboard/Dashboard-d177e4e8e93794d9ccb8.js.map  2.31 MiB                     app/dashboard/Dashboard  [emitted] [dev]        app/dashboard/Dashboard
+    js/app/dashboard/DonorForm/DonorFormContainer-6f3c35c370aecbe7514c.js   253 KiB  app/dashboard/DonorForm/DonorFormContainer  [emitted] [immutable]  app/dashboard/DonorForm/DonorFormContainer
+js/app/dashboard/DonorForm/DonorFormContainer-6f3c35c370aecbe7514c.js.map   244 KiB  app/dashboard/DonorForm/DonorFormContainer  [emitted] [dev]        app/dashboard/DonorForm/DonorFormContainer
+     js/app/dashboard/DonorForm/DonorFormViaAdmin-dd5e3906fb89cba12416.js   165 KiB   app/dashboard/DonorForm/DonorFormViaAdmin  [emitted] [immutable]  app/dashboard/DonorForm/DonorFormViaAdmin
+ js/app/dashboard/DonorForm/DonorFormViaAdmin-dd5e3906fb89cba12416.js.map   171 KiB   app/dashboard/DonorForm/DonorFormViaAdmin  [emitted] [dev]        app/dashboard/DonorForm/DonorFormViaAdmin
+    js/app/dashboard/DonorForm/DonorFormViaClinic-562c3e4ecf154b42062e.js   219 KiB  app/dashboard/DonorForm/DonorFormViaClinic  [emitted] [immutable]  app/dashboard/DonorForm/DonorFormViaClinic
+js/app/dashboard/DonorForm/DonorFormViaClinic-562c3e4ecf154b42062e.js.map   226 KiB  app/dashboard/DonorForm/DonorFormViaClinic  [emitted] [dev]        app/dashboard/DonorForm/DonorFormViaClinic
+                     js/app/dashboard/ProfileForm-4b5337370ecf2db88486.js  1.23 MiB                   app/dashboard/ProfileForm  [emitted] [immutable]  app/dashboard/ProfileForm
+                 js/app/dashboard/ProfileForm-4b5337370ecf2db88486.js.map  1.37 MiB                   app/dashboard/ProfileForm  [emitted] [dev]        app/dashboard/ProfileForm
+                js/app/dashboard/VerificationForm-5557f70e8d994a782e35.js  1.35 MiB              app/dashboard/VerificationForm  [emitted] [immutable]  app/dashboard/VerificationForm
+            js/app/dashboard/VerificationForm-5557f70e8d994a782e35.js.map  1.47 MiB              app/dashboard/VerificationForm  [emitted] [dev]        app/dashboard/VerificationForm
+               js/app/forms/AppealForm/AppealForm-531fde85e835dedf7c59.js  1.42 MiB             app/forms/AppealForm/AppealForm  [emitted] [immutable]  app/forms/AppealForm/AppealForm
+           js/app/forms/AppealForm/AppealForm-531fde85e835dedf7c59.js.map  1.56 MiB             app/forms/AppealForm/AppealForm  [emitted] [dev]        app/forms/AppealForm/AppealForm
+            js/app/forms/AppealForm/actions/index-85ed781a925a143f8220.js  69.5 KiB          app/forms/AppealForm/actions/index  [emitted] [immutable]  app/forms/AppealForm/actions/index
+        js/app/forms/AppealForm/actions/index-85ed781a925a143f8220.js.map  66.4 KiB          app/forms/AppealForm/actions/index  [emitted] [dev]        app/forms/AppealForm/actions/index
+           js/app/forms/AppealForm/reducers/index-781708814cb61d1935b0.js  10.7 KiB         app/forms/AppealForm/reducers/index  [emitted] [immutable]  app/forms/AppealForm/reducers/index
+       js/app/forms/AppealForm/reducers/index-781708814cb61d1935b0.js.map  10.9 KiB         app/forms/AppealForm/reducers/index  [emitted] [dev]        app/forms/AppealForm/reducers/index
+                         js/app/layouts/ErrorPage-6602f61e891dfc9787ac.js  79.1 KiB                       app/layouts/ErrorPage  [emitted] [immutable]  app/layouts/ErrorPage
+                     js/app/layouts/ErrorPage-6602f61e891dfc9787ac.js.map  89.1 KiB                       app/layouts/ErrorPage  [emitted] [dev]        app/layouts/ErrorPage
+                           js/app/layouts/Landing-14a18052b411b7eebc97.js  79.6 KiB                         app/layouts/Landing  [emitted] [immutable]  app/layouts/Landing
+                       js/app/layouts/Landing-14a18052b411b7eebc97.js.map  89.4 KiB                         app/layouts/Landing  [emitted] [dev]        app/layouts/Landing
+                               js/app/layouts/Nav-d87d0982c1bae57b3fb4.js  1.33 MiB                             app/layouts/Nav  [emitted] [immutable]  app/layouts/Nav
+                           js/app/layouts/Nav-d87d0982c1bae57b3fb4.js.map  1.46 MiB                             app/layouts/Nav  [emitted] [dev]        app/layouts/Nav
+                       js/app/profile/UserProfile-0c8ecc3638fca7aa7ff0.js   284 KiB                     app/profile/UserProfile  [emitted] [immutable]  app/profile/UserProfile
+                   js/app/profile/UserProfile-0c8ecc3638fca7aa7ff0.js.map   290 KiB                     app/profile/UserProfile  [emitted] [dev]        app/profile/UserProfile
+                                   js/application-17bb4a000ce34a66d23a.js  3.96 KiB                                 application  [emitted] [immutable]  application
+                               js/application-17bb4a000ce34a66d23a.js.map  3.63 KiB                                 application  [emitted] [dev]        application
+                                   js/hello_react-90d153f333646a7eba06.js  2.75 MiB                                 hello_react  [emitted] [immutable]  hello_react
+                               js/hello_react-90d153f333646a7eba06.js.map  2.82 MiB                                 hello_react  [emitted] [dev]        hello_react
+                          js/redux/reducers/index-e3172bab305f717053d1.js  47.5 KiB                        redux/reducers/index  [emitted] [immutable]  redux/reducers/index
+                      js/redux/reducers/index-e3172bab305f717053d1.js.map  46.1 KiB                        redux/reducers/index  [emitted] [dev]        redux/reducers/index
+                             js/redux/store/index-e03c102abebfdb93205b.js  49.6 KiB                           redux/store/index  [emitted] [immutable]  redux/store/index
+                         js/redux/store/index-e03c102abebfdb93205b.js.map  47.2 KiB                           redux/store/index  [emitted] [dev]        redux/store/index
+                                                            manifest.json  17.6 KiB                                              [emitted]              
+Entrypoint app/App = js/app/App-e728c8697bc21be9f2ac.js js/app/App-e728c8697bc21be9f2ac.js.map
+Entrypoint app/appeals/actions/index = js/app/appeals/actions/index-a7a9b26480d85c4b1590.js js/app/appeals/actions/index-a7a9b26480d85c4b1590.js.map
+Entrypoint app/appeals/AppealsContainer = js/app/appeals/AppealsContainer-57bb1cc2b1cd4066b014.js js/app/appeals/AppealsContainer-57bb1cc2b1cd4066b014.js.map
+Entrypoint app/appeals/components/AppealListing = js/app/appeals/components/AppealListing-b61706603db19435b3e4.js js/app/appeals/components/AppealListing-b61706603db19435b3e4.js.map
+Entrypoint app/appeals/components/AppealOptions = js/app/appeals/components/AppealOptions-3955cca3d19c27fd7fb0.js js/app/appeals/components/AppealOptions-3955cca3d19c27fd7fb0.js.map
+Entrypoint app/appeals/components/AppealResults = js/app/appeals/components/AppealResults-c6eda5a42f9eac9e5735.js js/app/appeals/components/AppealResults-c6eda5a42f9eac9e5735.js.map
+Entrypoint app/appeals/components/Distance = js/app/appeals/components/Distance-c74ad170e693311f33cb.js js/app/appeals/components/Distance-c74ad170e693311f33cb.js.map
+Entrypoint app/appeals/components/FocusedAppeal = js/app/appeals/components/FocusedAppeal-860f95cc8eb7e39b8f60.js js/app/appeals/components/FocusedAppeal-860f95cc8eb7e39b8f60.js.map
+Entrypoint app/appeals/reducers/index = js/app/appeals/reducers/index-beba8602ea7adfa8dff9.js js/app/appeals/reducers/index-beba8602ea7adfa8dff9.js.map
+Entrypoint app/auth/actions = js/app/auth/actions-7f5d533df45d7f8526a7.js js/app/auth/actions-7f5d533df45d7f8526a7.js.map
+Entrypoint app/auth/reducer = js/app/auth/reducer-7c49e58595230fa478d5.js js/app/auth/reducer-7c49e58595230fa478d5.js.map
+Entrypoint app/chat/Cable = js/app/chat/Cable-6d08b1404ff3d604e820.js js/app/chat/Cable-6d08b1404ff3d604e820.js.map
+Entrypoint app/chat/Chat = js/app/chat/Chat-6a4824bf429c23b6c175.js js/app/chat/Chat-6a4824bf429c23b6c175.js.map
+Entrypoint app/chat/constants/index = js/app/chat/constants/index-40476201da379601f7c8.js js/app/chat/constants/index-40476201da379601f7c8.js.map
+Entrypoint app/chat/ConversationsList = js/app/chat/ConversationsList-42df2d6770571bb345ff.js js/app/chat/ConversationsList-42df2d6770571bb345ff.js.map
+Entrypoint app/chat/MessagesArea = js/app/chat/MessagesArea-f8963fc600e862e45712.js js/app/chat/MessagesArea-f8963fc600e862e45712.js.map
+Entrypoint app/chat/NewConversationForm = js/app/chat/NewConversationForm-b520cdf1c51136e4eb69.js js/app/chat/NewConversationForm-b520cdf1c51136e4eb69.js.map
+Entrypoint app/chat/NewMessageForm = js/app/chat/NewMessageForm-7b96bdc481dec17636bf.js js/app/chat/NewMessageForm-7b96bdc481dec17636bf.js.map
+Entrypoint app/dashboard/AppealElement = js/app/dashboard/AppealElement-1e1b25b4560057788ba3.js js/app/dashboard/AppealElement-1e1b25b4560057788ba3.js.map
+Entrypoint app/dashboard/AppealsSummary = js/app/dashboard/AppealsSummary-3ae440a3fe08e684f17f.js js/app/dashboard/AppealsSummary-3ae440a3fe08e684f17f.js.map
+Entrypoint app/dashboard/ClinicForm = js/app/dashboard/ClinicForm-487dcf3421c5bec696e8.js js/app/dashboard/ClinicForm-487dcf3421c5bec696e8.js.map
+Entrypoint app/dashboard/Console/ConsoleContainer = js/app/dashboard/Console/ConsoleContainer-778c0dec5d4a9069730a.js js/app/dashboard/Console/ConsoleContainer-778c0dec5d4a9069730a.js.map
+Entrypoint app/dashboard/Console/Request = js/app/dashboard/Console/Request-d29a2e95f8c1b67916af.js js/app/dashboard/Console/Request-d29a2e95f8c1b67916af.js.map
+Entrypoint app/dashboard/Dashboard = js/app/dashboard/Dashboard-d177e4e8e93794d9ccb8.js js/app/dashboard/Dashboard-d177e4e8e93794d9ccb8.js.map
+Entrypoint app/dashboard/DonorForm/DonorFormContainer = js/app/dashboard/DonorForm/DonorFormContainer-6f3c35c370aecbe7514c.js js/app/dashboard/DonorForm/DonorFormContainer-6f3c35c370aecbe7514c.js.map
+Entrypoint app/dashboard/DonorForm/DonorFormViaAdmin = js/app/dashboard/DonorForm/DonorFormViaAdmin-dd5e3906fb89cba12416.js js/app/dashboard/DonorForm/DonorFormViaAdmin-dd5e3906fb89cba12416.js.map
+Entrypoint app/dashboard/DonorForm/DonorFormViaClinic = js/app/dashboard/DonorForm/DonorFormViaClinic-562c3e4ecf154b42062e.js js/app/dashboard/DonorForm/DonorFormViaClinic-562c3e4ecf154b42062e.js.map
+Entrypoint app/dashboard/ProfileForm = js/app/dashboard/ProfileForm-4b5337370ecf2db88486.js js/app/dashboard/ProfileForm-4b5337370ecf2db88486.js.map
+Entrypoint app/dashboard/VerificationForm = js/app/dashboard/VerificationForm-5557f70e8d994a782e35.js js/app/dashboard/VerificationForm-5557f70e8d994a782e35.js.map
+Entrypoint app/forms/AppealForm/actions/index = js/app/forms/AppealForm/actions/index-85ed781a925a143f8220.js js/app/forms/AppealForm/actions/index-85ed781a925a143f8220.js.map
+Entrypoint app/forms/AppealForm/AppealForm = js/app/forms/AppealForm/AppealForm-531fde85e835dedf7c59.js js/app/forms/AppealForm/AppealForm-531fde85e835dedf7c59.js.map
+Entrypoint app/forms/AppealForm/reducers/index = js/app/forms/AppealForm/reducers/index-781708814cb61d1935b0.js js/app/forms/AppealForm/reducers/index-781708814cb61d1935b0.js.map
+Entrypoint app/layouts/ErrorPage = js/app/layouts/ErrorPage-6602f61e891dfc9787ac.js js/app/layouts/ErrorPage-6602f61e891dfc9787ac.js.map
+Entrypoint app/layouts/Landing = js/app/layouts/Landing-14a18052b411b7eebc97.js js/app/layouts/Landing-14a18052b411b7eebc97.js.map
+Entrypoint app/layouts/Nav = js/app/layouts/Nav-d87d0982c1bae57b3fb4.js js/app/layouts/Nav-d87d0982c1bae57b3fb4.js.map
+Entrypoint app/profile/UserProfile = js/app/profile/UserProfile-0c8ecc3638fca7aa7ff0.js js/app/profile/UserProfile-0c8ecc3638fca7aa7ff0.js.map
+Entrypoint application = css/application-2902a343.css js/application-17bb4a000ce34a66d23a.js css/application-2902a343.css.map js/application-17bb4a000ce34a66d23a.js.map
+Entrypoint hello_react = js/hello_react-90d153f333646a7eba06.js js/hello_react-90d153f333646a7eba06.js.map
+Entrypoint redux/reducers/index = js/redux/reducers/index-e3172bab305f717053d1.js js/redux/reducers/index-e3172bab305f717053d1.js.map
+Entrypoint redux/store/index = js/redux/store/index-e03c102abebfdb93205b.js js/redux/store/index-e03c102abebfdb93205b.js.map
+[./app/javascript/packs/app/App.jsx] 5.74 KiB {app/App} {hello_react} [built]
+[./app/javascript/packs/app/appeals/AppealsContainer.jsx] 13.9 KiB {app/appeals/AppealsContainer} {app/App} {hello_react} [built]
+[./app/javascript/packs/app/appeals/actions/index.js] 3.15 KiB {app/appeals/actions/index} {app/App} {app/appeals/AppealsContainer} {app/appeals/components/AppealListing} {app/appeals/components/AppealResults} {app/appeals/components/FocusedAppeal} {hello_react} [built]
+[./app/javascript/packs/app/appeals/reducers/index.js] 3.02 KiB {app/appeals/reducers/index} {hello_react} {redux/reducers/index} {redux/store/index} [built]
+[./app/javascript/packs/app/auth/actions.js] 955 bytes {app/auth/actions} {app/App} {app/appeals/AppealsContainer} {app/appeals/components/FocusedAppeal} {app/layouts/Nav} {hello_react} [built]
+[./app/javascript/packs/app/auth/reducer.js] 2.08 KiB {app/auth/reducer} {hello_react} {redux/reducers/index} {redux/store/index} [built]
+[./app/javascript/packs/app/chat/Cable.js] 973 bytes {app/chat/Cable} {app/App} {app/chat/Chat} {app/chat/ConversationsList} {hello_react} [built]
+[./app/javascript/packs/app/chat/Chat.jsx] 3.57 KiB {app/chat/Chat} {app/App} {hello_react} [built]
+[./app/javascript/packs/app/chat/ConversationsList.jsx] 11.9 KiB {app/chat/ConversationsList} {app/App} {app/chat/Chat} {hello_react} [built]
+[./app/javascript/packs/app/chat/MessagesArea.jsx] 3.97 KiB {app/chat/MessagesArea} {app/App} {app/chat/Chat} {app/chat/ConversationsList} {hello_react} [built]
+[./app/javascript/packs/app/chat/NewConversationForm.jsx] 4.68 KiB {app/chat/NewConversationForm} [built]
+[./app/javascript/packs/app/chat/NewMessageForm.jsx] 5.71 KiB {app/chat/NewMessageForm} {app/App} {app/chat/Chat} {app/chat/ConversationsList} {app/chat/MessagesArea} {hello_react} [built]
+[./app/javascript/packs/app/chat/constants/index.js] 213 bytes {app/chat/constants/index} {app/App} {app/chat/Chat} {app/chat/ConversationsList} {app/chat/MessagesArea} {app/chat/NewConversationForm} {app/chat/NewMessageForm} {hello_react} [built]
+[./app/javascript/packs/app/dashboard/AppealElement.js] 3.64 KiB {app/dashboard/AppealElement} {app/App} {app/dashboard/AppealsSummary} {app/dashboard/Dashboard} {hello_react} [built]
+[./app/javascript/packs/app/dashboard/AppealsSummary.js] 3.33 KiB {app/dashboard/AppealsSummary} {app/App} {app/dashboard/Dashboard} {hello_react} [built]
+    + 296 hidden modules
+Child mini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--7-1!node_modules/postcss-loader/src/index.js??ref--7-2!node_modules/sass-loader/dist/cjs.js??ref--7-3!app/javascript/packs/application.scss:
+    Entrypoint mini-css-extract-plugin = *
+    [./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./app/javascript/packs/application.scss] ./node_modules/css-loader/dist/cjs.js??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./app/javascript/packs/application.scss 8.72 KiB {mini-css-extract-plugin} [built]
+        + 1 hidden module
+
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered pages/index.html.erb within layouts/application (Duration: 14736.7ms | Allocations: 730640)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14799ms (Views: 14798.8ms | ActiveRecord: 0.0ms | Allocations: 757916)
+
+
+Started GET "/api/v1/auth/check-login" for ::1 at 2020-11-16 20:18:03 +0800
+Processing by Api::V1::UsersController#isloggedin as HTML
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 10ms (Views: 4.9ms | ActiveRecord: 0.0ms | Allocations: 4175)
+
+
+Started GET "/api/v1/appeals.json" for ::1 at 2020-11-16 20:18:08 +0800
+Processing by Api::V1::AppealsController#index as JSON
+  [1m[36mAppeal Load (1.8ms)[0m  [1m[34mSELECT "appeals".* FROM "appeals" ORDER BY id DESC[0m
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.11ms)
+Completed 200 OK in 24ms (Views: 12.9ms | ActiveRecord: 6.2ms | Allocations: 4923)
+
+
+Started GET "/api/v1/appeals.json" for ::1 at 2020-11-16 20:18:08 +0800
+Processing by Api::V1::AppealsController#index as JSON
+  [1m[36mAppeal Load (0.6ms)[0m  [1m[34mSELECT "appeals".* FROM "appeals" ORDER BY id DESC[0m
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.09ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.6ms | Allocations: 1288)
+
+
+Started GET "/users/sign_up" for ::1 at 2020-11-16 20:18:57 +0800
+Processing by Users::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/devise
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.7ms | Allocations: 198)
+  Rendered devise/shared/_links.html.erb (Duration: 1.0ms | Allocations: 519)
+  Rendered devise/registrations/new.html.erb within layouts/devise (Duration: 24.2ms | Allocations: 7413)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 45ms (Views: 32.9ms | ActiveRecord: 5.8ms | Allocations: 17984)
+
+
+Started POST "/users" for ::1 at 2020-11-16 20:19:02 +0800
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"IJ919LS7+bR7Epf+HYVJFSx9OEsbYHeI9yJv0aW61DQAfzGaP7kYg4hsziETR9j54CPu6amxRVSrtPn0oG7aJA==", "user"=>{"email"=>"chelseaejw@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:16:in `create'
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "chelseaejw@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:16:in `create'
+  [1m[35m (1.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users/registrations_controller.rb:16:in `create'
+  Rendering devise/registrations/new.html.erb within layouts/devise
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.4ms | Allocations: 219)
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 80)
+  Rendered devise/registrations/new.html.erb within layouts/devise (Duration: 2.0ms | Allocations: 1707)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 575ms (Views: 22.7ms | ActiveRecord: 8.6ms | Allocations: 71251)
+
+
+Started POST "/users" for ::1 at 2020-11-16 20:19:08 +0800
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"MHBqOgRbRWA9ioCXb15PlNYe2nLS0A9oaG0Z5yKPs8YQkC5Uj1mkV8702UhhnN54GkAM0GABPbQ0+4/CJ1u91g==", "user"=>{"email"=>"chelseaejw@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "chelseaejw@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:16:in `create'
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "chelseaejw@gmail.com"], ["encrypted_password", "$2a$11$hxt0C3lNB4OdGpWWtqKxcu3mwu.BhsA9yg4jRKlEbilghj/sF/Qvm"], ["created_at", "2020-11-16 12:19:08.921849"], ["updated_at", "2020-11-16 12:19:08.921849"]]
+  ↳ app/controllers/users/registrations_controller.rb:16:in `create'
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:16:in `create'
+Redirected to http://localhost:3000/
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users/registrations_controller.rb:19:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users/registrations_controller.rb:19:in `create'
+  [1m[36mProfile Create (1.3ms)[0m  [1m[32mINSERT INTO "profiles" ("user_id", "display_name", "account_type", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["display_name", "chelseaejw@gmail.com"], ["account_type", "user"], ["created_at", "2020-11-16 12:19:08.939254"], ["updated_at", "2020-11-16 12:19:08.939254"]]
+  ↳ app/controllers/users/registrations_controller.rb:19:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users/registrations_controller.rb:19:in `create'
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: 8f657122-cd62-4f99-bd75-0f6b4003a757) to Async(mailers) with arguments: "UserNotifierMailer", "send_signup_email", "deliver_now", {:args=>[#<GlobalID:0x00007fd6b6a0cac8 @uri=#<URI::GID gid://lifelines/User/1>>]}
+Completed 302 Found in 139ms (ActiveRecord: 5.2ms | Allocations: 32991)
+
+
+Started GET "/" for ::1 at 2020-11-16 20:19:08 +0800
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [8f657122-cd62-4f99-bd75-0f6b4003a757] Performing ActionMailer::MailDeliveryJob (Job ID: 8f657122-cd62-4f99-bd75-0f6b4003a757) from Async(mailers) enqueued at 2020-11-16T12:19:08Z with arguments: "UserNotifierMailer", "send_signup_email", "deliver_now", {:args=>[#<GlobalID:0x00007fd6b61288d0 @uri=#<URI::GID gid://lifelines/User/1>>]}
+[ActiveJob] [ActionMailer::MailDeliveryJob] [8f657122-cd62-4f99-bd75-0f6b4003a757]   Rendering user_notifier_mailer/send_signup_email.html.erb within layouts/mailer
+[ActiveJob] [ActionMailer::MailDeliveryJob] [8f657122-cd62-4f99-bd75-0f6b4003a757]   Rendered user_notifier_mailer/send_signup_email.html.erb within layouts/mailer (Duration: 0.5ms | Allocations: 105)
+[ActiveJob] [ActionMailer::MailDeliveryJob] [8f657122-cd62-4f99-bd75-0f6b4003a757] UserNotifierMailer#send_signup_email: processed outbound mail in 7.1ms
+[ActiveJob] [ActionMailer::MailDeliveryJob] [8f657122-cd62-4f99-bd75-0f6b4003a757] Delivered mail 5fb26e3cece0e_16d2ea794296b3@Chelseas-MacBook-Pro.local.mail (6.7ms)
+[ActiveJob] [ActionMailer::MailDeliveryJob] [8f657122-cd62-4f99-bd75-0f6b4003a757] Date: Mon, 16 Nov 2020 20:19:08 +0800
+From: lifelines.team@gmail.com
+To: chelsejw@gmail.com, 
+ chelseaejw@gmail.com
+Message-ID: <5fb26e3cece0e_16d2ea794296b3@Chelseas-MacBook-Pro.local.mail>
+Subject: chelseaejw@gmail.com has signed up for Lifelines
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Lifelines!</h1>
+    <p>We're glad you're with us. Be it as a donor, or just to spread the news, we appreciate that you took a step forward to help.</p>
+        <p>You're going to be a hero.</p>
+        <p>Be sure to turn on your notifications!</p>
+
+        <p>Love, Chelsea from Lifelines</p>
+
+  </body>
+</html>
+  </body>
+</html>
+
+[ActiveJob] [ActionMailer::MailDeliveryJob] [8f657122-cd62-4f99-bd75-0f6b4003a757] Error performing ActionMailer::MailDeliveryJob (Job ID: 8f657122-cd62-4f99-bd75-0f6b4003a757) from Async(mailers) in 14.63ms: ArgumentError (SMTP-AUTH requested but missing secret phrase):
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/2.7.0/net/smtp.rb:780:in `check_auth_args'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/2.7.0/net/smtp.rb:546:in `do_start'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/2.7.0/net/smtp.rb:518:in `start'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/mail-2.7.1/lib/mail/network/delivery_methods/smtp.rb:109:in `start_smtp_session'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/mail-2.7.1/lib/mail/network/delivery_methods/smtp.rb:100:in `deliver!'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/mail-2.7.1/lib/mail/message.rb:2159:in `do_delivery'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/mail-2.7.1/lib/mail/message.rb:260:in `block in deliver'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/actionmailer-6.0.3.1/lib/action_mailer/base.rb:589:in `block in deliver_mail'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/notifications.rb:180:in `block in instrument'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/notifications.rb:180:in `instrument'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/actionmailer-6.0.3.1/lib/action_mailer/base.rb:587:in `deliver_mail'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/mail-2.7.1/lib/mail/message.rb:260:in `deliver'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/actionmailer-6.0.3.1/lib/action_mailer/message_delivery.rb:115:in `block in deliver_now'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/actionmailer-6.0.3.1/lib/action_mailer/rescuable.rb:17:in `handle_exceptions'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/actionmailer-6.0.3.1/lib/action_mailer/message_delivery.rb:114:in `deliver_now'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/actionmailer-6.0.3.1/lib/action_mailer/mail_delivery_job.rb:23:in `perform'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/execution.rb:40:in `block in perform_now'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:112:in `block in run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/i18n-1.8.3/lib/i18n.rb:313:in `with_locale'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/translation.rb:9:in `block (2 levels) in <module:Translation>'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `instance_exec'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/core_ext/time/zones.rb:66:in `use_zone'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/timezones.rb:9:in `block (2 levels) in <module:Timezones>'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `instance_exec'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/logging.rb:25:in `block (4 levels) in <module:Logging>'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/notifications.rb:180:in `block in instrument'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/notifications.rb:180:in `instrument'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/logging.rb:24:in `block (3 levels) in <module:Logging>'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/logging.rb:45:in `block in tag_logger'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/tagged_logging.rb:80:in `block in tagged'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/tagged_logging.rb:28:in `tagged'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/tagged_logging.rb:80:in `tagged'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/logging.rb:45:in `tag_logger'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/logging.rb:21:in `block (2 levels) in <module:Logging>'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `instance_exec'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:139:in `run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/execution.rb:39:in `perform_now'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/execution.rb:25:in `block in execute'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:112:in `block in run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/railtie.rb:43:in `block (4 levels) in <class:Railtie>'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/execution_wrapper.rb:88:in `wrap'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/reloader.rb:72:in `block in wrap'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/execution_wrapper.rb:88:in `wrap'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/reloader.rb:71:in `wrap'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/railtie.rb:42:in `block (3 levels) in <class:Railtie>'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `instance_exec'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activesupport-6.0.3.1/lib/active_support/callbacks.rb:139:in `run_callbacks'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/execution.rb:23:in `execute'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/activejob-6.0.3.1/lib/active_job/queue_adapters/async_adapter.rb:70:in `perform'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/concurrent-ruby-1.1.6/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:353:in `run_task'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/concurrent-ruby-1.1.6/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:342:in `block (3 levels) in create_worker'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/concurrent-ruby-1.1.6/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:325:in `loop'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/concurrent-ruby-1.1.6/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:325:in `block (2 levels) in create_worker'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/concurrent-ruby-1.1.6/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:324:in `catch'
+/Users/chels/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/concurrent-ruby-1.1.6/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:324:in `block in create_worker'
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered pages/index.html.erb within layouts/application (Duration: 9.4ms | Allocations: 6124)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 16.6ms | ActiveRecord: 0.0ms | Allocations: 11028)
+
+
+Started GET "/api/v1/auth/check-login" for ::1 at 2020-11-16 20:19:09 +0800
+Processing by Api::V1::UsersController#isloggedin as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `isloggedin'
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "verifications" WHERE "verifications"."user_id" = $1 AND "verifications"."status" = $2[0m  [["user_id", 1], ["status", "pending"]]
+  ↳ app/controllers/api/v1/users_controller.rb:11:in `isloggedin'
+  [1m[36mProfile Load (0.8ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles" WHERE "profiles"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:16:in `isloggedin'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.64ms)
+Completed 200 OK in 33ms (Views: 1.2ms | ActiveRecord: 10.2ms | Allocations: 7356)
+
+
+Started GET "/api/v1/appeals.json" for ::1 at 2020-11-16 20:19:10 +0800
+Processing by Api::V1::AppealsController#index as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+  [1m[36mAppeal Load (0.8ms)[0m  [1m[34mSELECT "appeals".* FROM "appeals" ORDER BY id DESC[0m
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.04ms)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 1.1ms | Allocations: 2371)
+
+
+Started GET "/api/v1/appeals.json" for ::1 at 2020-11-16 20:19:10 +0800
+Processing by Api::V1::AppealsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+  [1m[36mAppeal Load (0.3ms)[0m  [1m[34mSELECT "appeals".* FROM "appeals" ORDER BY id DESC[0m
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.04ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.6ms | Allocations: 2368)
+
+
+Started GET "/api/v1/clinics" for ::1 at 2020-11-16 20:19:12 +0800
+Started GET "/new/api" for ::1 at 2020-11-16 20:19:12 +0800
+Processing by Api::V1::ClinicsController#index as HTML
+Processing by PagesController#index as HTML
+  Parameters: {"path"=>"new/api"}
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/clinics_controller.rb:10:in `index'
+  [1m[36mClinic Load (0.8ms)[0m  [1m[34mSELECT "clinics".* FROM "clinics" ORDER BY id DESC[0m
+  ↳ app/controllers/api/v1/clinics_controller.rb:10:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.04ms)
+Completed 200 OK in 10ms (Views: 3.5ms | ActiveRecord: 3.8ms | Allocations: 5480)
+
+
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered pages/index.html.erb within layouts/application (Duration: 12.8ms | Allocations: 8771)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 20ms (Views: 20.0ms | ActiveRecord: 0.0ms | Allocations: 13708)
+
+
+Started GET "/" for ::1 at 2020-11-16 20:50:10 +0800
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered pages/index.html.erb within layouts/application (Duration: 35.8ms | Allocations: 18041)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 48ms (Views: 47.6ms | ActiveRecord: 0.0ms | Allocations: 23169)
+
+
+Started GET "/api/v1/auth/check-login" for ::1 at 2020-11-16 20:50:10 +0800
+Processing by Api::V1::UsersController#isloggedin as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `isloggedin'
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "verifications" WHERE "verifications"."user_id" = $1 AND "verifications"."status" = $2[0m  [["user_id", 1], ["status", "pending"]]
+  ↳ app/controllers/api/v1/users_controller.rb:11:in `isloggedin'
+  [1m[36mProfile Load (0.6ms)[0m  [1m[34mSELECT "profiles".* FROM "profiles" WHERE "profiles"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:16:in `isloggedin'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.4ms)
+Completed 200 OK in 39ms (Views: 1.7ms | ActiveRecord: 3.9ms | Allocations: 19128)
+
+
+Started GET "/api/v1/clinics" for ::1 at 2020-11-16 20:50:41 +0800
+Started GET "/new/api" for ::1 at 2020-11-16 20:50:41 +0800
+Processing by Api::V1::ClinicsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/clinics_controller.rb:10:in `index'
+Processing by PagesController#index as HTML
+  Parameters: {"path"=>"new/api"}
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mClinic Load (1.8ms)[0m  [1m[34mSELECT "clinics".* FROM "clinics" ORDER BY id DESC[0m
+  ↳ app/controllers/api/v1/clinics_controller.rb:10:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.08ms)
+Completed 200 OK in 10ms (Views: 5.7ms | ActiveRecord: 2.1ms | Allocations: 5433)
+
+
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered pages/index.html.erb within layouts/application (Duration: 16.8ms | Allocations: 7597)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 25ms (Views: 24.9ms | ActiveRecord: 0.0ms | Allocations: 12496)
+
+
+Started GET "/api/v1/appeals.json" for ::1 at 2020-11-16 20:50:42 +0800
+Processing by Api::V1::AppealsController#index as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+  [1m[36mAppeal Load (2.2ms)[0m  [1m[34mSELECT "appeals".* FROM "appeals" ORDER BY created_at DESC[0m
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.08ms)
+Completed 200 OK in 14ms (Views: 6.7ms | ActiveRecord: 3.3ms | Allocations: 3988)
+
+
+Started GET "/api/v1/appeals.json" for ::1 at 2020-11-16 20:50:42 +0800
+Processing by Api::V1::AppealsController#index as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+  [1m[36mAppeal Load (0.5ms)[0m  [1m[34mSELECT "appeals".* FROM "appeals" ORDER BY created_at DESC[0m
+  ↳ app/controllers/api/v1/appeals_controller.rb:13:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.06ms)
+Completed 200 OK in 8ms (Views: 5.9ms | ActiveRecord: 1.1ms | Allocations: 2364)
+
+
+Started GET "/" for ::1 at 2020-11-16 22:16:14 +0800
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+[Webpacker] Everything's up-to-date. Nothing to do
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered pages/index.html.erb within layouts/application (Duration: 28.0ms | Allocations: 6127)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 42ms (Views: 41.2ms | ActiveRecord: 0.0ms | Allocations: 11028)
+
+
+Started GET "/api/v1/auth/check-login" for ::1 at 2020-11-16 22:16:15 +0800
+Processing by Api::V1::UsersController#isloggedin as HTML
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `isloggedin'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 200 OK in 11ms (Views: 0.8ms | ActiveRecord: 2.4ms | Allocations: 1807)
+
+
